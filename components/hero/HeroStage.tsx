@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { Photo } from "@/components/ui/Photo";
+import { logoMask } from "@/components/ui/Logo";
 
 type Vars = CSSProperties & Record<`--${string}`, string | number>;
 
@@ -50,74 +51,65 @@ function Layer({
   );
 }
 
-function Star({ className }: { className?: string }) {
+function Ornament() {
   return (
-    <svg viewBox="0 0 200 200" fill="none" aria-hidden className={className}>
-      <g stroke="currentColor" vectorEffect="non-scaling-stroke">
-        <circle cx="100" cy="100" r="98" strokeWidth="0.35" />
-        <circle cx="100" cy="100" r="88" strokeWidth="0.25" strokeDasharray="1 3" />
-        <rect x="37.8" y="37.8" width="124.4" height="124.4" strokeWidth="0.45" />
-        <rect
-          x="37.8"
-          y="37.8"
-          width="124.4"
-          height="124.4"
-          strokeWidth="0.45"
-          transform="rotate(45 100 100)"
-        />
-        <rect x="56" y="56" width="88" height="88" strokeWidth="0.3" />
-        <rect
-          x="56"
-          y="56"
-          width="88"
-          height="88"
-          strokeWidth="0.3"
-          transform="rotate(45 100 100)"
-        />
-        <circle cx="100" cy="100" r="44" strokeWidth="0.3" />
-      </g>
-      {Array.from({ length: 8 }, (_, i) => (
-        <circle
-          key={i}
-          cx="100"
-          cy="12"
-          r="1.3"
-          fill="currentColor"
-          transform={`rotate(${i * 45} 100 100)`}
-        />
-      ))}
-    </svg>
+    <div className="relative aspect-square">
+      <svg viewBox="0 0 200 200" fill="none" aria-hidden className="hero-spin h-full w-full">
+        <g stroke="currentColor" vectorEffect="non-scaling-stroke">
+          <circle cx="100" cy="100" r="98" strokeWidth="0.35" />
+          <circle cx="100" cy="100" r="88" strokeWidth="0.25" strokeDasharray="1 3" />
+        </g>
+        {Array.from({ length: 8 }, (_, i) => (
+          <circle
+            key={i}
+            cx="100"
+            cy="12"
+            r="1.3"
+            fill="currentColor"
+            transform={`rotate(${i * 45} 100 100)`}
+          />
+        ))}
+      </svg>
+      <span
+        aria-hidden
+        style={logoMask}
+        className="absolute left-1/2 top-1/2 aspect-[598/333] w-[62%] -translate-x-1/2 -translate-y-1/2 bg-current"
+      />
+    </div>
   );
 }
 
 function Seal() {
   return (
-    <svg viewBox="0 0 120 120" aria-hidden className="h-full w-full">
-      <defs>
-        <path id="hero-seal-path" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0" />
-      </defs>
-      <circle cx="60" cy="60" r="59" fill="#1a110b" stroke="#b89a5a" strokeOpacity="0.55" strokeWidth="0.6" />
-      <circle cx="60" cy="60" r="34" fill="none" stroke="#b89a5a" strokeOpacity="0.35" strokeWidth="0.5" />
-      <g className="hero-spin-slow" style={{ transformOrigin: "60px 60px" }}>
-        <text
-          lang="en"
-          direction="ltr"
-          fill="#d9c08a"
-          fontSize="8.4"
-          fontWeight="500"
-          letterSpacing="2.6"
-          className="font-serif"
-        >
-          <textPath href="#hero-seal-path" textLength="280" lengthAdjust="spacing">
-            AL HAYBA SWEETS · CASABLANCA ·
-          </textPath>
-        </text>
-      </g>
-      <g stroke="#d9c08a" strokeWidth="0.8" fill="none">
-        <rect x="48" y="48" width="24" height="24" />
-        <rect x="48" y="48" width="24" height="24" transform="rotate(45 60 60)" />
-      </g>
-    </svg>
+    <div className="relative h-full w-full">
+      <svg viewBox="0 0 120 120" aria-hidden className="h-full w-full">
+        <defs>
+          <path id="hero-seal-path" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0" />
+        </defs>
+        <circle cx="60" cy="60" r="59" fill="#1a110b" stroke="#b89a5a" strokeOpacity="0.55" strokeWidth="0.6" />
+        <circle cx="60" cy="60" r="34" fill="none" stroke="#b89a5a" strokeOpacity="0.35" strokeWidth="0.5" />
+        <g className="hero-spin-slow" style={{ transformOrigin: "60px 60px" }}>
+          <text
+            lang="en"
+            direction="ltr"
+            fill="#d9c08a"
+            fontSize="8.4"
+            fontWeight="500"
+            letterSpacing="2.6"
+            className="font-serif"
+          >
+            <textPath href="#hero-seal-path" textLength="280" lengthAdjust="spacing">
+              AL HAYBA SWEETS · CASABLANCA ·
+            </textPath>
+          </text>
+        </g>
+      </svg>
+      <span
+        aria-hidden
+        style={logoMask}
+        className="absolute left-1/2 top-1/2 aspect-[598/333] w-[48%] -translate-x-1/2 -translate-y-1/2 bg-[#d9c08a]"
+      />
+    </div>
   );
 }
 
@@ -137,8 +129,8 @@ export function HeroStage({ alt }: { alt: string }) {
       <div data-hero="scroll-rig" className="hero-3d absolute inset-0">
         <div data-hero="mouse-rig" className="hero-3d absolute inset-0">
           <Layer name="star" x={50} y={52} z={-260} k={-1.3} className="w-[min(44rem,112%)]">
-            <div className="hero-spin aspect-square text-gold/45">
-              <Star className="h-full w-full" />
+            <div className="text-gold/45">
+              <Ornament />
             </div>
           </Layer>
 

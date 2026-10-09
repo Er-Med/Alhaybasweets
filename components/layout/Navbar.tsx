@@ -127,6 +127,17 @@ export function Navbar() {
           </div>
           <div className="flex shrink-0 items-center gap-5">
             <a
+              href="/menu"
+              className={cn(
+                "caption inline-flex border px-4 py-2.5 text-[0.6rem] transition-colors duration-300 lg:hidden",
+                overDark
+                  ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
+                  : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",
+              )}
+            >
+              {copy.nav.carte}
+            </a>
+            <a
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
@@ -153,9 +164,10 @@ export function Navbar() {
             <button
               type="button"
               className={cn(
-                "caption group flex items-center gap-2.5 text-[0.62rem] transition-colors duration-300",
+                "caption group flex items-center text-[0.62rem] transition-colors duration-300",
                 overDark && "hover:text-gold",
               )}
+              aria-label={copy.nav.menu}
               aria-expanded={open}
               aria-controls="site-menu"
               onClick={() => setOpen(true)}
@@ -164,7 +176,6 @@ export function Navbar() {
                 <span className="h-px w-5 bg-current" />
                 <span className="h-px w-3.5 bg-current transition-[width] duration-300 group-hover:w-5" />
               </span>
-              {copy.nav.menu}
             </button>
           </div>
         </div>
@@ -199,7 +210,7 @@ export function Navbar() {
             {copy.nav.close}
           </button>
         </div>
-        <nav className="flex flex-1 flex-col justify-center px-[var(--gutter)]" aria-label="Menu">
+        <nav className="flex flex-1 flex-col justify-center px-[var(--gutter)]" aria-label={copy.nav.menu}>
           {links.map((link, index) => (
             <a
               key={link.href}

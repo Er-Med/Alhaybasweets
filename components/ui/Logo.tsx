@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { cn } from "@/lib/cn";
 
-const mask = {
+export const logoMask = {
   maskImage: "url(/elhaybalogo-mask.png)",
   WebkitMaskImage: "url(/elhaybalogo-mask.png)",
   maskSize: "contain",
@@ -23,7 +23,7 @@ export function Logo({
   return (
     <span
       aria-hidden
-      style={mask}
+      style={logoMask}
       className={cn(
         "block aspect-[598/333] bg-current transition-colors duration-500",
         tone === "light" ? "h-[3.15rem] text-[#0b3831] lg:h-[3.85rem]" : "h-9 text-ivory lg:h-11",

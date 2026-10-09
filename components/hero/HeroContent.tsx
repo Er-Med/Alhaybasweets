@@ -78,7 +78,7 @@ export function HeroContent() {
         <MagneticButton href={WHATSAPP} external variant="gold">
           {copy.hero.order}
         </MagneticButton>
-        <MagneticButton href="/#collection" variant="light">
+        <MagneticButton href="/menu" variant="light">
           {copy.hero.explore}
         </MagneticButton>
       </div>
