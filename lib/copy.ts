@@ -185,7 +185,7 @@ const en: Copy = {
     view: "View",
   },
   featured: {
-    kicker: "Featured product",
+    kicker: "04 — Featured",
     discover: "Discover more",
   },
   heritage: {
@@ -196,7 +196,7 @@ const en: Copy = {
     fig: "The house in Casablanca",
   },
   gallery: {
-    kicker: "06",
+    kicker: "06 — Gallery",
     titleLead: "Made to be",
     titleEm: "shared.",
     intro: "From the tray, the kitchen, and the city that shapes them.",
@@ -218,7 +218,7 @@ const en: Copy = {
     alt: "An open Al Hayba gift box",
   },
   instagram: {
-    kicker: "08",
+    kicker: "08 — Instagram",
     titleLead: "From our table",
     titleEm: "to your feed.",
     handle: "@alhaybasweets",
@@ -234,7 +234,7 @@ const en: Copy = {
     ],
   },
   stats: {
-    kicker: "09",
+    kicker: "09 — Legacy",
     titleLead: "A legacy",
     titleEm: "of quality.",
     items: [
@@ -454,7 +454,7 @@ const ar: Copy = {
     view: "عرض",
   },
   featured: {
-    kicker: "المنتج المميز",
+    kicker: "٠٤ — المميز",
     discover: "اكتشف المزيد",
   },
   heritage: {
@@ -465,7 +465,7 @@ const ar: Copy = {
     fig: "الدار في الدار البيضاء",
   },
   gallery: {
-    kicker: "٠٦",
+    kicker: "٠٦ — المعرض",
     titleLead: "صُنعت",
     titleEm: "لتُشارَك.",
     intro: "من الصينية، والمطبخ، والمدينة التي تشكّلها.",
@@ -487,7 +487,7 @@ const ar: Copy = {
     alt: "صندوق هدايا الهيبة المفتوح",
   },
   instagram: {
-    kicker: "٠٨",
+    kicker: "٠٨ — إنستغرام",
     titleLead: "من مائدتنا",
     titleEm: "إلى يومياتك.",
     handle: "@alhaybasweets",
@@ -503,7 +503,7 @@ const ar: Copy = {
     ],
   },
   stats: {
-    kicker: "٠٩",
+    kicker: "٠٩ — الإرث",
     titleLead: "إرث",
     titleEm: "من الجودة.",
     items: [

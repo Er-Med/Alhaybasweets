@@ -14,6 +14,7 @@ export function ParallaxImage({
   speed = 8,
   priority = false,
   cursor = true,
+  reveal = true,
   onOpen,
 }: {
   src: string;
@@ -24,18 +25,32 @@ export function ParallaxImage({
   speed?: number;
   priority?: boolean;
   cursor?: boolean;
+  /** Wipe the frame open the first time it scrolls into view. */
+  reveal?: boolean;
   onOpen?: () => void;
 }) {
   const frame = useRef<HTMLDivElement>(null);
   const inner = useRef<HTMLDivElement>(null);
+  const zoom = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const reduce = prefersReducedMotion();
+    if (prefersReducedMotion()) return;
     const narrow = window.matchMedia("(max-width: 1023px)").matches;
-    if (reduce || narrow) return;
     registerGsap();
 
     const ctx = gsap.context(() => {
+      if (reveal) {
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: frame.current, start: "top 90%", toggleActions: "play none none none" },
+        });
+        tl.fromTo(
+          frame.current,
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut" },
+        ).fromTo(zoom.current, { scale: 1.25 }, { scale: 1, duration: 1.9, ease: "expo.out" }, 0.15);
+      }
+
+      if (narrow) return;
       gsap.fromTo(
         inner.current,
         { yPercent: -speed },
@@ -53,7 +68,7 @@ export function ParallaxImage({
     }, frame);
 
     return () => ctx.revert();
-  }, [speed]);
+  }, [speed, reveal]);
 
   return (
     <div
@@ -62,7 +77,9 @@ export function ParallaxImage({
       className={cn("relative overflow-hidden", className)}
     >
       <div ref={inner} className="absolute inset-[-10%]">
-        <Photo src={src} alt={onOpen ? "" : alt} sizes={sizes} priority={priority} className={imageClass} />
+        <div ref={zoom} className="absolute inset-0">
+          <Photo src={src} alt={onOpen ? "" : alt} sizes={sizes} priority={priority} className={imageClass} />
+        </div>
       </div>
       {onOpen ? (
         <button type="button" aria-label={alt} className="absolute inset-0 z-10" onClick={onOpen} />

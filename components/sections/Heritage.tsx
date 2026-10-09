@@ -2,7 +2,7 @@
 
 import { useLocale } from "@/lib/i18n";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
-import { Reveal } from "@/components/motion/Reveal";
+import { Line, Reveal } from "@/components/motion/Reveal";
 
 export function Heritage() {
   const { copy } = useLocale();
@@ -11,10 +11,12 @@ export function Heritage() {
     <section id="heritage" className="overflow-hidden bg-ivory px-[var(--gutter)] py-24 lg:py-32">
       <div className="grid items-end gap-8 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
-          <p className="caption text-pistachio">{copy.heritage.kicker}</p>
+          <p data-reveal className="caption text-pistachio">
+            {copy.heritage.kicker}
+          </p>
           <h2 className="display-lg mt-5">
-            <span className="block">{copy.heritage.titleLead}</span>
-            <span className="block italic">{copy.heritage.titleEm}</span>
+            <Line>{copy.heritage.titleLead}</Line>
+            <Line className="italic">{copy.heritage.titleEm}</Line>
           </h2>
         </Reveal>
         <div className="lg:col-span-6 lg:col-start-7">

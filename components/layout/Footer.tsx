@@ -2,7 +2,7 @@
 
 import { useLocale } from "@/lib/i18n";
 import { ADDRESS, INSTAGRAM, locations, WHATSAPP } from "@/lib/site";
-import { Motif } from "@/components/ui/Motif";
+import { MotifBand, MotifField } from "@/components/ui/Motif";
 
 const links = [
   { href: "/collection", key: "collection" },
@@ -17,12 +17,16 @@ export function Footer() {
 
   return (
     <footer className="tone-dark relative overflow-hidden bg-ink text-ivory">
-      <Motif className="pointer-events-none absolute -end-10 top-10 h-56 w-56 text-gold/25 md:h-72 md:w-72" />
-      <div className="relative px-[var(--gutter)] pt-20 pb-10 lg:pt-28">
+      <MotifField fade className="absolute inset-0 text-gold/25" />
+      <div className="relative">
+        <MotifBand className="w-full text-gold" />
+        <div className="px-[var(--gutter)] pt-20 pb-10 lg:pt-28">
         <p className="font-serif text-[clamp(3.4rem,15vw,12.5rem)] leading-[0.82] tracking-[-0.035em]">
           AL HAYBA
         </p>
-        <p className="caption mt-4 text-gold">Sweets</p>
+        <p lang="en" className="script -mt-1 text-[clamp(2.6rem,5.5vw,4.6rem)] text-gold">
+          Sweets
+        </p>
 
         <div className="mt-16 grid gap-12 border-t border-ivory/15 pt-10 md:grid-cols-3">
           <nav className="flex flex-col items-start gap-3" aria-label="Footer">
@@ -70,6 +74,7 @@ export function Footer() {
         </div>
 
         <p className="caption mt-16 text-ivory/50">{copy.footer.rights}</p>
+        </div>
       </div>
     </footer>
   );

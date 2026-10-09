@@ -1,35 +1,54 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useLocale } from "@/lib/i18n";
 import { WHATSAPP } from "@/lib/site";
+import { cn } from "@/lib/cn";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+
+function Line({ children, className }: { children: ReactNode; className?: string }) {
+  const script = className?.includes("italic");
+  return (
+    <span
+      className={cn(
+        "block overflow-hidden",
+        script ? "-my-[0.06em] px-[0.12em] py-[0.28em]" : "-mb-[0.14em] pb-[0.14em]",
+      )}
+    >
+      <span data-hero="line" className={cn("hero-await block", script && "script", className)}>
+        {children}
+      </span>
+    </span>
+  );
+}
 
 export function HeroContent() {
   const { locale, copy } = useLocale();
   const arabic = locale === "ar";
 
   return (
-    <div className="max-w-[38rem] pb-2 lg:pb-0">
-      <p data-hero="eyebrow" className="hero-await caption text-pistachio">
+    <div className="max-w-[40rem]">
+      <p data-hero="eyebrow" className="hero-await caption flex items-center gap-4 text-gold">
+        <span aria-hidden className="h-px w-10 bg-gradient-to-r from-transparent to-gold rtl:bg-gradient-to-l" />
         {copy.hero.eyebrow}
       </p>
 
       {arabic ? (
         <>
           <h1
-            data-hero="arabic"
             lang="ar"
-            className="hero-await arabic-display mt-6 text-[clamp(2.3rem,6vw,4.4rem)] text-chocolate"
+            className="arabic-display mt-7 text-[clamp(2.6rem,6.4vw,5.2rem)] leading-[1.65] text-ivory"
           >
-            {copy.hero.arabicTitle}
+            <Line>{copy.hero.arabicTitle}</Line>
           </h1>
           <p
-            data-hero="title"
             lang="en"
             dir="ltr"
-            className="hero-await mt-4 max-w-[16ch] font-serif text-[clamp(1.45rem,2.4vw,2.2rem)] italic leading-tight text-chocolate/80"
+            className="script mt-3 font-serif text-[clamp(1.8rem,3vw,2.8rem)] leading-tight"
           >
-            {copy.hero.titleLead} {copy.hero.titleEm}
+            <Line>
+              {copy.hero.titleLead} <span className="hero-gold-text">{copy.hero.titleEm}</span>
+            </Line>
           </p>
         </>
       ) : (
@@ -38,32 +57,31 @@ export function HeroContent() {
             data-hero="arabic"
             lang="ar"
             dir="rtl"
-            className="hero-await arabic-display mt-6 w-fit text-[clamp(1.25rem,2vw,1.8rem)] text-pistachio"
+            className="hero-await arabic-display mt-7 w-fit text-[clamp(1.45rem,2.3vw,2.15rem)] text-gold/90"
           >
             {copy.hero.arabicTitle}
           </p>
-          <h1 data-hero="title" className="hero-await display-xl mt-3 text-chocolate">
-            <span className="block">{copy.hero.titleLead}</span>
-            <span className="block italic">{copy.hero.titleEm}</span>
+          <h1 className="hero-title mt-3 font-serif text-ivory">
+            <Line>{copy.hero.titleLead}</Line>
+            <Line className="italic">
+              <span className="hero-gold-text">{copy.hero.titleEm}</span>
+            </Line>
           </h1>
         </>
       )}
 
-      <p data-hero="desc" className="hero-await body-lg mt-6 max-w-[32ch] text-muted">
+      <p data-hero="desc" className="hero-await body-lg mt-7 max-w-[32ch] text-ivory/65">
         {copy.hero.description}
       </p>
 
-      <div data-hero="cta" className="hero-await mt-8 flex flex-wrap gap-3">
-        <MagneticButton href={WHATSAPP} external>
+      <div data-hero="cta" className="hero-await mt-9 flex flex-wrap gap-3">
+        <MagneticButton href={WHATSAPP} external variant="gold">
           {copy.hero.order}
         </MagneticButton>
-        <MagneticButton href="/#collection" variant="ghost">
+        <MagneticButton href="/#collection" variant="light">
           {copy.hero.explore}
         </MagneticButton>
       </div>
-      <p data-hero="fig" className="hero-await caption mt-8 text-muted">
-        {copy.hero.fig}
-      </p>
     </div>
   );
 }

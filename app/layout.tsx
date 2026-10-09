@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope, Noto_Kufi_Arabic } from "next/font/google";
+import { Allura, Amiri, Aref_Ruqaa, Cormorant_Garamond, Figtree } from "next/font/google";
 import { Providers } from "@/components/providers/Providers";
 import "./globals.css";
 
@@ -11,17 +11,31 @@ const serif = Cormorant_Garamond({
   display: "swap",
 });
 
-const sans = Manrope({
+const sans = Figtree({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-manrope",
+  variable: "--font-figtree",
   display: "swap",
 });
 
-const arabic = Noto_Kufi_Arabic({
+/** The Latin wordmark under the calligraphy is a formal script. */
+const script = Allura({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-script",
+  display: "swap",
+});
+
+const arabic = Amiri({
   subsets: ["arabic"],
-  weight: ["400", "500", "600"],
-  variable: "--font-kufi",
+  weight: ["400", "700"],
+  variable: "--font-amiri",
+  display: "swap",
+});
+
+const arabicDisplay = Aref_Ruqaa({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-ruqaa",
   display: "swap",
 });
 
@@ -95,7 +109,7 @@ export default function RootLayout({
     <html
       lang="en"
       dir="ltr"
-      className={`${serif.variable} ${sans.variable} ${arabic.variable} h-full antialiased`}
+      className={`${serif.variable} ${sans.variable} ${script.variable} ${arabic.variable} ${arabicDisplay.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full font-sans" suppressHydrationWarning>

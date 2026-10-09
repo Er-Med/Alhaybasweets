@@ -7,6 +7,7 @@ import { useLocale } from "@/lib/i18n";
 import { getLenis } from "@/lib/scroll";
 import { WHATSAPP } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { Logo } from "@/components/ui/Logo";
 
 const links = [
   { href: "/#collection", key: "collection" },
@@ -21,7 +22,42 @@ export function Navbar() {
   const { locale, setLocale, copy } = useLocale();
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const home = pathname === "/";
+  const [overDark, setOverDark] = useState(home);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 8);
+      const line = (headerRef.current?.offsetHeight ?? 0) / 2;
+      const grounds = document.querySelectorAll<HTMLElement>("main section.tone-dark, footer.tone-dark");
+      setOverDark(
+        Array.from(grounds).some((el) => {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= line && rect.bottom > line;
+        }),
+      );
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -44,26 +80,45 @@ export function Navbar() {
   return (
     <>
       <header
+        ref={headerRef}
         data-hero={home ? "nav" : undefined}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-chocolate/10 bg-ivory text-chocolate transition-colors duration-300",
+          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,color,backdrop-filter] duration-500 ease-[var(--ease)]",
+          overDark
+            ? cn(
+                "tone-dark border-ivory/10 text-ivory",
+                scrolled ? "bg-espresso/75 backdrop-blur-xl" : "bg-transparent",
+              )
+            : "border-chocolate/10 bg-ivory/95 text-chocolate backdrop-blur-xl",
           home && "hero-await",
         )}
       >
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#120b07]/70 to-transparent transition-opacity duration-500",
+            overDark && !scrolled ? "opacity-100" : "opacity-0",
+          )}
+        />
+        <div
+          ref={progressRef}
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-gold rtl:origin-right"
+        />
         <div className="flex items-center justify-between gap-4 px-[var(--gutter)] py-5">
           <div className="flex min-w-0 items-center gap-6 lg:gap-8">
             <Link href="/" className="shrink-0 leading-none" aria-label="Al Hayba Sweets">
-              <span className="block whitespace-nowrap font-serif text-[1.15rem] tracking-[0.14em] lg:text-[1.28rem]">
-                AL HAYBA
-              </span>
-              <span className="mt-1 block caption text-[0.56rem]">Sweets</span>
+              <Logo className={overDark ? "text-ivory" : undefined} />
             </Link>
             <nav className="hidden items-center gap-5 xl:gap-7 lg:flex" aria-label="Primary">
               {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="caption whitespace-nowrap text-[0.6rem] opacity-70 transition-opacity duration-300 hover:opacity-100"
+                  className={cn(
+                    "nav-link caption whitespace-nowrap text-[0.6rem] transition-[color,opacity] duration-300",
+                    overDark ? "text-ivory/70 hover:text-gold" : "opacity-70 hover:opacity-100",
+                  )}
                 >
                   {copy.nav[link.key]}
                 </a>
@@ -71,9 +126,25 @@ export function Navbar() {
             </nav>
           </div>
           <div className="flex shrink-0 items-center gap-5">
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "caption hidden border px-4 py-2.5 text-[0.6rem] transition-colors duration-300 lg:inline-flex",
+                overDark
+                  ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
+                  : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",
+              )}
+            >
+              {copy.hero.order}
+            </a>
             <button
               type="button"
-              className="caption text-[0.62rem]"
+              className={cn(
+                "caption text-[0.62rem] transition-colors duration-300",
+                overDark && "hover:text-gold",
+              )}
               aria-label={copy.nav.language}
               onClick={() => setLocale(locale === "en" ? "ar" : "en")}
             >
@@ -81,11 +152,18 @@ export function Navbar() {
             </button>
             <button
               type="button"
-              className="caption text-[0.62rem]"
+              className={cn(
+                "caption group flex items-center gap-2.5 text-[0.62rem] transition-colors duration-300",
+                overDark && "hover:text-gold",
+              )}
               aria-expanded={open}
               aria-controls="site-menu"
               onClick={() => setOpen(true)}
             >
+              <span aria-hidden className="flex w-5 flex-col items-end gap-[5px]">
+                <span className="h-px w-5 bg-current" />
+                <span className="h-px w-3.5 bg-current transition-[width] duration-300 group-hover:w-5" />
+              </span>
               {copy.nav.menu}
             </button>
           </div>
@@ -104,7 +182,14 @@ export function Navbar() {
         )}
       >
         <div className="flex items-center justify-between px-[var(--gutter)] py-5">
-          <p className="font-serif text-[1.35rem] tracking-[0.16em]">AL HAYBA</p>
+          <Link
+            href="/"
+            className="shrink-0 leading-none"
+            aria-label="Al Hayba Sweets"
+            onClick={() => setOpen(false)}
+          >
+            <Logo tone="dark" />
+          </Link>
           <button
             type="button"
             className="caption"

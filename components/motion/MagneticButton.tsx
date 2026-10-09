@@ -11,6 +11,7 @@ const variants = {
   light: "border border-ivory/45 text-ivory hover:border-ivory",
   ivory: "bg-ivory text-chocolate hover:bg-[#f7f3ea]",
   pistachio: "bg-pistachio text-ivory hover:bg-[#2c3b25]",
+  gold: "bg-gold text-espresso hover:bg-[#cdb073]",
 };
 
 export function MagneticButton({

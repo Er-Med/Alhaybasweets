@@ -31,10 +31,9 @@ export function FeaturedProduct() {
         pin: true,
         anticipatePin: 1,
         onUpdate: (self) => {
-          const next = Math.min(
-            featuredOrder.length - 1,
-            Math.floor(self.progress * featuredOrder.length * 0.999),
-          );
+          const scaled = self.progress * featuredOrder.length * 0.999;
+          const next = Math.min(featuredOrder.length - 1, Math.floor(scaled));
+          section.style.setProperty("--item-progress", String(scaled - next));
           if (next !== activeRef.current) {
             activeRef.current = next;
             setActive(next);
@@ -80,8 +79,12 @@ export function FeaturedProduct() {
               <div className="px-[var(--gutter)] py-10">
                 <p className="caption text-pistachio">{product.index}</p>
                 <h3 className="heading-xl mt-3">{product.short}</h3>
-                <p className="heading-lg mt-4 italic">{product.line1}</p>
-                <p className="heading-lg italic">{product.line2}</p>
+                <p className="heading-lg mt-4">
+                  <span className="script">{product.line1}</span>
+                </p>
+                <p className="heading-lg">
+                  <span className="script">{product.line2}</span>
+                </p>
                 <p className="body-lg mt-5 max-w-[38ch] text-muted">{product.detail}</p>
               </div>
             </article>
@@ -90,49 +93,69 @@ export function FeaturedProduct() {
       </div>
 
       <div className="hidden h-[100svh] lg:grid lg:grid-cols-2">
-        <div className="relative h-full overflow-hidden">
+        <div className="relative h-full overflow-hidden bg-espresso">
           {featuredOrder.map((id, index) => {
             const media = productMedia[id];
+            const shown = index <= active;
             return (
               <div
                 key={id}
-                className={cn(
-                  "absolute inset-0 transition-opacity duration-700",
-                  index === active ? "opacity-100" : "opacity-0",
-                )}
+                className="absolute inset-0 overflow-hidden transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.77,0,0.18,1)]"
+                style={{ clipPath: shown ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)" }}
               >
-                <Photo
-                  src={media.featured ?? media.image}
-                  alt={copy.products[id].alt}
-                  sizes="50vw"
-                  priority={index === 0}
-                  className={media.imageClass}
-                />
+                <div
+                  className={cn(
+                    "absolute inset-0 transition-transform duration-[1800ms] ease-[var(--ease)]",
+                    index === active ? "scale-100" : "scale-[1.12]",
+                  )}
+                >
+                  <Photo
+                    src={media.featured ?? media.image}
+                    alt={copy.products[id].alt}
+                    sizes="50vw"
+                    priority={index === 0}
+                    className={media.imageClass}
+                  />
+                </div>
               </div>
             );
           })}
+          <p className="caption pointer-events-none absolute bottom-8 start-8 z-10 text-ivory mix-blend-difference">
+            {copy.products[featuredOrder[active]].index}
+          </p>
         </div>
 
         <div className="flex h-full flex-col justify-between px-[clamp(2rem,4vw,4.5rem)] py-28">
-          <p className="caption text-pistachio">{copy.featured.kicker}</p>
+          <div className="flex items-center justify-between">
+            <p className="caption text-pistachio">{copy.featured.kicker}</p>
+            <p className="caption tabular-nums text-muted">
+              <span className="text-chocolate">{String(active + 1).padStart(2, "0")}</span>
+              <span className="mx-2">/</span>
+              {String(featuredOrder.length).padStart(2, "0")}
+            </p>
+          </div>
           <div className="relative min-h-[320px]">
             {featuredOrder.map((id, index) => {
               const product = copy.products[id];
+              const on = index === active;
               return (
                 <div
                   key={id}
                   className={cn(
-                    "transition-all duration-700",
-                    index === active
-                      ? "relative opacity-100"
-                      : "pointer-events-none absolute inset-0 opacity-0",
+                    "transition-[opacity,transform] duration-700 ease-[var(--ease)]",
+                    on
+                      ? "relative translate-y-0 opacity-100 delay-200"
+                      : cn(
+                          "pointer-events-none absolute inset-0 opacity-0",
+                          index < active ? "-translate-y-8" : "translate-y-8",
+                        ),
                   )}
-                  aria-hidden={index !== active}
+                  aria-hidden={!on}
                 >
                   <h2 className="display-lg">{product.short}</h2>
-                  <p className="heading-lg mt-6 italic text-chocolate">
-                    {product.line1}
-                    <span className="block">{product.line2}</span>
+                  <p className="heading-lg mt-6 text-chocolate">
+                    <span className="script">{product.line1}</span>
+                    <span className="script block">{product.line2}</span>
                   </p>
                   <p className="body-lg mt-6 max-w-[34ch] text-muted">{product.detail}</p>
                   <TextLink href={`/menu#${menuSectionForProduct[id]}`} className="mt-8 text-chocolate">
@@ -157,7 +180,15 @@ export function FeaturedProduct() {
                     )}
                     aria-current={on ? "true" : undefined}
                   >
-                    <span className={cn("h-px w-6 bg-current", on && "bg-gold text-gold")} />
+                    <span className="relative h-px w-10 overflow-hidden bg-current/30">
+                      <span
+                        className={cn(
+                          "absolute inset-0 origin-left bg-gold rtl:origin-right",
+                          !on && "scale-x-0",
+                        )}
+                        style={on ? { transform: "scaleX(var(--item-progress, 1))" } : undefined}
+                      />
+                    </span>
                     <span className="text-gold">{product.index}</span>
                     <span className="tracking-[0.18em]">{product.short}</span>
                   </button>

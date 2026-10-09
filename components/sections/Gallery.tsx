@@ -5,6 +5,7 @@ import { useLocale } from "@/lib/i18n";
 import { galleryMedia } from "@/lib/site";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { ImageViewer } from "@/components/ui/ImageViewer";
+import { Line, Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 const frames: Record<(typeof galleryMedia)[number]["frame"], string> = {
@@ -29,16 +30,20 @@ export function Gallery({ intro = true }: { intro?: boolean }) {
   return (
     <section id="gallery" className={cn("bg-ivory px-[var(--gutter)]", intro ? "py-20 lg:py-28" : "pb-20 lg:pb-28")}>
       {intro ? (
-        <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
+        <Reveal className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="caption text-pistachio">{copy.gallery.kicker}</p>
+            <p data-reveal className="caption text-pistachio">
+              {copy.gallery.kicker}
+            </p>
             <h2 className="display-lg mt-4">
-              <span className="block">{copy.gallery.titleLead}</span>
-              <span className="block italic">{copy.gallery.titleEm}</span>
+              <Line>{copy.gallery.titleLead}</Line>
+              <Line className="italic">{copy.gallery.titleEm}</Line>
             </h2>
           </div>
-          <p className="body-md max-w-[28ch] text-muted lg:mb-3">{copy.gallery.intro}</p>
-        </div>
+          <p data-reveal className="body-md max-w-[28ch] text-muted lg:mb-3">
+            {copy.gallery.intro}
+          </p>
+        </Reveal>
       ) : null}
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:grid-rows-[minmax(180px,22vh)_minmax(200px,26vh)_minmax(180px,24vh)] lg:gap-4">

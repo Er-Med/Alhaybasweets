@@ -38,9 +38,9 @@ export function CollectionIndex() {
               <div className={cn("lg:col-span-4", flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-9")}>
                 <p className="caption text-gold">{product.index}</p>
                 <h2 className="heading-xl mt-4">{product.name}</h2>
-                <p className="heading-lg mt-5 italic">
-                  {product.line1}
-                  <span className="block">{product.line2}</span>
+                <p className="heading-lg mt-5">
+                  <span className="script">{product.line1}</span>
+                  <span className="script block">{product.line2}</span>
                 </p>
                 <p className="body-lg mt-6 text-muted">{product.detail}</p>
               </div>

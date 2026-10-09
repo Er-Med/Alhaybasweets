@@ -19,7 +19,7 @@ export function Photo({
       alt={alt}
       fill
       sizes={sizes}
-      priority={priority}
+      preload={priority}
       className={className}
     />
   );
