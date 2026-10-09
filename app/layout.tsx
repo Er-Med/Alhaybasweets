@@ -46,10 +46,10 @@ export const metadata: Metadata = {
     template: "%s — Al Hayba Sweets",
   },
   description:
-    "Al Hayba Sweets in Casablanca. Traditional Moroccan craftsmanship, reimagined. Baklava, pistachio, and gift boxes made by hand.",
+    "Al Hayba Sweets. Levantine and Oriental sweets, made in Casablanca. Baklava, kunafa, maamoul, and gift boxes made by hand.",
   openGraph: {
     title: "Al Hayba Sweets",
-    description: "Traditional craftsmanship, reimagined. Casablanca.",
+    description: "Levantine recipes, finished by Moroccan hands. Casablanca.",
     locale: "en",
     type: "website",
   },

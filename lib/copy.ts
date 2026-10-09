@@ -156,11 +156,11 @@ const en: Copy = {
     language: "Switch language",
   },
   hero: {
-    eyebrow: "Traditional sweets · Moroccan soul",
+    eyebrow: "Oriental sweets · Moroccan soul",
     arabicTitle: "حلويات الهيبة",
     titleLead: "A taste worth",
     titleEm: "remembering.",
-    description: "Traditional craftsmanship, reimagined.",
+    description: "Levantine recipes, finished by Moroccan hands.",
     order: "Order on WhatsApp",
     explore: "See the menu",
     fig: "Fig. 01 — Pistachio baklava",
@@ -170,12 +170,12 @@ const en: Copy = {
     titleLead: "More than",
     titleEm: "just sweets.",
     arabic: ["من التراث", "إلى المذاق", "الذي يدوم"],
-    body: "Al Hayba brings together craftsmanship, rich ingredients, Moroccan hospitality, and a contemporary way of presenting them. In Casablanca, each tray is still finished by hand. Filo pulled thin, pistachios chosen for colour, syrup poured only when the pastry is ready.",
+    body: "Al Hayba carries the sweets of Damascus, Beirut, and Istanbul to Casablanca, and serves them the way Morocco receives a guest. With tea, with time, with more than was asked for. Each tray is still finished by hand. Filo pulled thin, pistachios chosen for colour, syrup poured only when the pastry is ready.",
     cta: "Our story",
     fig: "Fig. 02 — The tray",
     more: [
-      "The work is repetitive on purpose. Butter is clarified until it is quiet. Nuts are sorted by hand. Nothing in the box is there to fill space.",
-      "What changed is the light around the recipe. The sweets travel in boxes meant to be opened slowly, at a table, with tea. They did not need to become louder to feel present.",
+      "The Mashreq and the Maghreb have always sat at the same table. One language, one faith, one habit of setting out something sweet before the guest has taken off their coat. Al Hayba was born where those two ends of the Arab world meet.",
+      "The recipes came west the way recipes always travel, with merchants, pilgrims, and families. They arrived in a country that already knew orange blossom, almonds, and patience. Here they found a second home, and the tea they had been waiting for.",
     ],
   },
   collection: {
@@ -190,10 +190,10 @@ const en: Copy = {
   },
   heritage: {
     kicker: "05 — Origin",
-    titleLead: "From tradition",
-    titleEm: "to today.",
-    body: "The recipes begin at Moroccan and Arab tables, measured by hand and repeated until they no longer need a recipe. Al Hayba keeps that patience and changes the light around it. Quieter presentation. The same ingredients. A kitchen in Casablanca that still refuses to rush a tray.",
-    fig: "The house in Casablanca",
+    titleLead: "From the East",
+    titleEm: "to the West.",
+    body: "The recipes begin in the kitchens of the Levant and Anatolia. Baklava from the Ottoman table, kunafa from Nablus and Damascus, maamoul from the Eid mornings of Beirut. Morocco has long shared their spices, their faith, and their love of the sweet table. Al Hayba keeps the original recipe, exactly, and adds the one thing Morocco gives every guest: a welcome.",
+    fig: "Levantine craft, Casablanca house",
   },
   gallery: {
     kicker: "06 — Gallery",
@@ -213,7 +213,7 @@ const en: Copy = {
     kicker: "07 — The gift",
     titleLead: "A gift of",
     titleEm: "authenticity.",
-    body: "Beautifully crafted boxes, filled with the finest selection of sweets. Chosen piece by piece, packed to travel, and opened when the table is ready.",
+    body: "A box that speaks both dialects. Sweets from the East, chosen piece by piece and packed with Moroccan care. A gift that is understood from Beirut to Casablanca, and opened when the table is ready.",
     cta: "Order your box",
     alt: "An open Al Hayba gift box",
   },
@@ -239,7 +239,7 @@ const en: Copy = {
     titleEm: "of quality.",
     items: [
       { value: "100%", label: "Natural ingredients" },
-      { value: "10+", label: "Years of craftsmanship" },
+      { value: "3", label: "Lands of origin" },
       { value: "16.7K", label: "Followers on Instagram" },
     ],
   },
@@ -250,7 +250,7 @@ const en: Copy = {
     items: [
       {
         quote:
-          "The baklava tastes the way I remember a family table. Quieter, more exact. We order the box for every gathering.",
+          "My grandmother was from Damascus. This is the baklava of her table, served in Casablanca with mint tea. We order the box for every gathering.",
         name: "Leila B.",
         place: "Casablanca",
       },
@@ -362,7 +362,7 @@ const en: Copy = {
       line1: "Layers of tradition.",
       line2: "A modern obsession.",
       detail:
-        "Forty sheets of filo, clarified butter, and pistachio. A light orange-blossom syrup, never heavy, always exact.",
+        "A recipe from the Ottoman kitchens. Forty sheets of filo, clarified butter, and pistachio. A light orange-blossom syrup, the scent Morocco and the Levant have always shared.",
       alt: "Pistachio baklava in a brass tray",
     },
     pistachio: {
@@ -395,18 +395,18 @@ const en: Copy = {
       line1: "Pressed by hand.",
       line2: "Fragrant with blossom.",
       detail:
-        "Semolina, date, and orange blossom. Shaped for coffee, for visits, and for the hour that does not need to hurry.",
+        "The sweet of Levantine Eid mornings. Semolina, date, and orange blossom, pressed into wooden moulds. Shaped for coffee, for visits, and for the hour that does not need to hurry.",
       alt: "Three pieces of maamoul on a plate",
     },
     oriental: {
       index: "05",
       name: "Oriental Sweets",
       short: "Oriental Sweets",
-      summary: "The full selection, arranged for a table and a long conversation.",
+      summary: "The sweets of Lebanon, Syria, and Turkey, arranged for a Moroccan table.",
       line1: "The full table.",
       line2: "Arranged to be shared.",
       detail:
-        "A composed selection of the house. Baklava, pistachio, chocolate, and maamoul, packed as one gesture.",
+        "What Casablanca calls ḥalawiyyat sharqiyya. Baklava, kunafa, basbousa, and maamoul from the Levant, gathered by the house and packed as one gesture.",
       alt: "An open Al Hayba gift box of assorted baklava",
     },
   },
@@ -425,11 +425,11 @@ const ar: Copy = {
     language: "تغيير اللغة",
   },
   hero: {
-    eyebrow: "حلويات تقليدية · روح مغربية",
+    eyebrow: "حلويات شرقية · روح مغربية",
     arabicTitle: "حلويات الهيبة",
     titleLead: "A taste worth",
     titleEm: "remembering.",
-    description: "حرفة تقليدية، برؤية معاصرة.",
+    description: "وصفات شامية، بلمسة يد مغربية.",
     order: "اطلب عبر واتساب",
     explore: "شاهد القائمة",
     fig: "صورة ٠١ — بقلاوة بالفستق",
@@ -439,12 +439,12 @@ const ar: Copy = {
     titleLead: "أكثر من",
     titleEm: "مجرد حلويات.",
     arabic: ["من التراث", "إلى المذاق", "الذي يدوم"],
-    body: "تجمع الهيبة بين الحرفة والمكوّنات الغنية والضيافة المغربية، وطريقة معاصرة في التقديم. في الدار البيضاء، ما زالت كل صينية تُنجز باليد. عجين رقيق، وفستق يُختار للونه، وقطر يُسكب حين تستوي الحلوى.",
+    body: "تحمل الهيبة حلويات دمشق وبيروت وإسطنبول إلى الدار البيضاء، وتقدّمها كما يستقبل المغرب ضيفه. بالشاي، وبالوقت، وبأكثر مما طُلب. وما زالت كل صينية تُنجز باليد. عجين رقيق، وفستق يُختار للونه، وقطر يُسكب حين تستوي الحلوى.",
     cta: "قصتنا",
     fig: "صورة ٠٢ — الصينية",
     more: [
-      "التكرار مقصود. يُصفّى السمن حتى يهدأ، وتُفرز المكسّرات باليد. لا شيء في الصندوق لملء الفراغ.",
-      "ما تغيّر هو الضوء حول الوصفة. تصل الحلويات في صناديق تُفتح ببطء، على مائدة، مع الشاي. لم تحتج أن تصبح أعلى صوتًا كي تُحضر.",
+      "جلس المشرق والمغرب دائمًا إلى المائدة نفسها. لغة واحدة، وإيمان واحد، وعادة واحدة في أن يُقدَّم الحلو قبل أن يستقرّ الضيف في مجلسه. وُلدت الهيبة حيث يلتقي طرفا العالم العربي.",
+      "سافرت الوصفات غربًا كما تسافر الوصفات دائمًا، مع التجّار والحجّاج والعائلات. ووصلت إلى بلد يعرف ماء الزهر واللوز والصبر. فوجدت فيه بيتًا ثانيًا، والشاي الذي كانت تنتظره.",
     ],
   },
   collection: {
@@ -459,10 +459,10 @@ const ar: Copy = {
   },
   heritage: {
     kicker: "٠٥ — الأصل",
-    titleLead: "من التراث",
-    titleEm: "إلى اليوم.",
-    body: "تبدأ الوصفات على الموائد المغربية والعربية، تُقاس باليد وتُعاد حتى تستغني عن الوصفة. تحفظ الهيبة هذا الصبر وتغيّر الضوء حوله. تقديم أهدأ. المكوّنات نفسها. مطبخ في الدار البيضاء ما زال يرفض أن يستعجل صينية.",
-    fig: "الدار في الدار البيضاء",
+    titleLead: "من المشرق",
+    titleEm: "إلى المغرب.",
+    body: "تبدأ الوصفات في مطابخ الشام والأناضول. بقلاوة من المائدة العثمانية، وكنافة من نابلس ودمشق، ومعمول من صباحات العيد في بيروت. وقد شارك المغرب هذه البلاد طويلًا توابلها وإيمانها وحبّها لمائدة الحلو. تحفظ الهيبة الوصفة الأصلية كما هي، وتضيف إليها ما يمنحه المغرب لكل ضيف: الترحاب.",
+    fig: "حرفة شامية، دار بيضاوية",
   },
   gallery: {
     kicker: "٠٦ — المعرض",
@@ -482,7 +482,7 @@ const ar: Copy = {
     kicker: "٠٧ — الهدية",
     titleLead: "هدية من",
     titleEm: "الأصالة.",
-    body: "صناديق تُصنع بعناية، وتُملأ بأرقى مختارات الحلويات. تُختار قطعة قطعة، وتُجهَّز للسفر، وتُفتح حين تجهز المائدة.",
+    body: "صندوق يتكلّم اللهجتين. حلويات من المشرق، تُختار قطعة قطعة، وتُرصّ بعناية مغربية. هدية تُفهم من بيروت إلى الدار البيضاء، وتُفتح حين تجهز المائدة.",
     cta: "اطلب صندوقك",
     alt: "صندوق هدايا الهيبة المفتوح",
   },
@@ -508,7 +508,7 @@ const ar: Copy = {
     titleEm: "من الجودة.",
     items: [
       { value: "100%", label: "مكوّنات طبيعية" },
-      { value: "10+", label: "سنوات من الحرفة" },
+      { value: "3", label: "بلدان الأصل" },
       { value: "16.7K", label: "متابع على إنستغرام" },
     ],
   },
@@ -519,7 +519,7 @@ const ar: Copy = {
     items: [
       {
         quote:
-          "طعم البقلاوة كما أذكر مائدة العائلة. أهدأ، وأدق. نطلب الصندوق لكل لقاء.",
+          "جدّتي من دمشق. هذه بقلاوة مائدتها، تُقدَّم في الدار البيضاء مع الشاي بالنعناع. نطلب الصندوق لكل لقاء.",
         name: "ليلى ب.",
         place: "الدار البيضاء",
       },
@@ -631,7 +631,7 @@ const ar: Copy = {
       line1: "طبقات من التراث.",
       line2: "هوسٌ معاصر.",
       detail:
-        "أربعون ورقة من العجين، وسمن مصفّى، وفستق. قطر خفيف بماء الزهر، غير ثقيل، دقيق دائمًا.",
+        "وصفة من المطابخ العثمانية. أربعون ورقة من العجين، وسمن مصفّى، وفستق. قطر خفيف بماء الزهر، العطر الذي تقاسمه المغرب والشام منذ زمن.",
       alt: "بقلاوة بالفستق في صينية نحاسية",
     },
     pistachio: {
@@ -664,17 +664,17 @@ const ar: Copy = {
       line1: "يُشكَّل باليد.",
       line2: "يفوح بماء الزهر.",
       detail:
-        "سميد، وتمر، وماء الزهر. للمعمول هيئة الزيارة والقهوة والساعة التي لا تستعجل.",
+        "حلوى صباحات العيد في الشام. سميد، وتمر، وماء الزهر، يُضغط في قوالب الخشب. للمعمول هيئة الزيارة والقهوة والساعة التي لا تستعجل.",
       alt: "ثلاث قطع معمول على طبق",
     },
     oriental: {
       index: "٠٥",
       name: "حلويات شرقية",
       short: "حلويات شرقية",
-      summary: "المختارات كاملة، مرتّبة لمائدة وحديث طويل.",
+      summary: "حلويات لبنان وسوريا وتركيا، مرتّبة لمائدة مغربية.",
       line1: "المائدة كاملة.",
       line2: "مرتّبة لتُشارَك.",
-      detail: "مختارات الدار في إيماءة واحدة. بقلاوة، وفستق، وشوكولاتة، ومعمول.",
+      detail: "ما تسمّيه الدار البيضاء «الحلويات الشرقية». بقلاوة، وكنافة، وبسبوسة، ومعمول من الشام، تجمعها الدار في إيماءة واحدة.",
       alt: "صندوق الهيبة المفتوح بتشكيلة البقلاوة",
     },
   },

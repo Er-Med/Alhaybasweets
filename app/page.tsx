@@ -15,7 +15,7 @@ import { VisitUs } from "@/components/sections/VisitUs";
 export const metadata: Metadata = {
   title: { absolute: "Al Hayba Sweets — A taste worth remembering." },
   description:
-    "Traditional Moroccan sweets from Casablanca. Baklava, pistachio, and gift boxes made by hand at Al Hayba.",
+    "Oriental sweets from the Levant, made by hand in Casablanca. Baklava, kunafa, pistachio, and gift boxes at Al Hayba.",
 };
 
 export default function HomePage() {
