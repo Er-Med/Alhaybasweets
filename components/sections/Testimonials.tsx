@@ -21,7 +21,7 @@ export function Testimonials() {
     <section className="bg-ivory" aria-labelledby="voices-heading">
       <div>
         <Reveal
-          className="flex flex-col justify-between px-[var(--gutter)] py-16 lg:py-24"
+          className="flex flex-col justify-between px-[var(--gutter)] py-[var(--section-y)]"
           start="top 75%"
         >
           <div data-reveal className="flex items-center justify-between">

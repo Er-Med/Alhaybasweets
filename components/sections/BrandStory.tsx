@@ -41,19 +41,19 @@ export function BrandStory() {
   }, []);
 
   return (
-    <section id="story" className="overflow-hidden bg-ivory px-[var(--gutter)] py-20 lg:py-28">
-      <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-0">
-        <div className="lg:col-span-7">
+    <section id="story" className="overflow-hidden bg-ivory px-[var(--gutter)] py-[var(--section-y)]">
+      <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-x-[var(--gutter)]">
+        <div className="lg:col-span-6">
           <div
             ref={frame}
-            className="relative h-[72vw] min-h-[320px] max-h-[820px] overflow-hidden lg:h-[88vh]"
+            className="relative aspect-[3/4] w-full max-w-[2152px] overflow-hidden"
             data-cursor="view"
           >
             <div ref={media} className="absolute inset-0">
               <Photo
                 src="/images/baklava-round.jpg"
                 alt={copy.hero.slides[1].alt}
-                sizes="(max-width: 1024px) 100vw, 58vw"
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center"
               />
             </div>
@@ -61,7 +61,7 @@ export function BrandStory() {
           <p className="caption mt-3 text-muted">{copy.story.fig}</p>
         </div>
 
-        <Reveal className="relative lg:col-span-5 lg:ps-[clamp(2.5rem,5vw,5.5rem)]">
+        <Reveal className="relative lg:col-span-6">
           <p data-reveal className="caption text-pistachio">
             {copy.story.kicker}
           </p>

@@ -22,7 +22,7 @@ export function Gallery({ intro = true, embedded = false }: { intro?: boolean; e
 
   const grid = (
     <>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
+      <div className="grid grid-cols-1 gap-[var(--gutter)] md:grid-cols-12">
         {galleryMedia.map((item, index) => (
           <ParallaxImage
             key={item.src}
@@ -31,7 +31,7 @@ export function Gallery({ intro = true, embedded = false }: { intro?: boolean; e
             sizes="(max-width: 768px) 100vw, 33vw"
             imageClass={item.imageClass}
             onOpen={() => setOpen(index)}
-            className="mx-auto aspect-[3/4] w-full"
+            className="aspect-[3/4] w-full md:col-span-4"
             style={{ maxWidth: Math.round(item.maxWidth / 1.2) }}
           />
         ))}
@@ -43,7 +43,7 @@ export function Gallery({ intro = true, embedded = false }: { intro?: boolean; e
   if (embedded) return grid;
 
   return (
-    <section id="gallery" className={cn("bg-ivory px-[var(--gutter)]", intro ? "py-20 lg:py-28" : "pb-20 lg:pb-28")}>
+    <section id="gallery" className={cn("bg-ivory px-[var(--gutter)]", intro ? "py-[var(--section-y)]" : "pb-[var(--section-y)]")}>
       {intro ? (
         <Reveal className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div>

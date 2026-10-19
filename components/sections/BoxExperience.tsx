@@ -46,8 +46,8 @@ export function BoxExperience() {
   return (
     <section ref={section} id="box" className="tone-dark relative overflow-hidden bg-pistachio text-ivory">
       <MotifVeil fade="aside" className="text-ivory/40" />
-      <div className="relative grid items-center gap-10 px-[var(--gutter)] py-20 lg:grid-cols-12 lg:py-28">
-        <Reveal className="lg:col-span-5">
+      <div className="relative grid items-center gap-10 px-[var(--gutter)] py-[var(--section-y)] lg:grid-cols-12 lg:gap-x-[var(--gutter)]">
+        <Reveal className="lg:col-span-6">
           <p data-reveal className="caption text-ivory/80">
             {copy.box.kicker}
           </p>
@@ -64,12 +64,12 @@ export function BoxExperience() {
             </MagneticButton>
           </div>
         </Reveal>
-        <div className="lg:col-span-6 lg:col-start-7">
-          <div ref={box} className="relative mx-auto h-[78vw] max-h-[760px] min-h-[320px] w-full lg:h-[74vh]" data-cursor="view">
+        <div className="lg:col-span-6">
+          <div ref={box} className="relative mx-auto aspect-[3/4] w-full max-w-[2010px]" data-cursor="view">
             <Photo
               src="/images/gift-box.jpg"
               alt={copy.box.alt}
-              sizes="(max-width: 1024px) 100vw, 48vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </div>

@@ -8,8 +8,8 @@ export function Origin() {
   const { copy } = useLocale();
 
   return (
-    <section id="gallery" className="bg-ivory px-[var(--gutter)] py-20 lg:py-28">
-      <Reveal className="mb-10 max-w-[46rem] lg:mb-14">
+    <section id="gallery" className="bg-ivory px-[var(--gutter)] py-[var(--section-y)]">
+      <Reveal className="mb-10 max-w-[46rem] lg:col-span-6 lg:mb-14">
         <p data-reveal className="caption text-pistachio">
           {copy.heritage.kicker}
         </p>

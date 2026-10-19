@@ -16,7 +16,7 @@ export function VisitUs({ offset = false }: { offset?: boolean; }) {
         <div
           className={cn(
             "relative flex flex-col justify-center overflow-hidden px-[var(--gutter)]",
-            offset ? "pt-36 pb-20 lg:pt-44 lg:pb-28" : "py-20 lg:py-28",
+            offset ? "pt-36 pb-[var(--section-y)] lg:pt-44" : "py-[var(--section-y)]",
           )}
         >
           {offset ? <MotifVeil fade="aside" className="text-chocolate/30" /> : null}
@@ -33,7 +33,7 @@ export function VisitUs({ offset = false }: { offset?: boolean; }) {
             <p data-reveal className="body-lg mt-8 max-w-[34ch]">
               {copy.visit.note}
             </p>
-            <ul className="mt-10 grid gap-x-8 gap-y-7 border-t border-chocolate/15 pt-8 sm:grid-cols-2">
+            <ul className="mt-10 grid gap-x-8 gap-y-7 border-t border-chocolate/15 pt-8 md:grid-cols-2">
               {locations.map((place) => (
                 <li key={place.id} data-reveal>
                   <p className="caption text-muted">{copy.visit.places[place.id]}</p>
