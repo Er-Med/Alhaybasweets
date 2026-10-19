@@ -5,12 +5,14 @@
   --font-serif: var(--serif-stack);
   --font-arabic: var(--font-amiri), "Noto Naskh Arabic", serif;
   --font-arabic-display: var(--font-ruqaa), var(--font-amiri), serif;
-  --color-ivory: #f3ebdd;
-  --color-espresso: #24170f;
+  --color-ivory: #f5efe4;
+  --color-espresso: #14100c;
+  --color-surface: #211a14;
   --color-ink: #151a12;
-  --color-pistachio: #34452b;
-  --color-gold: #b89a5a;
-  --color-chocolate: #241812;
+  --color-pistachio: #8da34a;
+  --color-gold: #c9a35c;
+  --color-gold-light: #e6cf98;
+  --color-chocolate: #2a1d14;
   --color-muted: #766b5d;
 }
 
@@ -41,28 +43,57 @@
 html {
   scroll-behavior: auto;
   color-scheme: light;
-  background: #f3ebdd;
+  background: #f5efe4;
 }
 
 body {
-  background: #f3ebdd;
-  color: #241812;
+  background: #f5efe4;
+  color: #2a1d14;
   font-family: var(--sans-stack);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: #34452b;
-  color: #f3ebdd;
+  background: #2a1d14;
+  color: #f5efe4;
 }
 
 :focus-visible {
-  outline: 2px solid #241812;
+  outline: 2px solid #2a1d14;
   outline-offset: 3px;
 }
 
 .tone-dark :focus-visible {
-  outline-color: #f3ebdd;
+  outline-color: #f5efe4;
+}
+
+/* Small gold type on dark reads as brass highlight, not the button gold. */
+.tone-dark .text-gold {
+  color: var(--color-gold-light);
+}
+
+.tone-dark .text-gold\/90 {
+  color: color-mix(in srgb, var(--color-gold-light) 90%, transparent);
+}
+
+.tone-dark .text-gold\/55 {
+  color: color-mix(in srgb, var(--color-gold-light) 55%, transparent);
+}
+
+.tone-dark .text-gold\/25 {
+  color: color-mix(in srgb, var(--color-gold-light) 25%, transparent);
+}
+
+.tone-dark .text-gold\/\[0\.08\] {
+  color: color-mix(in srgb, var(--color-gold-light) 8%, transparent);
+}
+
+.tone-dark .hover\:text-gold:hover {
+  color: var(--color-gold-light);
+}
+
+.tone-dark .hover\:text-espresso:hover {
+  color: var(--color-espresso);
 }
 
 [id] {
@@ -152,8 +183,8 @@ body {
   overflow: visible;
   clip: auto;
   white-space: normal;
-  background: #f3ebdd;
-  color: #241812;
+  background: #f5efe4;
+  color: #2a1d14;
   padding: 0.75rem 1rem;
 }
 
@@ -170,11 +201,6 @@ body {
   }
 }
 
-.hero {
-  --mx: 62%;
-  --my: 42%;
-  --spread: 0px;
-}
 
 .hero-title {
   font-size: clamp(3rem, 6vw, 6.9rem);
@@ -206,7 +232,7 @@ footer .script {
 
 .hero-gold-text {
   padding-inline-end: 0.08em;
-  background: linear-gradient(100deg, #9c7f45 0%, #e9d6a2 32%, #b89a5a 50%, #f2e2b6 68%, #9c7f45 100%);
+  background: linear-gradient(100deg, #a68545 0%, #e6cf98 32%, #c9a35c 50%, #f3e6c4 68%, #a68545 100%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -214,24 +240,10 @@ footer .script {
   animation: hero-shimmer 9s ease-in-out infinite alternate;
 }
 
-.hero-spot {
-  background: radial-gradient(40rem circle at var(--mx) var(--my), rgba(184, 154, 90, 0.13), transparent 62%);
-}
-
 .hero-grain {
-  opacity: 0.08;
+  opacity: 0.07;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.hero-3d {
-  transform-style: preserve-3d;
-}
-
-.hero-layer {
-  left: var(--xs);
-  transform-style: preserve-3d;
-  transform: translate(-50%, -50%) translateZ(calc(var(--z, 0px) + var(--spread) * var(--k, 0)));
 }
 
 .hero-arch {
@@ -239,33 +251,12 @@ footer .script {
   border-start-end-radius: 50% 36%;
 }
 
-@media (min-width: 64rem) {
-  .hero-layer {
-    left: var(--x);
-  }
+.hero-kenburns {
+  animation: hero-kenburns 9s ease-out both;
 }
 
-.hero-sheen {
-  mix-blend-mode: soft-light;
-  background: radial-gradient(28rem circle at var(--mx) var(--my), rgba(255, 244, 214, 0.55), transparent 55%);
-}
-
-.hero-float {
-  animation: hero-float var(--float-d, 10s) ease-in-out var(--float-delay, 0s) infinite alternate;
-}
-
-.hero-spin {
-  animation: hero-spin 90s linear infinite;
-}
-
-.hero-spin-slow {
-  animation: hero-spin 40s linear infinite;
-}
-
-.hero-dust {
-  opacity: 0;
-  box-shadow: 0 0 6px rgba(230, 207, 152, 0.8);
-  animation: hero-dust 14s ease-in-out infinite;
+.hero-progress {
+  animation: hero-progress linear forwards;
 }
 
 .hero-cue::after {
@@ -274,14 +265,12 @@ footer .script {
   inset-inline: 0;
   top: 0;
   height: 40%;
-  background: #b89a5a;
+  background: #c9a35c;
   animation: hero-cue 2.4s var(--ease) infinite;
 }
 
-.hero-paused .hero-float,
-.hero-paused .hero-spin,
-.hero-paused .hero-spin-slow,
-.hero-paused .hero-dust,
+.hero-paused .hero-kenburns,
+.hero-paused .hero-progress,
 .hero-paused .hero-gold-text,
 .hero-paused .hero-cue::after {
   animation-play-state: paused;
@@ -293,33 +282,21 @@ footer .script {
   }
 }
 
-@keyframes hero-float {
+@keyframes hero-kenburns {
   from {
-    transform: translate3d(0, -0.5rem, 0) rotate(-0.6deg);
+    transform: scale(1.12);
   }
   to {
-    transform: translate3d(0, 0.6rem, 0) rotate(0.6deg);
+    transform: scale(1.02);
   }
 }
 
-@keyframes hero-spin {
+@keyframes hero-progress {
+  from {
+    width: 0%;
+  }
   to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes hero-dust {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 2.5rem, var(--z));
-  }
-  30%,
-  70% {
-    opacity: 0.85;
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(0.75rem, -5rem, var(--z));
+    width: 100%;
   }
 }
 
@@ -403,7 +380,7 @@ html[dir="rtl"] .text-link > span {
 }
 
 .shade {
-  background: rgba(21, 26, 18, 0);
+  background: rgba(20, 16, 12, 0);
 }
 
 .group:hover .media-zoom {
@@ -419,7 +396,7 @@ html[dir="rtl"] .text-link > span {
 }
 
 .group:hover .shade {
-  background: rgba(21, 26, 18, 0.16);
+  background: rgba(20, 16, 12, 0.16);
 }
 
 .no-scrollbar {
@@ -558,9 +535,7 @@ html[dir="rtl"] .text-link > span {
   .motif-drift,
   .motif-veil-drift,
   .hero-gold-text,
-  .hero-float,
-  .hero-spin,
-  .hero-spin-slow,
+  .hero-kenburns,
   .hero-cue::after {
     animation: none;
     transition: none;

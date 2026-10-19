@@ -25,8 +25,11 @@ export function ImageViewer({
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const onCloseRef = useRef(onClose);
-  onCloseRef.current = onClose;
   const signature = item ? `${item.src}\n${item.title}\n${item.detail ?? ""}\n${item.meta ?? ""}` : "";
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     if (!signature) return;
@@ -54,7 +57,7 @@ export function ImageViewer({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-espresso px-[var(--gutter)] py-20"
+      className="tone-dark fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-espresso px-[var(--gutter)] py-20"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}

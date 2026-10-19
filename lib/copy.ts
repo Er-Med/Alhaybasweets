@@ -41,6 +41,7 @@ export type Copy = {
     order: string;
     explore: string;
     fig: string;
+    slides: { label: string; alt: string }[];
   };
   story: {
     kicker: string;
@@ -164,6 +165,11 @@ const en: Copy = {
     order: "Order on WhatsApp",
     explore: "See the menu",
     fig: "Fig. 01 — Pistachio baklava",
+    slides: [
+      { label: "The brass tray", alt: "Pistachio baklava in an engraved brass tray" },
+      { label: "The gift box", alt: "An open Al Hayba gold box of assorted baklava" },
+      { label: "The slice", alt: "A slice of pistachio baklava on a white plate" },
+    ],
   },
   story: {
     kicker: "02 — The house",
@@ -433,6 +439,11 @@ const ar: Copy = {
     order: "اطلب عبر واتساب",
     explore: "شاهد القائمة",
     fig: "صورة ٠١ — بقلاوة بالفستق",
+    slides: [
+      { label: "الصينية النحاسية", alt: "بقلاوة بالفستق في صينية نحاسية منقوشة" },
+      { label: "علبة الهدايا", alt: "علبة الهيبة الذهبية مفتوحة بتشكيلة البقلاوة" },
+      { label: "الشريحة", alt: "شريحة بقلاوة بالفستق على طبق أبيض" },
+    ],
   },
   story: {
     kicker: "٠٢ — الدار",

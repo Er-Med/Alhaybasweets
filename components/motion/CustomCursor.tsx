@@ -88,7 +88,7 @@ export function CustomCursor() {
           <span className="caption text-[0.58rem] tracking-[0.22em]">{copy.collection.view}</span>
         </div>
       ) : (
-        <div className="h-2 w-2 rounded-full bg-espresso shadow-[0_0_0_1px_#F3EBDD]" />
+        <div className="h-2 w-2 rounded-full bg-espresso shadow-[0_0_0_1px_#F5EFE4]" />
       )}
     </div>
     </div>

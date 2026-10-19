@@ -96,7 +96,7 @@ export function Navbar() {
         <div
           aria-hidden
           className={cn(
-            "pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#120b07]/70 to-transparent transition-opacity duration-500",
+            "pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#14100C]/70 to-transparent transition-opacity duration-500",
             overDark && !scrolled ? "opacity-100" : "opacity-0",
           )}
         />
