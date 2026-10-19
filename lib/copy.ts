@@ -156,9 +156,9 @@ const en: Copy = {
     explore: "See the menu",
     fig: "Fig. 01 — Pistachio baklava",
     slides: [
-      { label: "The brass tray", alt: "Pistachio baklava in an engraved brass tray" },
-      { label: "The gift box", alt: "An open Al Hayba gold box of assorted baklava" },
-      { label: "The slice", alt: "A slice of pistachio baklava on a white plate" },
+      { label: "The gold box", alt: "A gold Al Hayba gift box" },
+      { label: "The round", alt: "Pistachio baklava cut into a round" },
+      { label: "Maamoul", alt: "Three pieces of maamoul on a plate" },
     ],
   },
   story: {
@@ -193,12 +193,9 @@ const en: Copy = {
     titleEm: "shared.",
     intro: "From the tray, the kitchen, and the city that shapes them.",
     alts: [
-      "An open Al Hayba box of assorted baklava",
-      "A slice of pistachio baklava",
       "Inside the Al Hayba kiosk",
-      "Kunafa finished with pistachio",
-      "Sweets arranged on the counter",
       "A gold Al Hayba gift box",
+      "An open wooden Al Hayba box",
     ],
   },
   box: {
@@ -217,12 +214,8 @@ const en: Copy = {
     followers: "16.7K followers",
     cta: "Follow on Instagram",
     alts: [
-      "Pistachio baklava in a brass tray",
-      "Cream baklava lifted from the tray",
-      "An open wooden Al Hayba box",
+      "Sweets arranged on the counter",
       "Chocolate and pistachio baklava squares",
-      "A gold Al Hayba gift box",
-      "Three pieces of maamoul on a plate",
     ],
   },
   quotes: {
@@ -389,7 +382,7 @@ const en: Copy = {
       line2: "Arranged to be shared.",
       detail:
         "What Casablanca calls ḥalawiyyat sharqiyya. Baklava, kunafa, basbousa, and maamoul from the Levant, gathered by the house and packed as one gesture.",
-      alt: "An open Al Hayba gift box of assorted baklava",
+      alt: "Cream baklava lifted from the tray",
     },
   },
 };
@@ -416,9 +409,9 @@ const ar: Copy = {
     explore: "شاهد القائمة",
     fig: "صورة ٠١ — بقلاوة بالفستق",
     slides: [
-      { label: "الصينية النحاسية", alt: "بقلاوة بالفستق في صينية نحاسية منقوشة" },
-      { label: "علبة الهدايا", alt: "علبة الهيبة الذهبية مفتوحة بتشكيلة البقلاوة" },
-      { label: "الشريحة", alt: "شريحة بقلاوة بالفستق على طبق أبيض" },
+      { label: "العلبة الذهبية", alt: "صندوق هدايا الهيبة الذهبي" },
+      { label: "القرص", alt: "بقلاوة بالفستق مقطّعة قرصًا" },
+      { label: "المعمول", alt: "ثلاث قطع معمول على طبق" },
     ],
   },
   story: {
@@ -453,12 +446,9 @@ const ar: Copy = {
     titleEm: "لتُشارَك.",
     intro: "من الصينية، والمطبخ، والمدينة التي تشكّلها.",
     alts: [
-      "صندوق الهيبة المفتوح بتشكيلة البقلاوة",
-      "شريحة بقلاوة بالفستق",
       "داخل ركن الهيبة",
-      "كنافة بالفستق",
-      "حلويات مرتّبة على الرخام",
       "صندوق هدايا الهيبة الذهبي",
+      "صندوق الهيبة الخشبي المفتوح",
     ],
   },
   box: {
@@ -477,12 +467,8 @@ const ar: Copy = {
     followers: "16.7K متابع",
     cta: "تابعنا على إنستغرام",
     alts: [
-      "بقلاوة بالفستق في صينية نحاسية",
-      "بقلاوة بالكريمة تُرفع من الصينية",
-      "صندوق الهيبة الخشبي المفتوح",
+      "حلويات مرتّبة على الرخام",
       "مربعات بقلاوة بالشوكولاتة والفستق",
-      "صندوق هدايا الهيبة الذهبي",
-      "ثلاث قطع معمول على طبق",
     ],
   },
   quotes: {
@@ -648,7 +634,7 @@ const ar: Copy = {
       line1: "المائدة كاملة.",
       line2: "مرتّبة لتُشارَك.",
       detail: "ما تسمّيه الدار البيضاء «الحلويات الشرقية». بقلاوة، وكنافة، وبسبوسة، ومعمول من الشام، تجمعها الدار في إيماءة واحدة.",
-      alt: "صندوق الهيبة المفتوح بتشكيلة البقلاوة",
+      alt: "بقلاوة بالكريمة تُرفع من الصينية",
     },
   },
 };

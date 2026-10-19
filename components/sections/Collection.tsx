@@ -116,7 +116,8 @@ export function Collection() {
                 <article
                   key={id}
                   data-card
-                  className="group flex w-[78vw] shrink-0 snap-start flex-col sm:w-[48vw] lg:w-[34vw]"
+                  className="group flex w-[78vw] max-w-full shrink-0 snap-start flex-col sm:w-[48vw] lg:w-[34vw]"
+                  style={{ maxWidth: Math.round(media.maxWidth / 1.2) }}
                 >
                   <div className="relative h-[46vh] min-h-[220px] overflow-hidden lg:h-auto lg:min-h-0 lg:flex-1">
                     <div data-card-media className="absolute inset-y-0 -inset-x-[8%]">

@@ -33,14 +33,14 @@ export function Footer() {
             </a>
             <p className="caption text-ivory/70">{copy.instagram.followers}</p>
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-2">
-            {instagramMedia.slice(0, 2).map((item, index) => (
+          <div className="mt-4 flex gap-2">
+            {instagramMedia.map((item, index) => (
               <a
                 key={item.src}
                 href={INSTAGRAM}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative block aspect-[3/4] max-h-40 overflow-hidden"
+                className="relative block h-36 w-28 overflow-hidden"
               >
                 <Photo
                   src={item.src}

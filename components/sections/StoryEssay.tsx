@@ -47,7 +47,7 @@ export function StoryEssay() {
           />
           <ParallaxImage
             src="/images/kiosk.jpg"
-            alt={copy.gallery.alts[2]}
+            alt={copy.gallery.alts[0]}
             sizes="(max-width: 1024px) 100vw, 60vw"
             className="h-[64vw] min-h-[240px] lg:col-span-7 lg:col-start-6 lg:mt-16 lg:h-[68vh]"
             imageClass="object-cover object-center"

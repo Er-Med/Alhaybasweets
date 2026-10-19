@@ -52,7 +52,7 @@ export function BrandStory() {
             <div ref={media} className="absolute inset-0">
               <Photo
                 src="/images/baklava-round.jpg"
-                alt={copy.products.baklava.alt}
+                alt={copy.hero.slides[1].alt}
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 className="object-cover object-center"
               />

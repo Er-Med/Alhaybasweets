@@ -8,13 +8,6 @@ import { ImageViewer } from "@/components/ui/ImageViewer";
 import { Line, Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
-const frames: Record<(typeof galleryMedia)[number]["frame"], string> = {
-  feature: "col-span-2 min-h-[280px] lg:col-span-2 lg:row-span-2 lg:min-h-0",
-  small: "min-h-[200px] lg:min-h-0",
-  portrait: "min-h-[300px] lg:col-start-4 lg:row-span-2 lg:row-start-1 lg:min-h-0",
-  wide: "col-span-2 min-h-[220px] lg:min-h-0",
-};
-
 export function Gallery({ intro = true, embedded = false }: { intro?: boolean; embedded?: boolean }) {
   const { copy } = useLocale();
   const [open, setOpen] = useState<number | null>(null);
@@ -29,17 +22,17 @@ export function Gallery({ intro = true, embedded = false }: { intro?: boolean; e
 
   const grid = (
     <>
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:grid-rows-[minmax(180px,22vh)_minmax(200px,26vh)_minmax(180px,24vh)] lg:gap-4">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
         {galleryMedia.map((item, index) => (
           <ParallaxImage
-            key={item.src + item.frame + index}
+            key={item.src}
             src={item.src}
             alt={copy.gallery.alts[index]}
-            sizes={item.frame === "feature" || item.frame === "wide" ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 1024px) 50vw, 25vw"}
-            speed={item.speed}
+            sizes="(max-width: 768px) 100vw, 33vw"
             imageClass={item.imageClass}
             onOpen={() => setOpen(index)}
-            className={cn(frames[item.frame], index === 1 && "lg:col-start-3 lg:row-start-1", index === 3 && "lg:col-start-3 lg:row-start-2", index === 4 && "lg:col-start-1 lg:row-start-3", index === 5 && "lg:col-start-3 lg:row-start-3")}
+            className="mx-auto aspect-[3/4] w-full"
+            style={{ maxWidth: Math.round(item.maxWidth / 1.2) }}
           />
         ))}
       </div>

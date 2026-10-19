@@ -3,7 +3,6 @@
 import { useLocale } from "@/lib/i18n";
 import { locations, MAPS, WHATSAPP } from "@/lib/site";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Line, Reveal } from "@/components/motion/Reveal";
 import { MotifVeil } from "@/components/ui/Motif";
 import { cn } from "@/lib/cn";
@@ -13,7 +12,7 @@ export function VisitUs({ offset = false }: { offset?: boolean; }) {
 
   return (
     <section id="visit" className="bg-ivory">
-      <div className="grid lg:min-h-[84vh] lg:grid-cols-2">
+      <div>
         <div
           className={cn(
             "relative flex flex-col justify-center overflow-hidden px-[var(--gutter)]",
@@ -58,14 +57,6 @@ export function VisitUs({ offset = false }: { offset?: boolean; }) {
             </div>
           </Reveal>
         </div>
-        <ParallaxImage
-          src="/images/kiosk.jpg"
-          alt={copy.gallery.alts[2]}
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="min-h-[360px] lg:min-h-full"
-          imageClass="object-cover"
-          speed={6}
-        />
       </div>
     </section>
   );

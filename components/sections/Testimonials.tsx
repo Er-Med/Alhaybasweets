@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useLocale } from "@/lib/i18n";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Reveal } from "@/components/motion/Reveal";
 
 const arrow =
@@ -20,15 +19,7 @@ export function Testimonials() {
 
   return (
     <section className="bg-ivory" aria-labelledby="voices-heading">
-      <div className="grid lg:min-h-[78vh] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <ParallaxImage
-          src="/images/cream-baklava.jpg"
-          alt={copy.instagram.alts[1]}
-          sizes="(max-width: 1024px) 100vw, 58vw"
-          className="min-h-[320px] lg:min-h-full"
-          imageClass="object-cover object-center"
-          speed={6}
-        />
+      <div>
         <Reveal
           className="flex flex-col justify-between px-[var(--gutter)] py-16 lg:py-24"
           start="top 75%"

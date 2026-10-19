@@ -27,9 +27,13 @@ export function CollectionIndex() {
               id={id}
               className="grid items-center gap-8 border-t border-chocolate/15 py-14 lg:grid-cols-12 lg:gap-12 lg:py-20"
             >
-              <div className={cn("relative h-[72vw] min-h-[260px] lg:h-[68vh] lg:col-span-7", flip && "lg:order-2")} data-cursor="view">
+              <div
+                className={cn("relative h-[72vw] min-h-[260px] w-full lg:h-[68vh] lg:col-span-7", flip && "lg:order-2")}
+                style={{ maxWidth: media.maxWidth }}
+                data-cursor="view"
+              >
                 <Photo
-                  src={media.featured ?? media.image}
+                  src={media.image}
                   alt={product.alt}
                   sizes="(max-width: 1024px) 100vw, 55vw"
                   className={media.imageClass}

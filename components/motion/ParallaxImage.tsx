@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { gsap, prefersReducedMotion, registerGsap } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 import { Photo } from "@/components/ui/Photo";
@@ -13,6 +13,7 @@ export function ParallaxImage({
   sizes,
   speed = 8,
   priority = false,
+  style,
   cursor = true,
   reveal = true,
   onOpen,
@@ -24,6 +25,7 @@ export function ParallaxImage({
   sizes: string;
   speed?: number;
   priority?: boolean;
+  style?: CSSProperties;
   cursor?: boolean;
   /** Wipe the frame open the first time it scrolls into view. */
   reveal?: boolean;
@@ -75,6 +77,7 @@ export function ParallaxImage({
       ref={frame}
       data-cursor={cursor ? "view" : undefined}
       className={cn("relative overflow-hidden", className)}
+      style={style}
     >
       <div ref={inner} className="absolute inset-[-10%]">
         <div ref={zoom} className="absolute inset-0">

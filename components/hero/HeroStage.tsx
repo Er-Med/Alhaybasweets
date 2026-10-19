@@ -6,9 +6,9 @@ import { prefersReducedMotion } from "@/lib/gsap";
 import { Photo } from "@/components/ui/Photo";
 
 const SOURCES = [
-  { src: "/images/baklava-tray.jpg", position: "object-[50%_45%]" },
-  { src: "/images/gold-box.jpg", position: "object-[50%_55%]" },
-  { src: "/images/pistachio-slice.jpg", position: "object-[50%_50%]" },
+  { src: "/images/gold-box.jpg", position: "object-[50%_50%]" },
+  { src: "/images/baklava-round.jpg", position: "object-[50%_45%]" },
+  { src: "/images/maamoul.jpg", position: "object-[50%_50%]" },
 ];
 
 const INTERVAL = 6500;

@@ -42,59 +42,46 @@ export const productOrder = [
   "oriental",
 ] as const;
 
-export const featuredOrder = [
-  "baklava",
-  "pistachio",
-  "dubai",
-  "maamoul",
-] as const;
-
 export type ProductId = (typeof productOrder)[number];
 
 export const productMedia: Record<
   ProductId,
-  { image: string; featured?: string; imageClass: string }
+  { image: string; maxWidth: number; imageClass: string }
 > = {
   baklava: {
-    image: "/images/baklava-round.jpg",
-    featured: "/images/baklava-tray.jpg",
+    image: "/images/baklava-tray.jpg",
+    maxWidth: 720,
     imageClass: "object-cover object-center",
   },
   pistachio: {
     image: "/images/pistachio-slice.jpg",
-    featured: "/images/pistachio-slice.jpg",
+    maxWidth: 720,
     imageClass: "object-cover object-center",
   },
   dubai: {
     image: "/images/dubai-bar.jpg",
-    featured: "/images/dubai-bar.jpg",
+    maxWidth: 540,
     imageClass: "object-cover object-center",
   },
   maamoul: {
     image: "/images/maamoul.jpg",
-    featured: "/images/maamoul.jpg",
+    maxWidth: 3376,
     imageClass: "object-cover object-center",
   },
   oriental: {
-    image: "/images/gift-box.jpg",
+    image: "/images/cream-baklava.jpg",
+    maxWidth: 1166,
     imageClass: "object-cover object-center",
   },
 };
 
 export const galleryMedia = [
-  { src: "/images/gift-box.jpg", frame: "feature", speed: 7, imageClass: "object-cover object-center" },
-  { src: "/images/pistachio-slice.jpg", frame: "small", speed: 14, imageClass: "object-cover object-center" },
-  { src: "/images/kiosk.jpg", frame: "portrait", speed: 9, imageClass: "object-cover object-center" },
-  { src: "/images/kunafa.jpg", frame: "small", speed: 16, imageClass: "object-cover object-center" },
-  { src: "/images/counter.jpg", frame: "wide", speed: 5, imageClass: "object-cover object-center" },
-  { src: "/images/gold-box.jpg", frame: "wide", speed: 11, imageClass: "object-cover object-center" },
+  { src: "/images/kiosk.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
+  { src: "/images/gold-box.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
+  { src: "/images/wood-box.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
 ] as const;
 
 export const instagramMedia = [
-  { src: "/images/baklava-tray.jpg", aspect: "aspect-[3/4]", imageClass: "object-cover object-center" },
-  { src: "/images/cream-baklava.jpg", aspect: "aspect-[4/5]", imageClass: "object-cover object-center" },
-  { src: "/images/wood-box.jpg", aspect: "aspect-square", imageClass: "object-cover object-center" },
-  { src: "/images/chocolate-square.jpg", aspect: "aspect-[3/4]", imageClass: "object-cover object-center" },
-  { src: "/images/gold-box.jpg", aspect: "aspect-[5/4]", imageClass: "object-cover object-center" },
-  { src: "/images/maamoul.jpg", aspect: "aspect-[3/4]", imageClass: "object-cover object-center" },
+  { src: "/images/counter.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
+  { src: "/images/chocolate-square.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
 ] as const;
