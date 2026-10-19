@@ -5,7 +5,7 @@ import { useLocale } from "@/lib/i18n";
 import { Reveal } from "@/components/motion/Reveal";
 
 const arrow =
-  "flex h-12 w-12 items-center justify-center border border-chocolate/25 transition-colors duration-300 hover:border-chocolate hover:bg-chocolate hover:text-ivory";
+  "flex h-12 w-12 items-center justify-center border border-ivory/25 text-ivory transition-colors duration-300 hover:border-ivory hover:bg-ivory hover:text-espresso";
 
 export function Testimonials() {
   const { copy } = useLocale();
@@ -18,18 +18,18 @@ export function Testimonials() {
   };
 
   return (
-    <section className="bg-ivory" aria-labelledby="voices-heading">
+    <section className="tone-dark bg-espresso text-ivory" aria-labelledby="voices-heading">
       <div>
         <Reveal
           className="flex flex-col justify-between px-[var(--gutter)] py-[var(--section-y)]"
           start="top 75%"
         >
           <div data-reveal className="flex items-center justify-between">
-            <p id="voices-heading" className="caption text-pistachio">
+            <p id="voices-heading" className="caption text-gold">
               {copy.quotes.kicker}
             </p>
-            <p className="caption tabular-nums text-muted" aria-live="polite">
-              <span className="text-chocolate">{String(index + 1).padStart(2, "0")}</span>
+            <p className="caption tabular-nums text-ivory/60" aria-live="polite">
+              <span className="text-ivory">{String(index + 1).padStart(2, "0")}</span>
               <span className="mx-2">/</span>
               {String(total).padStart(2, "0")}
             </p>
@@ -43,7 +43,7 @@ export function Testimonials() {
             </p>
           </blockquote>
           <div data-reveal className="mt-12">
-            <div className="mb-8 h-px bg-chocolate/15">
+            <div className="mb-8 h-px bg-ivory/15">
               <div
                 className="h-px origin-left bg-gold transition-transform duration-700 ease-[var(--ease)] rtl:origin-right"
                 style={{ transform: `scaleX(${(index + 1) / total})` }}
@@ -60,7 +60,7 @@ export function Testimonials() {
             >
               <footer key={item.name} className="quote-in">
                 <p className="font-serif text-2xl">{item.name}</p>
-                <p className="caption mt-2 text-muted">{item.place}</p>
+                <p className="caption mt-2 text-ivory/60">{item.place}</p>
               </footer>
               <div className="flex gap-2">
                 <button type="button" className={arrow} aria-label={copy.quotes.prev} onClick={() => shift(-1)}>

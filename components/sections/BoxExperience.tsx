@@ -44,7 +44,7 @@ export function BoxExperience() {
   }, []);
 
   return (
-    <section ref={section} id="box" className="tone-dark relative overflow-hidden bg-pistachio text-ivory">
+    <section ref={section} id="box" className="tone-dark relative overflow-hidden bg-pistachio-deep text-ivory">
       <MotifVeil fade="aside" className="text-ivory/40" />
       <div className="relative grid items-center gap-10 px-[var(--gutter)] py-[var(--section-y)] lg:grid-cols-12 lg:gap-x-[var(--gutter)]">
         <Reveal className="lg:col-span-6">
