@@ -60,7 +60,7 @@ export function BoxExperience() {
           </p>
           <div data-reveal>
             <MagneticButton href={WHATSAPP} external variant="ivory" className="mt-8">
-              {copy.box.cta}
+              {copy.hero.order}
             </MagneticButton>
           </div>
         </Reveal>

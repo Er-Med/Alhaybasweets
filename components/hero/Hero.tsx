@@ -43,9 +43,12 @@ export function Hero() {
       if (nav) {
         tl.fromTo(nav, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out" }, 0.35);
       }
-      tl.fromTo(q("eyebrow"), { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, 0.6)
-        .fromTo(q("arabic"), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out" }, 0.78)
-        .fromTo(
+      tl.fromTo(q("eyebrow"), { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, 0.6);
+      const arabic = q("arabic");
+      if (arabic) {
+        tl.fromTo(arabic, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out" }, 0.78);
+      }
+      tl.fromTo(
           qa("line"),
           { yPercent: 110, opacity: 0 },
           { yPercent: 0, opacity: 1, duration: 1.3, stagger: 0.14, ease: "power4.out" },
@@ -76,7 +79,7 @@ export function Hero() {
     <section
       ref={root}
       id="top"
-      className="hero tone-dark relative flex min-h-[100svh] flex-col overflow-hidden bg-espresso text-ivory lg:grid lg:grid-cols-[minmax(0,40rem)_1fr]"
+      className="hero tone-dark relative flex h-[100svh] flex-col overflow-hidden bg-espresso text-ivory lg:grid lg:h-auto lg:min-h-[100svh] lg:grid-cols-[minmax(0,40rem)_1fr]"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(110%_80%_at_70%_45%,#211A14_0%,#1A1510_50%,#14100C_100%)]" />
@@ -84,13 +87,13 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       </div>
 
-      <div className="relative h-[58svh] min-h-[24rem] shrink-0 lg:order-2 lg:h-auto lg:min-h-[100svh]">
-        <div className="absolute inset-x-[var(--gutter)] bottom-16 top-[5.5rem] lg:inset-x-0 lg:bottom-[5rem] lg:top-[7rem] lg:pe-[var(--gutter)]">
+      <div className="relative order-2 min-h-0 flex-1 lg:order-2 lg:h-auto lg:min-h-[100svh]">
+        <div className="absolute inset-x-[var(--gutter)] top-2 bottom-3 lg:inset-x-0 lg:bottom-[5rem] lg:top-[7rem] lg:pe-[var(--gutter)]">
           <HeroStage slides={copy.hero.slides} />
         </div>
       </div>
 
-      <div className="relative z-10 flex flex-1 flex-col justify-center px-[var(--gutter)] pt-4 pb-[max(5rem,calc(env(safe-area-inset-bottom)+4rem))] lg:order-1 lg:py-36">
+      <div className="relative z-10 order-1 shrink-0 px-[var(--gutter)] pt-24 pb-2 lg:order-1 lg:flex lg:flex-1 lg:flex-col lg:justify-center lg:py-36">
         <div className="pointer-events-none absolute inset-0">
           <MotifVeil fade="hero" drift className="text-gold/[0.08]" />
         </div>

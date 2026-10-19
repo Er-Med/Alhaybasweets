@@ -9,23 +9,44 @@ export const locations = [
     phoneHref: "tel:+212522980637",
     address: "4 Rue El Kadi Lass",
     maps: "https://www.google.com/maps/search/?api=1&query=4+Rue+El+Kadi+Lass+Casablanca+Morocco",
+    hours: "", // TODO: opening hours
   },
   {
     id: "casa-port",
     phone: "05 22 31 20 37",
     phoneHref: "tel:+212522312037",
+    address: "", // TODO: street address
+    maps: "", // TODO: Google Maps link
+    hours: "", // TODO: opening hours
   },
   {
     id: "casa-voyageurs",
     phone: "07 22 22 36 43",
     phoneHref: "tel:+212722223643",
+    address: "", // TODO: street address
+    maps: "", // TODO: Google Maps link
+    hours: "", // TODO: opening hours
   },
   {
     id: "rabat-agdal",
     phone: "07 04 57 19 46",
     phoneHref: "tel:+212704571946",
+    address: "", // TODO: street address
+    maps: "", // TODO: Google Maps link
+    hours: "", // TODO: opening hours
   },
 ] as const;
+
+export type Review = {
+  name: string;
+  stars: number;
+  source: "Google";
+  date: string;
+  quote?: string;
+};
+
+// TODO: add real Google reviews (name, stars, source, date, and the original quote).
+export const reviews: Review[] = [];
 
 export type LocationId = (typeof locations)[number]["id"];
 

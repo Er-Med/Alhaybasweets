@@ -1,8 +1,9 @@
 "use client";
 
 import { useLocale } from "@/lib/i18n";
-import { locations, MAPS, WHATSAPP } from "@/lib/site";
+import { locations, WHATSAPP } from "@/lib/site";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { TextLink } from "@/components/ui/TextLink";
 import { Line, Reveal } from "@/components/motion/Reveal";
 import { MotifVeil } from "@/components/ui/Motif";
 import { cn } from "@/lib/cn";
@@ -33,26 +34,34 @@ export function VisitUs({ offset = false }: { offset?: boolean; }) {
             <p data-reveal className="body-lg mt-8 max-w-[34ch]">
               {copy.visit.note}
             </p>
-            <ul className="mt-10 grid gap-x-8 gap-y-7 border-t border-chocolate/15 pt-8 md:grid-cols-2">
+            <ul className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
               {locations.map((place) => (
-                <li key={place.id} data-reveal>
-                  <p className="caption text-muted">{copy.visit.places[place.id]}</p>
-                  {"address" in place ? <p className="body-md mt-1.5">{place.address}</p> : null}
+                <li key={place.id} data-reveal className="border border-chocolate/15 p-6">
+                  <p className="font-serif text-2xl">{copy.visit.places[place.id]}</p>
+                  {place.address ? <p className="body-md mt-3">{place.address}</p> : null}
                   <a
                     href={place.phoneHref}
-                    className="mt-2 inline-block font-serif text-[clamp(1.6rem,2.1vw,2.1rem)] leading-none transition-colors duration-300 hover:text-pistachio"
+                    className="mt-3 inline-block font-serif text-[clamp(1.45rem,2vw,1.85rem)] leading-none transition-colors duration-300 hover:text-pistachio"
                   >
                     <span dir="ltr">{place.phone}</span>
                   </a>
+                  {place.hours ? (
+                    <p className="body-md mt-3">
+                      <span className="caption me-2 text-muted">{copy.visit.hours}</span>
+                      {place.hours}
+                    </p>
+                  ) : null}
+                  {place.maps ? (
+                    <TextLink href={place.maps} external className="mt-4 text-chocolate">
+                      {copy.visit.directions}
+                    </TextLink>
+                  ) : null}
                 </li>
               ))}
             </ul>
-            <div data-reveal className="mt-10 flex flex-wrap gap-3">
-              <MagneticButton href={MAPS} external variant="ghost">
-                {copy.visit.directions}
-              </MagneticButton>
-              <MagneticButton href={WHATSAPP} external variant="pistachio">
-                {copy.visit.whatsapp}
+            <div data-reveal className="mt-10">
+              <MagneticButton href={WHATSAPP} external>
+                {copy.hero.order}
               </MagneticButton>
             </div>
           </Reveal>

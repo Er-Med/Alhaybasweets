@@ -17,7 +17,7 @@ export function Footer() {
   const { locale, setLocale, copy } = useLocale();
 
   return (
-    <footer className="tone-dark relative overflow-hidden bg-ink text-ivory">
+    <footer id="site-footer" className="tone-dark relative overflow-hidden bg-ink text-ivory">
       <MotifField fade className="absolute inset-0 text-gold/25" />
       <div className="relative">
         <MotifBand className="w-full text-gold" />
@@ -83,7 +83,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="block caption text-ivory/80 hover:text-ivory"
             >
-              {copy.visit.whatsapp}
+              {copy.hero.order}
             </a>
           </div>
           <div className="space-y-4">

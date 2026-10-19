@@ -1,79 +1,45 @@
 "use client";
 
-import { useState } from "react";
 import { useLocale } from "@/lib/i18n";
+import { reviews } from "@/lib/site";
 import { Reveal } from "@/components/motion/Reveal";
-
-const arrow =
-  "flex h-12 w-12 items-center justify-center border border-ivory/25 text-ivory transition-colors duration-300 hover:border-ivory hover:bg-ivory hover:text-espresso";
+import { cn } from "@/lib/cn";
 
 export function Testimonials() {
   const { copy } = useLocale();
-  const [index, setIndex] = useState(0);
-  const item = copy.quotes.items[index];
-  const total = copy.quotes.items.length;
+  if (reviews.length === 0) return null;
 
-  const shift = (direction: number) => {
-    setIndex((current) => (current + direction + total) % total);
-  };
+  const columns =
+    reviews.length % 3 === 0 ? "md:grid-cols-3" : reviews.length % 2 === 0 ? "md:grid-cols-2" : "";
 
   return (
-    <section className="tone-dark bg-espresso text-ivory" aria-labelledby="voices-heading">
-      <div>
-        <Reveal
-          className="flex flex-col justify-between px-[var(--gutter)] py-[var(--section-y)]"
-          start="top 75%"
-        >
-          <div data-reveal className="flex items-center justify-between">
-            <p id="voices-heading" className="caption text-gold">
-              {copy.quotes.kicker}
-            </p>
-            <p className="caption tabular-nums text-ivory/60" aria-live="polite">
-              <span className="text-ivory">{String(index + 1).padStart(2, "0")}</span>
-              <span className="mx-2">/</span>
-              {String(total).padStart(2, "0")}
-            </p>
-          </div>
-          <blockquote data-reveal key={`${index}-${item.name}`} className="quote-in mt-10">
-            <span aria-hidden className="-ms-1 block h-[0.42em] font-serif text-[9rem] leading-[0.8] text-gold/55">
-              “
-            </span>
-            <p className="font-serif text-[clamp(1.7rem,3vw,3.15rem)] italic leading-[1.18]">
-              {item.quote}
-            </p>
-          </blockquote>
-          <div data-reveal className="mt-12">
-            <div className="mb-8 h-px bg-ivory/15">
-              <div
-                className="h-px origin-left bg-gold transition-transform duration-700 ease-[var(--ease)] rtl:origin-right"
-                style={{ transform: `scaleX(${(index + 1) / total})` }}
-              />
-            </div>
-            <div
-              className="flex items-end justify-between gap-6"
-              onKeyDown={(event) => {
-                const forward = document.documentElement.dir === "rtl" ? "ArrowLeft" : "ArrowRight";
-                const back = forward === "ArrowLeft" ? "ArrowRight" : "ArrowLeft";
-                if (event.key === back) shift(-1);
-                if (event.key === forward) shift(1);
-              }}
-            >
-              <footer key={item.name} className="quote-in">
-                <p className="font-serif text-2xl">{item.name}</p>
-                <p className="caption mt-2 text-ivory/60">{item.place}</p>
-              </footer>
-              <div className="flex gap-2">
-                <button type="button" className={arrow} aria-label={copy.quotes.prev} onClick={() => shift(-1)}>
-                  <span aria-hidden="true" className="inline-block rtl:-scale-x-100">←</span>
-                </button>
-                <button type="button" className={arrow} aria-label={copy.quotes.next} onClick={() => shift(1)}>
-                  <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
+    <section className="tone-dark bg-espresso px-[var(--gutter)] py-[var(--section-y)] text-ivory" aria-labelledby="voices-heading">
+      <Reveal>
+        <p id="voices-heading" data-reveal className="caption text-gold">
+          {copy.quotes.kicker}
+        </p>
+        <ul className={cn("mt-10 grid grid-cols-1 gap-6", columns)}>
+          {reviews.map((review) => (
+            <li key={`${review.name}-${review.date}`} data-reveal className="border-t border-ivory/15 pt-6">
+              <p className="text-gold" aria-label={`${review.stars} / 5`}>
+                {"★".repeat(review.stars)}
+                <span className="text-ivory/25">{"★".repeat(Math.max(0, 5 - review.stars))}</span>
+              </p>
+              {review.quote ? (
+                <blockquote className="mt-4 font-serif text-[clamp(1.35rem,2vw,1.8rem)] italic leading-snug">
+                  {review.quote}
+                </blockquote>
+              ) : null}
+              <p className="mt-5 font-serif text-xl">{review.name}</p>
+              <p className="caption mt-2 text-ivory/60">
+                {review.source}
+                <span className="mx-2">·</span>
+                <span dir="ltr">{review.date}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </section>
   );
 }

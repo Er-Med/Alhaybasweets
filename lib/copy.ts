@@ -14,12 +14,6 @@ export type ProductCopy = {
   alt: string;
 };
 
-export type Quote = {
-  quote: string;
-  name: string;
-  place: string;
-};
-
 export type Copy = {
   nav: {
     collection: string;
@@ -92,9 +86,6 @@ export type Copy = {
   };
   quotes: {
     kicker: string;
-    prev: string;
-    next: string;
-    items: Quote[];
   };
   visit: {
     kicker: string;
@@ -102,6 +93,7 @@ export type Copy = {
     city: string;
     directions: string;
     whatsapp: string;
+    hours: string;
     note: string;
     places: Record<LocationId, string>;
   };
@@ -203,7 +195,7 @@ const en: Copy = {
     titleLead: "A gift of",
     titleEm: "authenticity.",
     body: "A box that speaks both dialects. Sweets from the East, chosen piece by piece and packed with Moroccan care. A gift that is understood from Beirut to Casablanca, and opened when the table is ready.",
-    cta: "Order your box",
+    cta: "Order on WhatsApp",
     alt: "An open Al Hayba gift box",
   },
   instagram: {
@@ -220,35 +212,14 @@ const en: Copy = {
   },
   quotes: {
     kicker: "05 — Reviews",
-    prev: "Previous testimonial",
-    next: "Next testimonial",
-    items: [
-      {
-        quote:
-          "My grandmother was from Damascus. This is the baklava of her table, served in Casablanca with mint tea. We order the box for every gathering.",
-        name: "Leila B.",
-        place: "Casablanca",
-      },
-      {
-        quote:
-          "Pistachio, properly done. Nothing loud, nothing careless. It is the sweet I bring when I want the evening to feel considered.",
-        name: "Youssef M.",
-        place: "Rabat",
-      },
-      {
-        quote:
-          "The box arrived as if it had been packed by someone who eats what they make. We finished it slowly, which is the point.",
-        name: "Amal K.",
-        place: "Casablanca",
-      },
-    ],
   },
   visit: {
     kicker: "06 — Visit",
     title: "Visit us",
     city: "Casablanca & Rabat",
     directions: "Get directions",
-    whatsapp: "WhatsApp us",
+    whatsapp: "Order on WhatsApp",
+    hours: "Hours",
     note: "Four houses, in Casablanca and Rabat. Come for the tray, or send for the box.",
     places: {
       maarif: "Maarif",
@@ -456,7 +427,7 @@ const ar: Copy = {
     titleLead: "هدية من",
     titleEm: "الأصالة.",
     body: "صندوق يتكلّم اللهجتين. حلويات من المشرق، تُختار قطعة قطعة، وتُرصّ بعناية مغربية. هدية تُفهم من بيروت إلى الدار البيضاء، وتُفتح حين تجهز المائدة.",
-    cta: "اطلب صندوقك",
+    cta: "اطلب عبر واتساب",
     alt: "صندوق هدايا الهيبة المفتوح",
   },
   instagram: {
@@ -473,35 +444,14 @@ const ar: Copy = {
   },
   quotes: {
     kicker: "٠٥ — الآراء",
-    prev: "الشهادة السابقة",
-    next: "الشهادة التالية",
-    items: [
-      {
-        quote:
-          "جدّتي من دمشق. هذه بقلاوة مائدتها، تُقدَّم في الدار البيضاء مع الشاي بالنعناع. نطلب الصندوق لكل لقاء.",
-        name: "ليلى ب.",
-        place: "الدار البيضاء",
-      },
-      {
-        quote:
-          "فستق كما ينبغي. لا صخب، ولا إهمال. الحلوى التي أحملها حين أريد للمساء أن يكون مدروسًا.",
-        name: "يوسف م.",
-        place: "الرباط",
-      },
-      {
-        quote:
-          "وصل الصندوق كأن من رصّه يأكل ما يصنع. أنهيناه ببطء، وهذا هو المقصود.",
-        name: "أمل ك.",
-        place: "الدار البيضاء",
-      },
-    ],
   },
   visit: {
     kicker: "٠٦ — الزيارة",
     title: "زورونا",
     city: "الدار البيضاء والرباط",
     directions: "الاتجاهات",
-    whatsapp: "واتساب",
+    whatsapp: "اطلب عبر واتساب",
+    hours: "الساعات",
     note: "أربع دور في الدار البيضاء والرباط. تعال إلى الصينية، أو اطلب الصندوق.",
     places: {
       maarif: "المعاريف",
