@@ -127,22 +127,11 @@ export function Navbar() {
           </div>
           <div className="flex shrink-0 items-center gap-5">
             <a
-              href="/menu"
-              className={cn(
-                "caption inline-flex border px-4 py-2.5 text-[0.6rem] transition-colors duration-300 lg:hidden",
-                overDark
-                  ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
-                  : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",
-              )}
-            >
-              {copy.nav.carte}
-            </a>
-            <a
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "caption hidden border px-4 py-2.5 text-[0.6rem] transition-colors duration-300 lg:inline-flex",
+                "caption inline-flex border px-3 py-2.5 text-[0.58rem] whitespace-nowrap transition-colors duration-300 lg:px-4 lg:text-[0.6rem]",
                 overDark
                   ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
                   : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",

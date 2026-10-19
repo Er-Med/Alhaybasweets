@@ -37,14 +37,14 @@ export function HeroContent() {
         <>
           <h1
             lang="ar"
-            className="arabic-display mt-7 text-[clamp(2.6rem,6.4vw,5.2rem)] leading-[1.65] text-ivory"
+            className="arabic-display mt-4 text-[2.35rem] leading-[1.35] text-ivory lg:mt-7 lg:text-[clamp(2.6rem,6.4vw,5.2rem)] lg:leading-[1.65]"
           >
             <Line>{copy.hero.arabicTitle}</Line>
           </h1>
           <p
             lang="en"
             dir="ltr"
-            className="script mt-3 font-serif text-[clamp(1.8rem,3vw,2.8rem)] leading-tight"
+            className="script mt-2 font-serif text-[clamp(1.55rem,6vw,2.2rem)] leading-tight lg:mt-3 lg:text-[clamp(1.8rem,3vw,2.8rem)]"
           >
             <Line>
               {copy.hero.titleLead} <span className="hero-gold-text">{copy.hero.titleEm}</span>
@@ -57,7 +57,7 @@ export function HeroContent() {
             data-hero="arabic"
             lang="ar"
             dir="rtl"
-            className="hero-await arabic-display mt-7 w-fit text-[clamp(1.45rem,2.3vw,2.15rem)] text-gold/90"
+            className="hero-await arabic-display mt-4 w-fit text-[1.35rem] text-gold/90 lg:mt-7 lg:text-[clamp(1.45rem,2.3vw,2.15rem)]"
           >
             {copy.hero.arabicTitle}
           </p>
@@ -70,11 +70,11 @@ export function HeroContent() {
         </>
       )}
 
-      <p data-hero="desc" className="hero-await body-lg mt-7 max-w-[32ch] text-ivory/65">
+      <p data-hero="desc" className="hero-await body-lg mt-4 max-w-[32ch] text-ivory/65 lg:mt-7">
         {copy.hero.description}
       </p>
 
-      <div data-hero="cta" className="hero-await mt-9 flex flex-wrap gap-3">
+      <div data-hero="cta" className="hero-await mt-5 flex flex-wrap gap-3 lg:mt-9">
         <MagneticButton href={WHATSAPP} external variant="gold">
           {copy.hero.order}
         </MagneticButton>

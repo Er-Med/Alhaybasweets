@@ -46,6 +46,7 @@ html {
   scroll-behavior: auto;
   color-scheme: light;
   background: #f5efe4;
+  overflow-x: clip;
 }
 
 body {
@@ -53,6 +54,7 @@ body {
   color: #2a1d14;
   font-family: var(--sans-stack);
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -205,10 +207,16 @@ body {
 
 
 .hero-title {
-  font-size: clamp(3rem, 6vw, 6.9rem);
+  font-size: clamp(2.35rem, 11vw, 3.3rem);
   font-weight: 500;
   line-height: 0.96;
   letter-spacing: -0.012em;
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: clamp(3rem, 6vw, 6.9rem);
+  }
 }
 
 /* Latin italics echo the "Sweets" script in the logo. Allura has no italic
