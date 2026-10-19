@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { useLocale } from "@/lib/i18n";
-import { menuSectionForProduct } from "@/lib/menu";
-import { productMedia, productOrder } from "@/lib/site";
+import { productMedia, productOrder, WHATSAPP } from "@/lib/site";
 import { gsap, prefersReducedMotion, registerGsap } from "@/lib/gsap";
 import { Photo } from "@/components/ui/Photo";
+import { TextLink } from "@/components/ui/TextLink";
 import { Line, Reveal } from "@/components/motion/Reveal";
 
 export function Collection() {
@@ -113,11 +113,9 @@ export function Collection() {
               const product = copy.products[id];
               const media = productMedia[id];
               return (
-                <a
+                <article
                   key={id}
                   data-card
-                  href={`/menu#${menuSectionForProduct[id]}`}
-                  data-cursor="view"
                   className="group flex w-[78vw] shrink-0 snap-start flex-col sm:w-[48vw] lg:w-[34vw]"
                 >
                   <div className="relative h-[46vh] min-h-[220px] overflow-hidden lg:h-auto lg:min-h-0 lg:flex-1">
@@ -145,11 +143,24 @@ export function Collection() {
                       →
                     </span>
                   </div>
+                  <p className="mt-3 font-serif text-[clamp(1.35rem,2vw,1.85rem)] leading-tight text-ivory">
+                    <span className="script block">{product.line1}</span>
+                    <span className="script block">{product.line2}</span>
+                  </p>
                   <p className="body-md mt-3 line-clamp-2 max-w-[34ch] text-ivory/70">{product.summary}</p>
-                </a>
+                  <TextLink href={WHATSAPP} external className="mt-4 text-gold">
+                    {copy.hero.order}
+                  </TextLink>
+                </article>
               );
             })}
           </div>
+        </div>
+
+        <div className="mt-8">
+          <TextLink href="/menu" className="text-ivory">
+            {copy.hero.explore}
+          </TextLink>
         </div>
 
         <div className="mt-6 hidden items-center gap-6 lg:flex">

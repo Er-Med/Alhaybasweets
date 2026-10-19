@@ -1,7 +1,8 @@
 "use client";
 
 import { useLocale } from "@/lib/i18n";
-import { ADDRESS, INSTAGRAM, locations, WHATSAPP } from "@/lib/site";
+import { ADDRESS, INSTAGRAM, instagramMedia, locations, WHATSAPP } from "@/lib/site";
+import { Photo } from "@/components/ui/Photo";
 import { MotifBand, MotifField } from "@/components/ui/Motif";
 
 const links = [
@@ -20,7 +21,38 @@ export function Footer() {
       <MotifField fade className="absolute inset-0 text-gold/25" />
       <div className="relative">
         <MotifBand className="w-full text-gold" />
-        <div className="px-[var(--gutter)] pt-20 pb-10 lg:pt-28">
+        <div className="px-[var(--gutter)] pt-8">
+          <div className="flex items-baseline justify-between gap-4">
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-serif text-2xl text-ivory hover:text-gold"
+            >
+              {copy.instagram.handle}
+            </a>
+            <p className="caption text-ivory/70">{copy.instagram.followers}</p>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            {instagramMedia.slice(0, 2).map((item, index) => (
+              <a
+                key={item.src}
+                href={INSTAGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block aspect-[3/4] max-h-40 overflow-hidden"
+              >
+                <Photo
+                  src={item.src}
+                  alt={copy.instagram.alts[index]}
+                  sizes="50vw"
+                  className={item.imageClass}
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="px-[var(--gutter)] pt-16 pb-10 lg:pt-20">
         <p className="font-serif text-[clamp(3.4rem,15vw,12.5rem)] leading-[0.82] tracking-[-0.035em]">
           AL HAYBA
         </p>

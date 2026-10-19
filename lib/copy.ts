@@ -59,10 +59,6 @@ export type Copy = {
     intro: string;
     view: string;
   };
-  featured: {
-    kicker: string;
-    discover: string;
-  };
   heritage: {
     kicker: string;
     titleLead: string;
@@ -93,12 +89,6 @@ export type Copy = {
     followers: string;
     cta: string;
     alts: string[];
-  };
-  stats: {
-    kicker: string;
-    titleLead: string;
-    titleEm: string;
-    items: { value: string; label: string }[];
   };
   quotes: {
     kicker: string;
@@ -172,7 +162,7 @@ const en: Copy = {
     ],
   },
   story: {
-    kicker: "02 — The house",
+    kicker: "01 — The house",
     titleLead: "More than",
     titleEm: "just sweets.",
     arabic: ["من التراث", "إلى المذاق", "الذي يدوم"],
@@ -185,24 +175,20 @@ const en: Copy = {
     ],
   },
   collection: {
-    kicker: "03 — The selection",
+    kicker: "02 — Signature sweets",
     title: "Signature sweets",
     intro: "Five expressions of the house. Composed to be shared, never rushed.",
     view: "View",
   },
-  featured: {
-    kicker: "04 — Featured",
-    discover: "Discover more",
-  },
   heritage: {
-    kicker: "05 — Origin",
+    kicker: "04 — Origin",
     titleLead: "From the East",
     titleEm: "to the West.",
     body: "The recipes begin in the kitchens of the Levant and Anatolia. Baklava from the Ottoman table, kunafa from Nablus and Damascus, maamoul from the Eid mornings of Beirut. Morocco has long shared their spices, their faith, and their love of the sweet table. Al Hayba keeps the original recipe, exactly, and adds the one thing Morocco gives every guest: a welcome.",
     fig: "Levantine craft, Casablanca house",
   },
   gallery: {
-    kicker: "06 — Gallery",
+    kicker: "Gallery",
     titleLead: "Made to be",
     titleEm: "shared.",
     intro: "From the tray, the kitchen, and the city that shapes them.",
@@ -216,7 +202,7 @@ const en: Copy = {
     ],
   },
   box: {
-    kicker: "07 — The gift",
+    kicker: "03 — The gift",
     titleLead: "A gift of",
     titleEm: "authenticity.",
     body: "A box that speaks both dialects. Sweets from the East, chosen piece by piece and packed with Moroccan care. A gift that is understood from Beirut to Casablanca, and opened when the table is ready.",
@@ -224,7 +210,7 @@ const en: Copy = {
     alt: "An open Al Hayba gift box",
   },
   instagram: {
-    kicker: "08 — Instagram",
+    kicker: "Instagram",
     titleLead: "From our table",
     titleEm: "to your feed.",
     handle: "@alhaybasweets",
@@ -239,18 +225,8 @@ const en: Copy = {
       "Three pieces of maamoul on a plate",
     ],
   },
-  stats: {
-    kicker: "09 — Legacy",
-    titleLead: "A legacy",
-    titleEm: "of quality.",
-    items: [
-      { value: "100%", label: "Natural ingredients" },
-      { value: "3", label: "Lands of origin" },
-      { value: "16.7K", label: "Followers on Instagram" },
-    ],
-  },
   quotes: {
-    kicker: "10 — Voices",
+    kicker: "05 — Reviews",
     prev: "Previous testimonial",
     next: "Next testimonial",
     items: [
@@ -275,7 +251,7 @@ const en: Copy = {
     ],
   },
   visit: {
-    kicker: "11 — Visit",
+    kicker: "06 — Visit",
     title: "Visit us",
     city: "Casablanca & Rabat",
     directions: "Get directions",
@@ -446,7 +422,7 @@ const ar: Copy = {
     ],
   },
   story: {
-    kicker: "٠٢ — الدار",
+    kicker: "٠١ — الدار",
     titleLead: "أكثر من",
     titleEm: "مجرد حلويات.",
     arabic: ["من التراث", "إلى المذاق", "الذي يدوم"],
@@ -459,24 +435,20 @@ const ar: Copy = {
     ],
   },
   collection: {
-    kicker: "٠٣ — المختارات",
+    kicker: "٠٢ — حلويات التوقيع",
     title: "حلويات التوقيع",
     intro: "خمسة تعبيرات من الدار. تُرتَّب لتُشارَك، بلا استعجال.",
     view: "عرض",
   },
-  featured: {
-    kicker: "٠٤ — المميز",
-    discover: "اكتشف المزيد",
-  },
   heritage: {
-    kicker: "٠٥ — الأصل",
+    kicker: "٠٤ — الأصل",
     titleLead: "من المشرق",
     titleEm: "إلى المغرب.",
     body: "تبدأ الوصفات في مطابخ الشام والأناضول. بقلاوة من المائدة العثمانية، وكنافة من نابلس ودمشق، ومعمول من صباحات العيد في بيروت. وقد شارك المغرب هذه البلاد طويلًا توابلها وإيمانها وحبّها لمائدة الحلو. تحفظ الهيبة الوصفة الأصلية كما هي، وتضيف إليها ما يمنحه المغرب لكل ضيف: الترحاب.",
     fig: "حرفة شامية، دار بيضاوية",
   },
   gallery: {
-    kicker: "٠٦ — المعرض",
+    kicker: "المعرض",
     titleLead: "صُنعت",
     titleEm: "لتُشارَك.",
     intro: "من الصينية، والمطبخ، والمدينة التي تشكّلها.",
@@ -490,7 +462,7 @@ const ar: Copy = {
     ],
   },
   box: {
-    kicker: "٠٧ — الهدية",
+    kicker: "٠٣ — الهدية",
     titleLead: "هدية من",
     titleEm: "الأصالة.",
     body: "صندوق يتكلّم اللهجتين. حلويات من المشرق، تُختار قطعة قطعة، وتُرصّ بعناية مغربية. هدية تُفهم من بيروت إلى الدار البيضاء، وتُفتح حين تجهز المائدة.",
@@ -498,7 +470,7 @@ const ar: Copy = {
     alt: "صندوق هدايا الهيبة المفتوح",
   },
   instagram: {
-    kicker: "٠٨ — إنستغرام",
+    kicker: "إنستغرام",
     titleLead: "من مائدتنا",
     titleEm: "إلى يومياتك.",
     handle: "@alhaybasweets",
@@ -513,18 +485,8 @@ const ar: Copy = {
       "ثلاث قطع معمول على طبق",
     ],
   },
-  stats: {
-    kicker: "٠٩ — الإرث",
-    titleLead: "إرث",
-    titleEm: "من الجودة.",
-    items: [
-      { value: "100%", label: "مكوّنات طبيعية" },
-      { value: "3", label: "بلدان الأصل" },
-      { value: "16.7K", label: "متابع على إنستغرام" },
-    ],
-  },
   quotes: {
-    kicker: "١٠ — أصوات",
+    kicker: "٠٥ — الآراء",
     prev: "الشهادة السابقة",
     next: "الشهادة التالية",
     items: [
@@ -549,7 +511,7 @@ const ar: Copy = {
     ],
   },
   visit: {
-    kicker: "١١ — الزيارة",
+    kicker: "٠٦ — الزيارة",
     title: "زورونا",
     city: "الدار البيضاء والرباط",
     directions: "الاتجاهات",
