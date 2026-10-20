@@ -1,39 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useLocale } from "@/lib/i18n";
 import { WHATSAPP } from "@/lib/site";
-import { cn } from "@/lib/cn";
 
 export function WhatsAppButton() {
   const { copy } = useLocale();
-  const [raised, setRaised] = useState(false);
-
-  useEffect(() => {
-    const hero = document.getElementById("top");
-    const footer = document.getElementById("site-footer");
-    if (!hero || !footer) return;
-
-    let pastHero = false;
-    let footerVisible = false;
-    const update = () => setRaised(pastHero && !footerVisible);
-
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      pastHero = !entry.isIntersecting;
-      update();
-    });
-    const footerObserver = new IntersectionObserver(([entry]) => {
-      footerVisible = entry.isIntersecting;
-      update();
-    });
-
-    heroObserver.observe(hero);
-    footerObserver.observe(footer);
-    return () => {
-      heroObserver.disconnect();
-      footerObserver.disconnect();
-    };
-  }, []);
 
   return (
     <a
@@ -41,12 +12,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={copy.hero.order}
-      className={cn(
-        "wa-fab group fixed end-5 z-40 flex size-14 items-center justify-center rounded-full border border-gold/60 bg-espresso text-gold shadow-[0_12px_32px_rgba(20,16,12,0.28)] transition-[color,bottom] duration-300 ease-[var(--ease)] hover:text-gold-light",
-        raised
-          ? "bottom-[max(6rem,calc(env(safe-area-inset-bottom)+6rem))] lg:bottom-[max(1.5rem,env(safe-area-inset-bottom))]"
-          : "bottom-[max(1.5rem,env(safe-area-inset-bottom))]",
-      )}
+      className="wa-fab group fixed end-5 bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-40 flex size-14 items-center justify-center rounded-full border border-gold/60 bg-espresso text-gold shadow-[0_12px_32px_rgba(20,16,12,0.28)] transition-colors duration-300 ease-[var(--ease)] hover:text-gold-light"
     >
       <span className="wa-fab-ring" aria-hidden="true" />
       <span className="caption pointer-events-none absolute end-full me-3 hidden whitespace-nowrap border border-gold/40 bg-espresso px-3 py-2 text-gold opacity-0 transition-opacity duration-300 ease-[var(--ease)] group-hover:opacity-100 [@media(hover:hover)]:inline-flex">

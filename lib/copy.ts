@@ -18,6 +18,7 @@ export type Copy = {
   nav: {
     collection: string;
     carte: string;
+    carteShort: string;
     story: string;
     gallery: string;
     contact: string;
@@ -133,6 +134,7 @@ const en: Copy = {
   nav: {
     collection: "Collection",
     carte: "The menu",
+    carteShort: "Menu",
     story: "Our Story",
     gallery: "Gallery",
     contact: "Contact",
@@ -370,6 +372,7 @@ const ar: Copy = {
   nav: {
     collection: "المجموعة",
     carte: "القائمة",
+    carteShort: "القائمة",
     story: "قصتنا",
     gallery: "المعرض",
     contact: "تواصل",

@@ -133,19 +133,29 @@ export function Navbar() {
             </nav>
           </div>
           <div className="flex shrink-0 items-center gap-5">
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/menu"
               className={cn(
-                "caption inline-flex min-h-11 items-center border px-3 text-[0.58rem] whitespace-nowrap transition-colors duration-300 lg:px-4 lg:text-[0.6rem]",
+                "caption inline-flex min-h-11 items-center border px-3 text-[0.58rem] whitespace-nowrap transition-colors duration-300 lg:hidden",
                 overDark
                   ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
                   : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",
               )}
             >
-              <span className="lg:hidden">{copy.hero.orderShort}</span>
-              <span className="hidden lg:inline">{copy.hero.order}</span>
+              {copy.nav.carteShort}
+            </Link>
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "caption hidden min-h-11 items-center border px-4 text-[0.6rem] whitespace-nowrap transition-colors duration-300 lg:inline-flex",
+                overDark
+                  ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
+                  : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",
+              )}
+            >
+              {copy.hero.order}
             </a>
             <button
               type="button"

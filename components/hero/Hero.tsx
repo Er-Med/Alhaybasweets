@@ -9,7 +9,7 @@ import { MotifVeil } from "@/components/ui/Motif";
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
-  const { copy } = useLocale();
+  const { locale, copy } = useLocale();
 
   useEffect(() => {
     const scope = root.current;
@@ -26,9 +26,24 @@ export function Hero() {
     const q = (name: string) => scope.querySelector<HTMLElement>(`[data-hero="${name}"]`);
     const qa = (name: string) => scope.querySelectorAll<HTMLElement>(`[data-hero="${name}"]`);
     const nav = document.querySelector<HTMLElement>("[data-hero='nav']");
+    const dropAwait = (el: HTMLElement | null) => el?.classList.remove("hero-await");
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      const lines = qa("line");
+      const tl = gsap.timeline({
+        defaults: { ease: "expo.out" },
+        onComplete: () => {
+          dropAwait(nav);
+          dropAwait(q("eyebrow"));
+          dropAwait(q("arabic"));
+          dropAwait(q("desc"));
+          dropAwait(q("cta"));
+          lines.forEach((line) => {
+            line.classList.remove("hero-await");
+            gsap.set(line, { clearProps: "transform" });
+          });
+        },
+      });
 
       tl.fromTo(q("photo-in"), { scale: 1.08 }, { scale: 1, duration: 2.4 }, 0);
 
@@ -41,7 +56,7 @@ export function Hero() {
         tl.fromTo(arabic, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out" }, 0.78);
       }
       tl.fromTo(
-        qa("line"),
+        lines,
         { yPercent: 110, opacity: 0 },
         { yPercent: 0, opacity: 1, duration: 1.3, stagger: 0.14, ease: "power4.out" },
         0.9,
@@ -57,12 +72,12 @@ export function Hero() {
 
       gsap
         .timeline({
-          scrollTrigger: { trigger: scope, start: "top top", end: "bottom top", scrub: 0.8 },
+          scrollTrigger: { trigger: scope, start: "top top", end: "bottom top", scrub: true },
           defaults: { ease: "none" },
         })
         .to(q("photo"), { scale: 1.06, duration: 1 }, 0)
         .to(q("veil"), { opacity: 0, duration: 1 }, 0)
-        .to(q("content"), { opacity: 0, duration: 0.7 }, 0);
+        .fromTo(q("content"), { opacity: 1 }, { opacity: 0, duration: 0.7, immediateRender: false }, 0);
     }, scope);
 
     return () => {
@@ -70,7 +85,7 @@ export function Hero() {
       observer.disconnect();
       if (nav) gsap.set(nav, { clearProps: "all" });
     };
-  }, []);
+  }, [locale]);
 
   return (
     <section

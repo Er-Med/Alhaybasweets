@@ -72,7 +72,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="px-[var(--gutter)] pt-16 pb-[max(6.5rem,calc(env(safe-area-inset-bottom)+6.5rem))] text-center lg:pt-20">
+        <div className="px-[var(--gutter)] pt-16 pb-[max(5.5rem,calc(env(safe-area-inset-bottom)+5.5rem))] text-center lg:pt-20">
           <div className="mt-12 grid gap-12 border-t border-ivory/15 pt-10 md:grid-cols-3">
             <nav className="flex flex-col items-center" aria-label={copy.footer.explore}>
               <p className="caption text-gold">{copy.footer.explore}</p>

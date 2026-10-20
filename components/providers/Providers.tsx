@@ -5,7 +5,6 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { OrderBar } from "@/components/layout/OrderBar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CustomCursor } from "@/components/motion/CustomCursor";
 
@@ -21,7 +20,6 @@ function Shell({ children }: { children: React.ReactNode }) {
         <Navbar />
         <main id="content">{children}</main>
         <Footer />
-        <OrderBar />
         <WhatsAppButton />
         <CustomCursor />
       </PageTransition>
