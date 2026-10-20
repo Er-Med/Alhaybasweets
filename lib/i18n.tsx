@@ -7,15 +7,15 @@ import { registerGsap, ScrollTrigger } from "@/lib/gsap";
 type LocaleValue = {
   locale: Locale;
   setLocale: (next: Locale) => void;
-  copy: (typeof copy)["en"];
+  copy: (typeof copy)["fr"];
 };
 
 const listeners = new Set<() => void>();
-let currentLocale: Locale = "en";
+let currentLocale: Locale = "fr";
 
 if (typeof window !== "undefined") {
   const stored = window.localStorage.getItem("alhayba-lang");
-  if (stored === "ar" || stored === "en") currentLocale = stored;
+  if (stored === "ar" || stored === "fr") currentLocale = stored;
 }
 
 function subscribe(listener: () => void) {
@@ -28,7 +28,7 @@ function getLocaleSnapshot() {
 }
 
 function getServerLocale(): Locale {
-  return "en";
+  return "fr";
 }
 
 function updateLocale(next: Locale) {
@@ -43,7 +43,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const locale = useSyncExternalStore(subscribe, getLocaleSnapshot, getServerLocale);
 
   useEffect(() => {
-    document.documentElement.lang = locale === "ar" ? "ar" : "en";
+    document.documentElement.lang = locale === "ar" ? "ar" : "fr";
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
     registerGsap();
     const id = window.setTimeout(() => ScrollTrigger.refresh(), 120);

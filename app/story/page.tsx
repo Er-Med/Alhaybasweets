@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { StoryEssay } from "@/components/sections/StoryEssay";
 
 export const metadata: Metadata = {
-  title: "Our Story",
-  description: "The story of Al Hayba Sweets, a Casablanca house of Levantine confectionery, made in Morocco.",
+  title: "Notre histoire",
+  description: "L'histoire d'Al Hayba Sweets, une maison casablancaise de pâtisserie levantine, faite au Maroc.",
 };
 
 export default function StoryPage() {

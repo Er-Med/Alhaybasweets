@@ -1,5 +1,5 @@
 export const WHATSAPP =
-  "https://wa.me/212522980637?text=Hello%20Al%20Hayba%2C%20I%20would%20like%20to%20order.";
+  "https://wa.me/212522980637?text=Bonjour%20Al%20Hayba%2C%20je%20souhaite%20passer%20commande.";
 export const INSTAGRAM = "https://instagram.com/alhaybasweets";
 
 export const locations = [

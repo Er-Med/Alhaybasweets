@@ -8,9 +8,9 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { VisitUs } from "@/components/sections/VisitUs";
 
 export const metadata: Metadata = {
-  title: { absolute: "Al Hayba Sweets — A taste worth remembering." },
+  title: { absolute: "Al Hayba Sweets — Un goût à retenir." },
   description:
-    "Oriental sweets from the Levant, made by hand in Casablanca. Baklava, kunafa, pistachio, and gift boxes at Al Hayba.",
+    "Pâtisseries orientales du Levant, faites à la main à Casablanca. Baklava, kunafa, pistache et coffrets cadeaux chez Al Hayba.",
 };
 
 export default function HomePage() {

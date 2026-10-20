@@ -164,9 +164,9 @@ export function Navbar() {
                 overDark && "hover:text-gold",
               )}
               aria-label={copy.nav.language}
-              onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+              onClick={() => setLocale(locale === "fr" ? "ar" : "fr")}
             >
-              {locale === "en" ? "AR" : "EN"}
+              {locale === "fr" ? "AR" : "FR"}
             </button>
             <button
               type="button"

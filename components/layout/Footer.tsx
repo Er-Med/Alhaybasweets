@@ -133,9 +133,9 @@ export function Footer() {
               type="button"
               className="caption inline-flex h-11 min-w-11 items-center justify-center text-ivory/80 transition-colors duration-300 hover:text-gold"
               aria-label={copy.nav.language}
-              onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+              onClick={() => setLocale(locale === "fr" ? "ar" : "fr")}
             >
-              {locale === "en" ? "AR" : "EN"}
+              {locale === "fr" ? "AR" : "FR"}
             </button>
           </div>
         </div>

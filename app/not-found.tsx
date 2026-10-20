@@ -7,7 +7,7 @@ export default function NotFound() {
       <MotifVeil fade="soft" className="text-chocolate/28" />
       <div className="relative">
         <p className="caption text-pistachio">404</p>
-        <h1 className="display-lg mt-4 max-w-[10ch]">This page has left the table.</h1>
+        <h1 className="display-lg mt-4 max-w-[12ch]">Cette page a quitté la table.</h1>
         <p lang="ar" dir="rtl" className="arabic-display mt-6 text-3xl text-pistachio">
           هذه الصفحة غادرت المائدة.
         </p>

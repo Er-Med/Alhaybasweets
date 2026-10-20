@@ -42,15 +42,15 @@ const arabicDisplay = Aref_Ruqaa({
 export const metadata: Metadata = {
   metadataBase: new URL("https://alhaybasweets.com"),
   title: {
-    default: "Al Hayba Sweets — A taste worth remembering.",
+    default: "Al Hayba Sweets — Un goût à retenir.",
     template: "%s — Al Hayba Sweets",
   },
   description:
-    "Al Hayba Sweets. Levantine and Oriental sweets, made in Casablanca. Baklava, kunafa, maamoul, and gift boxes made by hand.",
+    "Al Hayba Sweets. Pâtisseries levantines et orientales, faites à Casablanca. Baklava, kunafa, maamoul et coffrets, préparés à la main.",
   openGraph: {
     title: "Al Hayba Sweets",
-    description: "Levantine recipes, finished by Moroccan hands. Casablanca.",
-    locale: "en",
+    description: "Recettes levantines, achevées par des mains marocaines. Casablanca.",
+    locale: "fr_MA",
     type: "website",
   },
 };
@@ -107,7 +107,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="fr"
       dir="ltr"
       className={`${serif.variable} ${sans.variable} ${script.variable} ${arabic.variable} ${arabicDisplay.variable} h-full antialiased`}
       suppressHydrationWarning

@@ -41,7 +41,7 @@ export function HeroContent() {
             <Line>{copy.hero.arabicTitle}</Line>
           </h1>
           <p
-            lang="en"
+            lang="fr"
             dir="ltr"
             className="script mt-1.5 text-[clamp(1.45rem,3.4vw,2.6rem)] leading-tight text-ivory lg:mt-3 lg:text-[clamp(1.7rem,4vw,2.6rem)]"
           >
