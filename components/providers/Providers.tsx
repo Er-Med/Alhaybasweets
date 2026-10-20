@@ -6,6 +6,7 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { OrderBar } from "@/components/layout/OrderBar";
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CustomCursor } from "@/components/motion/CustomCursor";
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -21,6 +22,7 @@ function Shell({ children }: { children: React.ReactNode }) {
         <main id="content">{children}</main>
         <Footer />
         <OrderBar />
+        <WhatsAppButton />
         <CustomCursor />
       </PageTransition>
     </SmoothScroll>

@@ -27,12 +27,14 @@ export function Navbar() {
   const home = pathname === "/";
   const [overDark, setOverDark] = useState(home);
   const [scrolled, setScrolled] = useState(false);
+  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
       setScrolled(window.scrollY > 8);
+      setCompact(window.scrollY > 96);
       const line = (headerRef.current?.offsetHeight ?? 0) / 2;
       const grounds = document.querySelectorAll<HTMLElement>("main section.tone-dark, footer.tone-dark");
       setOverDark(
@@ -105,10 +107,15 @@ export function Navbar() {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-gold rtl:origin-right"
         />
-        <div className="flex items-center justify-between gap-4 px-[var(--gutter)] py-5">
+        <div
+          className={cn(
+            "flex items-center justify-between gap-3 px-[var(--gutter)] pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 transition-[padding] duration-500 ease-[var(--ease)] lg:gap-4",
+            compact ? "lg:py-3" : "lg:py-5",
+          )}
+        >
           <div className="flex min-w-0 items-center gap-6 lg:gap-8">
             <Link href="/" className="shrink-0 leading-none" aria-label="Al Hayba Sweets">
-              <Logo className={overDark ? "text-ivory" : undefined} />
+              <Logo compact={compact} className={overDark ? "text-ivory" : undefined} />
             </Link>
             <nav className="hidden items-center gap-5 xl:gap-7 lg:flex" aria-label="Primary">
               {links.map((link) => (
@@ -131,18 +138,19 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "caption inline-flex border px-3 py-2.5 text-[0.58rem] whitespace-nowrap transition-colors duration-300 lg:px-4 lg:text-[0.6rem]",
+                "caption inline-flex min-h-11 items-center border px-3 text-[0.58rem] whitespace-nowrap transition-colors duration-300 lg:px-4 lg:text-[0.6rem]",
                 overDark
                   ? "border-gold/60 text-gold hover:bg-gold hover:text-espresso"
                   : "border-chocolate/25 hover:border-chocolate hover:bg-chocolate hover:text-ivory",
               )}
             >
-              {copy.hero.order}
+              <span className="lg:hidden">{copy.hero.orderShort}</span>
+              <span className="hidden lg:inline">{copy.hero.order}</span>
             </a>
             <button
               type="button"
               className={cn(
-                "caption text-[0.62rem] transition-colors duration-300",
+                "caption inline-flex h-11 min-w-11 items-center justify-center text-[0.62rem] transition-colors duration-300",
                 overDark && "hover:text-gold",
               )}
               aria-label={copy.nav.language}
@@ -153,7 +161,7 @@ export function Navbar() {
             <button
               type="button"
               className={cn(
-                "caption group flex items-center text-[0.62rem] transition-colors duration-300",
+                "caption group inline-flex h-11 w-11 items-center justify-center text-[0.62rem] transition-colors duration-300",
                 overDark && "hover:text-gold",
               )}
               aria-label={copy.nav.menu}

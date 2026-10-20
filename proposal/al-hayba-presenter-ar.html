@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شاشة المقدِّم — لقاء حلويات الهيبة (خاص)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d1a17; --muted: #6b635a; --line: #e2d9ca; --paper: #f6f2ea; --card: #fffdf9;
+    --green: #0b3831; --gold: #a8873f;
+    --say: #1f6b45; --ask: #8a6417; --do: #2f5d8a; --warn: #9b2c2c; --if: #5a3f8c; --price: #0b3831; --tip: #6b635a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif; font-size: 19px; line-height: 1.8; }
+  button { font: inherit; cursor: pointer; }
+  .l { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+  /* ---------- Top bar ---------- */
+  .bar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 10px 18px; background: var(--green); color: #fff; }
+  .bar .private { font-size: 13px; font-weight: 600; padding: 2px 12px; border: 1px solid rgba(255,255,255,.5); border-radius: 20px; }
+  .clock { display: flex; align-items: baseline; gap: 12px; }
+  #time { direction: ltr; font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; padding: 0 12px; border-radius: 8px; background: rgba(255,255,255,.12); }
+  #time.late { background: #c98a1b; }
+  #time.over { background: #b23a3a; }
+  #target { font-size: 14.5px; opacity: .9; }
+  .bar button { padding: 4px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,.55); background: transparent; color: #fff; font-size: 15px; }
+  .bar button:hover { background: rgba(255,255,255,.14); }
+  .bar button.main { background: #fff; color: var(--green); border-color: #fff; font-weight: 600; }
+  .grow { flex: 1; }
+  #conn { display: flex; align-items: center; gap: 8px; font-size: 14.5px; }
+  #conn::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #c9c2b6; }
+  #conn.on::before { background: #58d68d; }
+
+  /* ---------- Layout ---------- */
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 22px; max-width: 1500px; margin: 0 auto; padding: 18px; }
+  .notes, .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+  .notes { padding: 20px 26px 24px; }
+  .side { display: flex; flex-direction: column; gap: 14px; }
+  .panel { padding: 12px 14px; }
+  .panel h2 { margin: 0 0 8px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
+
+  .titleRow { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  #num { direction: ltr; padding: 0 14px; border-radius: 8px; background: var(--green); color: #fff; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #title { margin: 0; font-size: 27px; font-weight: 700; line-height: 1.4; flex: 1; }
+  #budget { padding: 0 12px; border: 1px solid var(--gold); border-radius: 20px; color: var(--gold); font-size: 15px; font-weight: 600; white-space: nowrap; }
+  #goal { margin: 14px 0 0; font-size: 18px; color: var(--muted); }
+  #goal:empty { display: none; }
+
+  .block { margin-top: 18px; }
+  .kind { display: inline-block; padding: 0 12px; border-radius: 6px; color: #fff; font-size: 14px; font-weight: 600; line-height: 1.9; }
+  .block ul, .block ol { margin: 8px 0 0; padding-inline-start: 24px; }
+  .block li { margin: 7px 0; font-size: 20px; line-height: 1.75; }
+  .k-say .kind { background: var(--say); } .k-ask .kind { background: var(--ask); } .k-do .kind { background: var(--do); }
+  .k-warn .kind { background: var(--warn); } .k-if .kind { background: var(--if); } .k-price .kind { background: var(--price); } .k-tip .kind { background: var(--tip); }
+  .k-say li { font-size: 21.5px; }
+  .k-price ul { list-style: none; padding: 10px 16px; border: 1px dashed var(--green); border-radius: 10px; background: #eef5f0; }
+  .k-if dl { margin: 8px 0 0; }
+  .k-if dt { margin-top: 10px; font-weight: 700; color: var(--if); }
+  .k-if dd { margin: 2px 0 0; padding-inline-start: 18px; font-size: 20px; }
+  #nextLine { margin: 22px 0 0; padding-top: 14px; border-top: 1px solid var(--line); font-size: 19px; }
+  #nextLine b { color: var(--muted); font-weight: 600; }
+  #nextLine:empty { display: none; }
+
+  .nav { display: flex; gap: 12px; margin-top: 22px; }
+  .nav button { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid var(--green); background: #fff; color: var(--green); font-size: 19px; font-weight: 600; }
+  .nav #nextBtn { flex: 2; background: var(--green); color: #fff; }
+  .nav button:disabled { opacity: .35; cursor: default; }
+
+  .pv { position: relative; aspect-ratio: 16 / 9; background: #120c09; border-radius: 6px; overflow: hidden; }
+  .pv iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .pv.small { width: 62%; }
+  #nextTitle { font-weight: 600; color: var(--ink); }
+
+  #memo { width: 100%; min-height: 130px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font: inherit; font-size: 16.5px; line-height: 1.7; resize: vertical; }
+  #list { margin: 0; padding: 0; list-style: none; max-height: 260px; overflow: auto; }
+  #list button { display: flex; gap: 10px; width: 100%; padding: 3px 8px; border: 0; border-radius: 6px; background: transparent; text-align: start; font-size: 15.5px; color: var(--ink); }
+  #list button:hover { background: #efe8da; }
+  #list button.cur { background: var(--green); color: #fff; }
+  #list .n { direction: ltr; min-width: 22px; font-variant-numeric: tabular-nums; opacity: .7; }
+  #list .m { margin-inline-start: auto; font-size: 13px; opacity: .7; white-space: nowrap; }
+
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 16px; }
+  details summary { cursor: pointer; font-weight: 600; font-size: 16px; }
+  details ul, details ol { margin: 6px 0 8px; padding-inline-start: 22px; font-size: 16px; }
+  .top-details { max-width: 1500px; margin: 14px auto 0; padding: 0 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  @media (max-width: 1000px) {
+    main { grid-template-columns: minmax(0, 1fr); }
+    .previews { display: none; }
+    .top-details { grid-template-columns: 1fr; }
+    #title { font-size: 23px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <span class="private">خاص بك · لا تشاركه</span>
+  <div class="clock">
+    <span id="time">00:00</span>
+    <span id="target"></span>
+  </div>
+  <button id="startBtn" class="main" type="button">ابدأ التوقيت</button>
+  <button id="resetBtn" type="button">تصفير</button>
+  <span class="grow"></span>
+  <span id="conn">نافذة العرض غير مفتوحة</span>
+  <button id="openBtn" class="main" type="button">افتح نافذة العرض</button>
+</header>
+
+<div class="top-details">
+  <details>
+    <summary>كيف تعمل الشاشتان معاً</summary>
+    <ol>
+      <li>اضغط «افتح نافذة العرض»: تُفتح الشرائح في نافذة مستقلة.</li>
+      <li>في Meet أو Zoom اختر مشاركة «نافذة» وحدّد تلك النافذة فقط. هذه الصفحة تبقى لك وحدك.</li>
+      <li>تحكّم من هنا: السهم الأيمن أو المسافة للتالي، السهم الأيسر للسابق. النافذتان تتحركان معاً.</li>
+      <li>إن غيّرت الشريحة من نافذة العرض نفسها، تتبعها هذه الصفحة.</li>
+      <li>على الهاتف: افتح هذا الملف وحده وتنقّل بالزرّين، وغيّر شرائح العرض يدوياً من الحاسوب.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>قائمة ما قبل اللقاء</summary>
+    <ul>
+      <li>ثبّت رقماً واحداً لكل باقة (الشريحة 12).</li>
+      <li>أضف الفرنسية للموقع التجريبي، أو جهّز جملة «الفرنسية جزء من التسليم».</li>
+      <li>عوّض الشهادات الوهمية بتقييمات حقيقية من Google، أو احذف القسم.</li>
+      <li>جرّب عمليات البحث الثلاث وخذ لقطات شاشة احتياطية.</li>
+      <li>راجع عدد التقييمات صباح اللقاء (801 بمعدل 4.8 يوم 13 أكتوبر) وصحّح الشريحة 4 إن تغيّر.</li>
+      <li>افتح ثلاثة أشياء: نافذة العرض، تبويب الموقع التجريبي، تبويب Google.</li>
+      <li>جهّز عرض السعر (devis) لإرساله مباشرة بعد اللقاء.</li>
+    </ul>
+  </details>
+</div>
+
+<main>
+  <section class="notes">
+    <div class="titleRow">
+      <span id="num"></span>
+      <h1 id="title"></h1>
+      <span id="budget"></span>
+    </div>
+    <p id="goal"></p>
+    <div id="blocks"></div>
+    <p id="nextLine"></p>
+    <div class="nav">
+      <button id="prevBtn" type="button">السابق</button>
+      <button id="nextBtn" type="button">التالي</button>
+    </div>
+  </section>
+
+  <aside class="side">
+    <div class="panel previews">
+      <h2>على الشاشة الآن</h2>
+      <div class="pv"><iframe id="curFrame" title="الشريحة الحالية"></iframe></div>
+    </div>
+    <div class="panel previews">
+      <h2>التالية: <span id="nextTitle"></span></h2>
+      <div class="pv small"><iframe id="nextFrame" title="الشريحة التالية"></iframe></div>
+    </div>
+    <div class="panel">
+      <h2>ملاحظاتي أثناء اللقاء (تُحفظ في هذا المتصفح)</h2>
+      <textarea id="memo" placeholder="نسبة العمولة: … · أكبر طلب: … · معيار النجاح: … · صاحب القرار: …"></textarea>
+    </div>
+    <div class="panel">
+      <h2>كل الشرائح</h2>
+      <ol id="list"></ol>
+    </div>
+  </aside>
+</main>
+
+<script>
+(function () {
+  var DECK = 'al-hayba-deck-ar.html';
+
+  // One entry per slide of the shared deck, in the same order.
+  // m = minutes budgeted. Kinds: say, ask, do, warn, if ([what they say, your answer]), price, tip.
+  var NOTES = [
+    { t: 'الغلاف', m: 1,
+      goal: 'افتتاح دافئ وقصير، وتثبيت أن اللقاء عنهم لا عنك.',
+      b: [
+        ['say', ['«شكراً على وقتكم. أرسلت لكم ملفاً وموقعاً تجريبياً، واليوم أريد أولاً أن أفهم أولوياتكم، ثم أريكم ما وجدته.»',
+                 'ابدأ بجملة حقيقية عن تجربتك مع محلهم إن زرته. لا تخترع واحدة.']],
+        ['do', ['شارك «نافذة» العرض فقط، لا الشاشة كلها.', 'تأكد أن الموقع التجريبي مفتوح في تبويب جاهز.']],
+        ['warn', ['لا تتكلم عن نفسك ولا عن الأسعار الآن.']]
+      ],
+      next: '«اللقاء قصير، وهذا برنامجه.»' },
+
+    { t: 'برنامج اللقاء', m: 1,
+      b: [
+        ['say', ['«خمس وعشرون دقيقة، ثلاث محطات: أسمع منكم، أريكم ثلاث ملاحظات من Google، ثم الموقع والخطوة التالية.»']],
+        ['ask', ['«هل ما زال عندنا خمس وعشرون دقيقة؟»', '«هل ننتظر أحداً يشارك في القرار؟»']],
+        ['if', [['عندي ربع ساعة فقط', 'اختصر الاستماع إلى ثلاث دقائق، وتجاوز الشرائح 8 و10 و14.']]]
+      ],
+      next: '«أبدأ بكم أنتم.»' },
+
+    { t: 'نسمع منكم', m: 6,
+      goal: 'هو يتكلم 70% من الوقت. دوّن كلماته بالحرف لتعيدها في الشريحتين 10 و12.',
+      b: [
+        ['ask', ['«من أين تأتي أغلب طلبات العلب اليوم: المحل، الهاتف، واتساب، أم Glovo؟»',
+                 '«هل تصلكم طلبات شركات أو أعراس؟ كم تقريباً في رمضان الماضي، وما أكبر طلب؟»',
+                 '«كم تأخذ Glovo و Yumlo عن كل طلب؟»',
+                 '«من يدير إنستغرام وبطاقات Google اليوم؟»',
+                 '«الدومين alhaybasweets.com والبطاقة الرقمية: من أنشأهما ومن يملك الدخول؟»',
+                 '«المطعم والحلويات: نفس الإدارة؟ ومن أنجز تطبيق المطعم؟»',
+                 '«لو نجح المشروع، ما النتيجة التي تجعلكم تقولون بعد ستة أشهر: كان قراراً جيداً؟»',
+                 '«من يشارك في القرار غيركم؟»']],
+        ['warn', ['لا تقاطع ولا تبِع الآن.',
+                  'اكتب في خانة الملاحظات: نسبة العمولة، أكبر طلب، معيار النجاح، صاحب القرار.']],
+        ['if', [['كم الثمن؟', '«أعطيكم الرقم بعد عشر دقائق، حين نتفق على ما تحتاجونه فعلاً.»']]]
+      ],
+      next: '«شكراً، هذا يوضح لي الكثير. الآن ما وجدته أنا حين بحثت عنكم كزبون.»' },
+
+    { t: 'سمعتكم على Google', m: 1,
+      b: [
+        ['say', ['«أول ما وجدته: سمعتكم ممتازة. 801 تقييم بمعدل 4.8، وفرع Casa Port وحده 4.9 من 361.»',
+                 '«إذن المشكل ليس في المنتوج. السؤال: حين يبحث الناس عنكم، إلى أين يصلون؟»']],
+        ['warn', ['لا تعلّق على 4.5 في المعاريف.']],
+        ['if', [['يذكر التقييمات السلبية', '«هي 19 من 153، وأغلبها عن الكنافة والأداء بالبطاقة. الرد المنتظم عليها جزء من الخطة.»']]]
+      ],
+      next: '«جرّبت أن أبحث عنكم بالاسم.»' },
+
+    { t: 'الملاحظة 1: البحث بالاسم', m: 1.5,
+      b: [
+        ['say', ['«كتبت اسمكم في Google. الأولى Glovo، الثانية إنستغرام، الثالثة Yumlo. وحين أضفت كلمة menu: Glovo أولاً.»',
+                 '«يعني أن الزبون الذي يعرفكم ويبحث عنكم أنتم، يُسلَّم لمنصة تأخذ نسبتها وتحتفظ برقمه.»']],
+        ['do', ['إن أردت، بدّل إلى المتصفح واكتب Al Hayba Sweets menu أمامهم. جرّبها قبل اللقاء.',
+                'اربط بجوابه عن العمولة. على علبة H1 بـ380 درهماً: 20% تساوي 76، و25% تساوي 95، و30% تساوي 114 درهماً.']],
+        ['if', [['Glovo تجلب لنا زبناء', '«صحيح، ولا أقترح تركها. أقترح فقط أن من يبحث عنكم بالاسم يصل إليكم أنتم أولاً.»']]]
+      ],
+      next: '«ثم ضغطت على زر الموقع في Google Maps.»' },
+
+    { t: 'الملاحظة 2: عنوانكم على الإنترنت', m: 1.5,
+      b: [
+        ['say', ['«عندكم دومين alhaybasweets.com، وهو مربوط ببطاقاتكم في Google Maps. هذا ممتاز ويوفّر علينا الوقت.»',
+                 '«لكن من يضغط عليه يجد بطاقة فيها رقم المعاريف وإنستغرام فقط. زبون الرباط أو Casa Port لا يجد رقمه ولا القائمة.»']],
+        ['warn', ['كن لطيفاً: من أنشأ البطاقة قد يكون حاضراً. قل «البطاقة بداية جيدة».']],
+        ['if', [['إذن عندنا موقع', '«عندكم العنوان، وهذا نصف الطريق. نحن نضع خلفه الموقع.»']]]
+      ],
+      next: '«وهذا عمّن يعرفكم. فماذا عمّن لا يعرف اسمكم؟»' },
+
+    { t: 'الملاحظة 3: أين تظهرون وأين تغيبون', m: 1.5,
+      b: [
+        ['say', ['«حيث يعرفكم الناس أنتم أقوياء: "بقلاوة الدار البيضاء" تعطي فروعكم الثلاثة في الخريطة.»',
+                 '«لكن الزبون الجديد يكتب chocolat dubai أو pâtisserie orientale أو هدايا رمضان للشركات. هناك لا تظهرون، مع أنكم تبيعون شوكولاتة دبي بـ80 و145 درهماً.»']],
+        ['do', ['إن قال في الاستماع إنه يريد زبناء شركات، توقف عند سطر cadeau entreprise.']]
+      ],
+      next: '«وبحثت عن منافسيكم أيضاً.»' },
+
+    { t: 'الفرصة', m: 0.5,
+      b: [
+        ['say', ['«بحثت عن منافسيكم المباشرين: قصر الشام، روابي حلب، Antepli. لم أجد لأحد منهم موقعاً يعمل. المكان فارغ، ومن يدخل أولاً يأخذه.»',
+                 'ثم اصمت ثانيتين.']],
+        ['tip', ['يمكن تجاوز هذه الشريحة إن ضاق الوقت.']]
+      ],
+      next: '«ولهذا لم آتِ بفكرة، بل بموقع.»' },
+
+    { t: 'موقع الهيبة جاهز + العرض الحي', m: 4,
+      b: [
+        ['do', ['بدّل إلى تبويب الموقع التجريبي، بعرض الهاتف إن أمكن.',
+                'ثلاث محطات فقط: القائمة بالأسعار، زر واتساب، صفحة الفروع. ثم عد إلى العرض.']],
+        ['say', ['«هذا ليس مشروعاً على الورق. الموقع مبني بهويتكم، ويمكن أن يكون على alhaybasweets.com خلال أربعة أسابيع.»',
+                 'قل أنت أولاً: «النصوص والقصة والشهادات مؤقتة، نعوّضها بنصوصكم وبتقييمات حقيقية من Google.»',
+                 'إن لم تُضف الفرنسية بعد: «النسخة الفرنسية جزء من التسليم.»']],
+        ['ask', ['«ما أول شيء تغيّرونه فيه؟» من يجيب بدأ يعتبره موقعه.']],
+        ['warn', ['لا تتجول في كل الصفحات. أربع دقائق لا أكثر.']]
+      ],
+      next: '«ما الذي يتغيّر عملياً؟»' },
+
+    { t: 'ما الذي يتغيّر مع الموقع', m: 1,
+      b: [
+        ['say', ['اربط كل بطاقة بكلماته هو: «قلتم إن… وهذا ما تحله هذه البطاقة.»',
+                 '«القائمة عندكم بدل المنصات. طلب العلب بواتساب بلا عمولة. لكل فرع صفحته. وصفحة للشركات والمناسبات.»']],
+        ['tip', ['يمكن تجاوزها إن ضاق الوقت، وقل محتواها أثناء العرض الحي.']]
+      ],
+      next: '«لكن الموقع وحده نصف العمل.»' },
+
+    { t: 'بطاقات Google (خدمة SEO المحلي)', m: 1.5,
+      goal: 'هنا تبيع خدمة Google كجزء طبيعي من المشروع، لا كإضافة.',
+      b: [
+        ['say', ['«النصف الآخر هو بطاقاتكم على Google: هي التي تضع 801 تقييم أمام الزبون.»',
+                 '«اليوم الأسماء غير موحّدة، بطاقة الرباط بلا موقع، وهناك بطاقة مكررة بلا تقييمات. نوحّدها ونربط كل واحدة بصفحة فرعها.»',
+                 '«وكل شهر أعطيكم أرقاماً: كم اتصل، كم طلب الاتجاهات، كم ضغط واتساب.»']],
+        ['ask', ['«من يملك الدخول إلى بطاقات Google، وخصوصاً Casa Port؟»']],
+        ['if', [['هل تضمن المرتبة الأولى؟', '«لا أحد يضمنها، ومن يعدكم بها لا يصدقكم. أضمن أرقاماً شهرية واضحة، ونحكم معاً بعد ثلاثة أشهر.»']]],
+        ['warn', ['لا تقل إن بطاقة Casa Port غير موثّقة كحقيقة، فأنت لم تتأكد. اسأل فقط.']]
+      ],
+      next: '«فكيف ننطلق؟»' },
+
+    { t: 'الباقات والسعر', m: 2,
+      goal: 'لحظة السعر. الشاشة بلا أرقام، والأرقام تقولها أنت.',
+      b: [
+        ['say', ['ابدأ بالوسطى: «أنصحكم بالثانية، الموقع مع Google، لأن…» واذكر سبباً من كلامه هو.',
+                 '«يوجد أقل منها إن أردتم الموقع فقط، وأكثر إن أردتم أن أتابع النتائج شهرياً.»',
+                 'قل الرقم مرة واحدة بهدوء، ثم اصمت. لا تبرّر قبل أن يتكلم.']],
+        ['price', ['الانطلاقة: 9,000 إلى 12,000 درهم',
+                   'الموقع + Google: 15,000 إلى 20,000 درهم',
+                   'الشريك الرقمي: الباقة الثانية + 2,500 إلى 4,000 درهم في الشهر',
+                   'الصيانة والاستضافة: 300 إلى 500 درهم في الشهر',
+                   'هذه نطاقات مقترحة. ثبّت رقماً واحداً لكل باقة قبل اللقاء.']],
+        ['if', [['غالٍ', '«أفهم. طلب شركة واحد يغطي أغلبه، ويمكن التقسيم: نصف عند البدء ونصف عند الإطلاق. وإن أردتم أقل نبدأ بالانطلاقة.» لا تخفّض السعر، انقص من المحتوى.'],
+                ['عندنا شركة تتكلف بالتطبيق', '«التطبيق لمن يعرفكم ويطلب دائماً. الموقع لمن يبحث على Google ولا يعرفكم بعد. يكمّلان بعضهما.»'],
+                ['من يحدّث الأسعار والمنتوجات؟', '«ترسلون لي التغيير بواتساب ويُنفَّذ خلال 24 ساعة، ضمن الصيانة.»']]]
+      ],
+      next: '«ومتى نكون جاهزين؟»' },
+
+    { t: 'الجدول الزمني', m: 1,
+      b: [
+        ['say', ['«رمضان حوالي 8 فبراير، و Google يحتاج أسابيع ليُظهر موقعاً جديداً.»',
+                 '«إن انطلقنا هذا الأسبوع نكون على الإنترنت قبل فاتح دجنبر: نلحق هدايا نهاية السنة، ونصل رمضان والموقع ظاهر.»']],
+        ['warn', ['تاريخ رمضان تقدير فلكي. قل «حوالي».']]
+      ],
+      next: '«وما أحتاجه منكم قليل.»' },
+
+    { t: 'ما نحتاجه منكم', m: 0.75,
+      b: [
+        ['say', ['«للانطلاق أحتاج خمسة أشياء، وأغلبها عندكم جاهز.» اقرأها بسرعة.']],
+        ['tip', ['هذه الشريحة تجعل الموافقة تبدو خطوة عملية بسيطة. يمكن تجاوزها إن ضاق الوقت.']]
+      ],
+      next: '«إذن…»' },
+
+    { t: 'الخطوة التالية (الإغلاق)', m: 0.75,
+      b: [
+        ['say', ['سؤال القرار: «بناءً على ما رأيناه، هل ننطلق بالباقة الثانية لنكون على الإنترنت قبل فاتح دجنبر، أم تفضّلون البدء بالموقع وحده؟»',
+                 'ثم اصمت وانتظر.']],
+        ['if', [['نفكر ونرجع إليك', '«طبعاً. ما الذي ينقصكم لتقرروا؟» ثم: «هل نحدد موعداً يوم الخميس لتعطوني الجواب؟»'],
+                ['موافقون', '«ممتاز. أرسل لكم عرض السعر اليوم، والتسبيق يحجز تاريخ الإطلاق.» ثم اطلب العناصر الخمسة.']]],
+        ['tip', ['بعد الموافقة فقط، ازرع الفكرة: «وبعد الإطلاق نتحدث عن المطعم، فموقع alhayba.ma اليوم صفحة لتحميل التطبيق فقط.»',
+                 'اختم بتأكيد الخطوة التالية بيوم وتاريخ.']]
+      ] }
+  ];
+
+  var KIND = { say: 'قل', ask: 'اسأل', do: 'افعل', warn: 'انتبه', 'if': 'إن قال', price: 'الأسعار (لك وحدك)', tip: 'ملاحظة' };
+  var total = NOTES.length;
+  var cur = 1;
+  var aud = null;
+  var bc = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var curFrame = $('curFrame'), nextFrame = $('nextFrame');
+  var wide = window.matchMedia('(min-width: 1001px)').matches;
+
+  // Cumulative end time of each slide, in seconds.
+  var endAt = [];
+  NOTES.reduce(function (sum, s, i) { endAt[i] = Math.round((sum + s.m) * 60); return sum + s.m; }, 0);
+
+  function fmt(sec) {
+    sec = Math.max(0, Math.round(sec));
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  function minutesLabel(m) {
+    if (m < 1) return Math.round(m * 60) + ' ثانية';
+    if (m % 1) return Math.floor(m) + ' د و' + Math.round((m % 1) * 60) + ' ث';
+    return m + ' د';
+  }
+  function el(tag, text, cls) {
+    var e = document.createElement(tag);
+    if (text != null) e.textContent = text;
+    if (cls) e.className = cls;
+    return e;
+  }
+
+  function render() {
+    var s = NOTES[cur - 1];
+    $('num').textContent = cur + ' / ' + total;
+    $('title').textContent = s.t;
+    $('budget').textContent = minutesLabel(s.m);
+    $('goal').textContent = s.goal || '';
+
+    var box = $('blocks');
+    box.textContent = '';
+    s.b.forEach(function (blk) {
+      var kind = blk[0], items = blk[1];
+      var wrap = el('div', null, 'block k-' + kind);
+      wrap.appendChild(el('span', KIND[kind], 'kind'));
+      if (kind === 'if') {
+        var dl = el('dl');
+        items.forEach(function (pair) { dl.appendChild(el('dt', '«' + pair[0] + '»')); dl.appendChild(el('dd', pair[1])); });
+        wrap.appendChild(dl);
+      } else {
+        var list = el(kind === 'ask' && items.length > 2 ? 'ol' : 'ul');
+        items.forEach(function (t) { list.appendChild(el('li', t)); });
+        wrap.appendChild(list);
+      }
+      box.appendChild(wrap);
+    });
+
+    var nl = $('nextLine');
+    nl.textContent = '';
+    if (s.next) { nl.appendChild(el('b', 'جملة الانتقال: ')); nl.appendChild(document.createTextNode(s.next)); }
+
+    $('nextTitle').textContent = cur < total ? NOTES[cur].t : 'نهاية العرض';
+    $('prevBtn').disabled = cur === 1;
+    $('nextBtn').disabled = cur === total;
+    $('nextBtn').textContent = cur === total ? 'نهاية العرض' : 'التالي: ' + NOTES[cur].t;
+
+    Array.prototype.forEach.call($('list').querySelectorAll('button'), function (b, i) {
+      b.classList.toggle('cur', i === cur - 1);
+      if (i === cur - 1) b.scrollIntoView({ block: 'nearest' });
+    });
+    tick();
+    window.scrollTo(0, 0);
+  }
+
+  function send(win, n) { try { if (win) win.postMessage({ alhayba: 'goto', n: n }, '*'); } catch (e) {} }
+  function syncPreviews() {
+    if (!wide) return;
+    send(curFrame.contentWindow, cur);
+    send(nextFrame.contentWindow, Math.min(cur + 1, total));
+  }
+  function syncAudience() {
+    if (aud && !aud.closed) send(aud, cur);
+    if (bc) { try { bc.postMessage({ alhayba: 'goto', n: cur }); } catch (e) {} }
+  }
+  function go(n, fromAudience) {
+    n = Math.max(1, Math.min(total, n));
+    if (n === cur) return;
+    cur = n;
+    render();
+    syncPreviews();
+    if (!fromAudience) syncAudience();
+  }
+
+  // The shared window reports here when someone changes slide from that side.
+  var firstReport = true;
+  window.addEventListener('message', function (e) {
+    if (e.source === curFrame.contentWindow || e.source === nextFrame.contentWindow) return;
+    var d = e.data;
+    if (!d || typeof d !== 'object' || d.alhayba !== 'at') return;
+    if (e.source === aud) {
+      connected(true);
+      // First report is the window loading: bring it to where we are. Later ones are real moves.
+      if (firstReport) { firstReport = false; if (d.n !== cur) send(aud, cur); }
+      else go(d.n, true);
+    }
+  });
+  try {
+    bc = new BroadcastChannel('alhayba-deck');
+    bc.onmessage = function (e) { var d = e.data; if (d && d.alhayba === 'at') { connected(true); go(d.n, true); } };
+  } catch (e) {}
+
+  function connected(on) {
+    var c = $('conn');
+    c.classList.toggle('on', on);
+    c.textContent = on ? 'نافذة العرض متصلة' : 'نافذة العرض غير مفتوحة';
+  }
+  $('openBtn').addEventListener('click', function () {
+    firstReport = true;
+    aud = window.open(DECK + '#' + cur, 'alhayba-audience', 'popup,width=1280,height=720');
+    if (!aud) alert('المتصفح منع فتح النافذة. اسمح بالنوافذ المنبثقة لهذه الصفحة ثم أعد المحاولة.');
+  });
+
+  // ---------- Timer ----------
+  var running = false, startedAt = 0, banked = 0;
+  function elapsed() { return (banked + (running ? Date.now() - startedAt : 0)) / 1000; }
+  function tick() {
+    var t = elapsed(), end = endAt[cur - 1];
+    var time = $('time');
+    time.textContent = fmt(t);
+    time.classList.toggle('late', t > end && t <= end + 120);
+    time.classList.toggle('over', t > end + 120);
+    $('target').textContent = 'أنهِ هذه الشريحة عند ' + fmt(end) + ' · المجموع ' + fmt(endAt[total - 1]);
+    if (aud && aud.closed) { aud = null; connected(false); }
+  }
+  $('startBtn').addEventListener('click', function () {
+    if (running) { banked += Date.now() - startedAt; running = false; this.textContent = 'تابع التوقيت'; }
+    else { startedAt = Date.now(); running = true; this.textContent = 'أوقف مؤقتاً'; }
+    tick();
+  });
+  $('resetBtn').addEventListener('click', function () {
+    running = false; banked = 0; $('startBtn').textContent = 'ابدأ التوقيت'; tick();
+  });
+  setInterval(tick, 500);
+
+  // ---------- Navigation ----------
+  $('prevBtn').addEventListener('click', function () { go(cur - 1); });
+  $('nextBtn').addEventListener('click', function () { go(cur + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'textarea' || tag === 'input' || tag === 'summary') return;
+    if (tag === 'button' && e.key === ' ') return;
+    switch (e.key) {
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': go(cur + 1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': go(cur - 1); break;
+      case 'Home': go(1); break;
+      case 'End': go(total); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  var list = $('list');
+  NOTES.forEach(function (s, i) {
+    var li = el('li'), b = el('button');
+    b.type = 'button';
+    b.appendChild(el('span', String(i + 1), 'n'));
+    b.appendChild(el('span', s.t));
+    b.appendChild(el('span', minutesLabel(s.m), 'm'));
+    b.addEventListener('click', function () { go(i + 1); });
+    li.appendChild(b);
+    list.appendChild(li);
+  });
+
+  // ---------- Meeting notes, kept in this browser only ----------
+  var memo = $('memo');
+  try { memo.value = localStorage.getItem('alhayba-memo') || ''; } catch (e) {}
+  memo.addEventListener('input', function () { try { localStorage.setItem('alhayba-memo', memo.value); } catch (e) {} });
+
+  if (wide) {
+    curFrame.addEventListener('load', syncPreviews);
+    nextFrame.addEventListener('load', syncPreviews);
+    curFrame.src = DECK + '?preview=1#' + cur;
+    nextFrame.src = DECK + '?preview=1#' + Math.min(cur + 1, total);
+  }
+  render();
+})();
+</script>
+</body>
+</html>

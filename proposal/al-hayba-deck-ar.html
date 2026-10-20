@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حلويات الهيبة — لقاء العمل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #f3ebdd;
+    --ivory-2: #ebe0cd;
+    --chocolate: #241812;
+    --ink-2: #4a3c31;
+    --pistachio: #34452b;
+    --gold: #b89a5a;
+    --gold-soft: #d6bf8a;
+    --gold-deep: #86692f;
+    --muted: #766b5d;
+    --green: #0b3831;
+    --clay: #8c3b2a;
+    --line: rgba(36,24,18,.16);
+    --ar-display: "Aref Ruqaa", "Amiri", serif;
+    --ar-text: "Amiri", "Traditional Arabic", "Times New Roman", serif;
+    --lat-serif: "Cormorant Garamond", Georgia, serif;
+    --lat-sans: "Figtree", "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: #120c09; overflow: hidden; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ---------- Stage: a fixed 1920×1080 canvas scaled to the window ---------- */
+  #stage {
+    position: absolute; top: 50%; left: 50%;
+    width: 1920px; height: 1080px;
+    transform: translate(-50%, -50%) scale(var(--s, 1));
+    transform-origin: center center;
+  }
+  .slide {
+    position: absolute; inset: 0;
+    display: none; flex-direction: column; gap: 46px;
+    padding: 100px 128px 150px;
+    overflow: hidden;
+    background: var(--ivory); color: var(--chocolate);
+    font-family: var(--ar-text); font-size: 40px; line-height: 1.6;
+  }
+  .slide.on { display: flex; animation: fade .35s ease both; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .slide > * { position: relative; }
+  .slide.dark { background: var(--chocolate); color: var(--ivory); }
+  .slide.green { background: var(--green); color: var(--ivory); }
+  .pattern::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(30deg, rgba(184,154,90,.07) 12%, transparent 12.5%, transparent 87%, rgba(184,154,90,.07) 87.5%),
+      linear-gradient(150deg, rgba(184,154,90,.07) 12%, transparent 12.5%, transparent 87%, rgba(184,154,90,.07) 87.5%),
+      linear-gradient(30deg, rgba(184,154,90,.07) 12%, transparent 12.5%, transparent 87%, rgba(184,154,90,.07) 87.5%),
+      linear-gradient(150deg, rgba(184,154,90,.07) 12%, transparent 12.5%, transparent 87%, rgba(184,154,90,.07) 87.5%);
+    background-size: 96px 166px;
+    background-position: 0 0, 0 0, 48px 83px, 48px 83px;
+  }
+
+  /* ---------- Type ---------- */
+  h1, h2, h3 { font-family: var(--ar-display); font-weight: 700; margin: 0; line-height: 1.35; }
+  h2 { font-size: 84px; }
+  h3 { font-size: 50px; }
+  p { margin: 0; }
+  .eyebrow { display: flex; align-items: center; gap: 20px; font-size: 30px; font-weight: 700; color: var(--pistachio); }
+  .eyebrow::before { content: ""; width: 72px; height: 2px; background: currentColor; opacity: .6; }
+  .dark .eyebrow, .green .eyebrow { color: var(--gold-soft); }
+  .head { display: flex; flex-direction: column; gap: 8px; }
+  .soft { color: var(--ink-2); }
+  .dark .soft, .green .soft { color: rgba(243,235,221,.8); }
+  .lat { font-family: var(--lat-serif); font-weight: 600; font-variant-numeric: lining-nums; direction: ltr; unicode-bidi: isolate; }
+  .ltr { font-family: var(--lat-sans); direction: ltr; unicode-bidi: isolate; }
+  .num { font-family: var(--ar-text); font-weight: 400; font-variant-numeric: lining-nums; direction: ltr; unicode-bidi: isolate; }
+
+  .foot {
+    position: absolute !important; inset-inline: 128px; bottom: 52px;
+    display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 26px; line-height: 1.4; color: var(--muted);
+  }
+  .dark .foot, .green .foot { color: rgba(243,235,221,.6); border-color: rgba(243,235,221,.18); }
+  .foot .pg { font-size: 30px; }
+
+  /* ---------- Shared blocks ---------- */
+  .cols { display: flex; gap: 40px; }
+  .cols > * { flex: 1; min-width: 0; }
+  .card { display: flex; flex-direction: column; gap: 10px; padding: 34px 40px 38px; background: var(--ivory-2); border-top: 3px solid var(--gold); }
+  .dark .card, .green .card { background: rgba(243,235,221,.07); }
+  .card p { font-size: 34px; }
+  .spacer { flex: 1; }
+
+  /* ---------- 1 · Cover and 15 · Closing ---------- */
+  .cover { padding-left: 920px; justify-content: center; gap: 30px; }
+  .photo { position: absolute !important; left: 0; top: 0; width: 800px; height: 1080px; background-size: cover; background-position: center; }
+  .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, var(--chocolate) 0%, rgba(36,24,18,.1) 42%, rgba(36,24,18,.3) 100%); }
+  .cover .logo { position: absolute !important; top: 76px; right: 128px; height: 124px; }
+  .cover h1 { font-size: 128px; line-height: 1.32; }
+  .cover h1 em { font-style: normal; color: var(--gold-soft); }
+  .cover .sub { font-size: 44px; color: rgba(243,235,221,.85); }
+  .cover .prepared {
+    position: absolute !important; left: 920px; right: 128px; bottom: 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 22px; border-top: 1px solid rgba(184,154,90,.45);
+    font-size: 30px; color: rgba(243,235,221,.75);
+  }
+  .closing h1 { font-size: 96px; }
+  .closing .ar-line { font-family: var(--ar-display); font-size: 46px; color: var(--gold-soft); }
+  .contact { display: flex; gap: 56px; align-items: baseline; font-size: 40px; }
+  .contact .lat { font-size: 48px; }
+
+  /* ---------- 2 · Agenda ---------- */
+  .step { display: flex; flex-direction: column; gap: 6px; padding-top: 26px; border-top: 3px solid var(--gold); }
+  .step .big { font-size: 150px; line-height: 1.1; color: var(--green); }
+  .step p { font-size: 36px; color: var(--ink-2); }
+  .step .dur { font-size: 28px; color: var(--gold-deep); font-weight: 700; }
+
+  /* ---------- 3 · Listening ---------- */
+  .grid2 { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 32px; }
+  .grid2 .card { justify-content: center; padding: 30px 48px; }
+  .grid2 .card h3 { font-size: 56px; }
+  .grid2 .card p { font-size: 38px; }
+  .green .card h3 { color: var(--gold-soft); }
+
+  /* ---------- 4 · Reputation ---------- */
+  .stats { display: flex; gap: 120px; align-items: flex-end; }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat .huge { font-size: 230px; line-height: .95; color: var(--green); }
+  .stat .huge small { font-size: 90px; color: var(--gold-deep); }
+  .stat p { font-size: 38px; color: var(--ink-2); }
+  .branches { display: flex; gap: 28px; }
+  .branch { flex: 1; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 22px 30px; background: var(--ivory-2); border-top: 3px solid var(--gold); }
+  .branch b { font-size: 36px; }
+  .branch .num { font-size: 60px; line-height: 1; color: var(--green); }
+  .branch i { font-style: normal; font-size: 28px; color: var(--muted); }
+  .branch div { display: flex; flex-direction: column; gap: 2px; }
+
+  /* ---------- 5 · Search results mock ---------- */
+  .serp { display: flex; flex-direction: column; background: #fbf7ef; border: 1px solid var(--line); }
+  .serp .q { display: flex; align-items: center; gap: 18px; direction: ltr; padding: 24px 34px; border-bottom: 1px solid var(--line); font-family: var(--lat-sans); font-size: 38px; }
+  .serp .q::before { content: ""; width: 22px; height: 22px; border: 3px solid var(--muted); border-radius: 50%; }
+  .serp ol { list-style: none; margin: 0; padding: 0; }
+  .serp li { display: flex; align-items: center; gap: 26px; padding: 20px 34px; border-bottom: 1px solid var(--line); }
+  .serp li:last-child { border-bottom: 0; }
+  .serp .rk { width: 44px; font-size: 60px; line-height: 1; color: var(--gold-deep); text-align: center; }
+  .serp b { flex: 1; font-size: 46px; font-weight: 600; text-align: right; }
+  .tag { padding: 4px 22px; font-size: 30px; line-height: 1.5; background: rgba(140,59,42,.12); color: var(--clay); }
+  .tag.ok { background: rgba(11,56,49,.1); color: var(--green); }
+  .statement { font-family: var(--ar-display); font-size: 50px; line-height: 1.4; }
+
+  /* ---------- 6 · Business card mock ---------- */
+  .bizcard { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 36px 40px 40px; background: var(--green); }
+  .bizcard img { height: 104px; }
+  .bizcard span { width: 100%; padding: 12px 24px; background: #fbf7ef; color: var(--green); font-family: var(--lat-sans); font-size: 30px; direction: ltr; text-align: center; }
+  .caption { font-size: 30px; color: var(--muted); }
+  .need { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 17px 0; border-bottom: 1px solid var(--line); font-size: 38px; }
+  .need:last-child { border-bottom: 0; }
+
+  /* ---------- 7 · Keywords ---------- */
+  .kwcol { display: flex; flex-direction: column; }
+  .kwcol h3 { font-size: 46px; padding-bottom: 10px; border-bottom: 3px solid var(--green); color: var(--green); }
+  .kwcol.no h3 { border-color: var(--clay); color: var(--clay); }
+  .kw { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .kw:last-child { border-bottom: 0; }
+  .chip { padding: 2px 18px; background: var(--ivory-2); font-size: 30px; line-height: 1.55; }
+  .chip.ltr { font-size: 28px; line-height: 1.65; }
+  .kw p { font-size: 30px; line-height: 1.45; color: var(--ink-2); }
+
+  /* ---------- 8 · Statement ---------- */
+  .big-say { justify-content: center; gap: 44px; padding-inline: 190px; }
+  .big-say h2 { font-size: 112px; line-height: 1.4; }
+  .big-say h2 em { font-style: normal; color: var(--gold-soft); }
+  .big-say p { font-size: 44px; max-width: 1300px; }
+
+  /* ---------- 9 · The site ---------- */
+  .site { flex-direction: row; align-items: center; gap: 70px; padding-bottom: 100px; }
+  .site .txt { flex: 0 0 560px; display: flex; flex-direction: column; gap: 26px; }
+  .site .txt p { font-size: 42px; }
+  .pill { align-self: flex-start; padding: 10px 34px; border: 2px solid var(--gold); color: var(--gold-soft); font-family: var(--ar-display); font-size: 40px; }
+  .shots { flex: 1; height: 700px; }
+  .shots .desk { position: absolute; left: 0; top: 40px; width: 980px; height: 566px; object-fit: cover; object-position: top; border: 1px solid rgba(214,191,138,.45); box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .shots .phone { position: absolute; right: 0; bottom: 30px; width: 262px; height: 496px; object-fit: cover; object-position: top; border: 9px solid #0e0906; border-radius: 34px; box-shadow: 0 24px 60px rgba(0,0,0,.55); }
+
+  /* ---------- 11 · Google listings ---------- */
+  .gl { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+  .gl:last-child { border-bottom: 0; }
+  .gl .name { font-size: 31px; font-weight: 500; }
+  .gl .where { font-size: 30px; color: var(--muted); white-space: nowrap; }
+  .gl .where b { color: var(--clay); }
+  .todo { display: flex; flex-direction: column; }
+  .todo p { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 36px; }
+  .todo p:last-child { border-bottom: 0; }
+  .colhead { font-family: var(--ar-display); font-size: 44px; font-weight: 700; color: var(--green); }
+
+  /* ---------- 12 · Packages ---------- */
+  .pack { display: flex; flex-direction: column; gap: 6px; padding: 30px 38px 34px; background: var(--ivory-2); border-top: 3px solid var(--gold); }
+  .pack h3 { font-size: 52px; }
+  .pack p { font-size: 32px; line-height: 1.55; }
+  .pack .sub { color: var(--gold-deep); font-weight: 700; font-size: 30px; }
+  .pack.best { background: var(--green); color: var(--ivory); border-top-color: var(--gold-soft); }
+  .pack.best .sub { color: var(--gold-soft); }
+  .anchor { font-size: 36px; color: var(--ink-2); }
+  .anchor b { color: var(--green); }
+
+  /* ---------- 13 · Timeline ---------- */
+  .timeline { display: flex; gap: 30px; border-top: 2px solid rgba(214,191,138,.55); }
+  .tl { position: relative; flex: 1; display: flex; flex-direction: column; gap: 6px; padding-top: 44px; }
+  .tl::before { content: ""; position: absolute; top: -13px; inset-inline-start: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--gold); }
+  .tl h3 { font-size: 52px; color: var(--gold-soft); }
+  .tl p { font-size: 36px; line-height: 1.5; }
+  .tl.goal::before { top: -19px; width: 36px; height: 36px; background: var(--ivory); }
+  .tl.goal h3 { color: var(--ivory); }
+  .note { font-size: 40px; max-width: 1400px; }
+
+  /* ---------- 14 · What we need ---------- */
+  .ask { display: flex; align-items: baseline; gap: 34px; padding: 24px 0; border-bottom: 1px solid var(--line); font-size: 44px; }
+  .ask:last-child { border-bottom: 0; }
+  .ask .num { width: 56px; font-size: 64px; line-height: 1; color: var(--gold-deep); }
+
+  /* ---------- HUD (hidden in preview and in print) ---------- */
+  #hud {
+    position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 6px; padding: 6px 10px;
+    background: rgba(18,12,9,.82); border: 1px solid rgba(214,191,138,.35); border-radius: 999px;
+    font-family: var(--lat-sans); font-size: 14px; color: var(--ivory);
+    opacity: 0; transition: opacity .3s; direction: rtl;
+  }
+  #hud.show { opacity: 1; }
+  #hud button { all: unset; cursor: pointer; padding: 6px 14px; border-radius: 999px; font-family: "Segoe UI", Tahoma, sans-serif; font-size: 14px; }
+  #hud button:hover { background: rgba(214,191,138,.2); }
+  #hud #count { padding: 0 10px; direction: ltr; font-variant-numeric: tabular-nums; }
+  .preview #hud { display: none; }
+
+  @page { size: 1920px 1080px; margin: 0; }
+  @media print {
+    html, body { height: auto; overflow: visible; background: #fff; }
+    #stage { position: static; transform: none; width: 1920px; height: auto; }
+    .slide, .slide.on { position: relative; display: flex; width: 1920px; height: 1080px; animation: none; break-after: page; page-break-after: always; }
+    #hud { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1 · الغلاف -->
+  <section class="slide dark pattern cover">
+    <div class="photo" style="background-image:url(deck-assets/baklava-tray.jpg)"></div>
+    <img class="logo" src="deck-assets/logo-white.png" alt="شعار الهيبة Sweets">
+    <p class="eyebrow">لقاء عمل · أكتوبر 2026</p>
+    <h1>حضور رقمي<br>بحجم <em>سمعتكم</em></h1>
+    <p class="sub">حلويات الهيبة · الدار البيضاء والرباط</p>
+    <p class="prepared"><span>إعداد: <span class="lat">Mohamed Ermili</span></span><span class="ltr">ermiliweb.com</span></p>
+  </section>
+
+  <!-- 2 · برنامج اللقاء -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">برنامج اللقاء</p>
+      <h2>خمس وعشرون دقيقة، ثلاث محطات</h2>
+    </header>
+    <div class="spacer"></div>
+    <div class="cols">
+      <div class="step"><span class="num big">1</span><h3>نسمع منكم</h3><p>كيف تصلكم الطلبات اليوم، وما أولويتكم قبل رمضان.</p><p class="dur">حوالي 6 دقائق</p></div>
+      <div class="step"><span class="num big">2</span><h3>ما وجدناه</h3><p>ثلاث ملاحظات عن حضور الهيبة على <span class="lat">Google</span>.</p><p class="dur">حوالي 6 دقائق</p></div>
+      <div class="step"><span class="num big">3</span><h3>الموقع والخطوة التالية</h3><p>الموقع الجاهز، والخطة للظهور قبل رمضان.</p><p class="dur">حوالي 11 دقيقة</p></div>
+    </div>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 3 · نسمع منكم -->
+  <section class="slide green pattern">
+    <header class="head">
+      <p class="eyebrow">01 — نسمع منكم</p>
+      <h2>قبل أن نريكم أي شيء</h2>
+    </header>
+    <div class="grid2">
+      <div class="card"><h3>طلبات العلب</h3><p class="soft">من أين تأتي اليوم: المحل، الهاتف، واتساب، أم التطبيقات؟</p></div>
+      <div class="card"><h3>الشركات والمناسبات</h3><p class="soft">هدايا رمضان، الأعراس، ونهاية السنة.</p></div>
+      <div class="card"><h3>منصات التوصيل</h3><p class="soft"><span class="lat">Glovo</span> و <span class="lat">Yumlo</span>: ماذا تعطيكم، وماذا تأخذ؟</p></div>
+      <div class="card"><h3>الأولوية</h3><p class="soft">لو تغيّر شيء واحد قبل رمضان، ما هو؟</p></div>
+    </div>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 4 · السمعة -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">02 — ما وجدناه</p>
+      <h2>سمعتكم على <span class="lat">Google</span></h2>
+    </header>
+    <div class="stats">
+      <div class="stat"><span class="num huge">801</span><p>تقييم للفروع الأربعة على <span class="lat">Google Maps</span></p></div>
+      <div class="stat"><span class="num huge">4.8<small>/5</small></span><p>المعدل العام</p></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="branches">
+      <div class="branch"><div><b class="lat">Casa Port</b><i>361 تقييماً</i></div><span class="num">4.9</span></div>
+      <div class="branch"><div><b>الرباط أكدال</b><i>167 تقييماً</i></div><span class="num">4.8</span></div>
+      <div class="branch"><div><b class="lat">Casa Voyageurs</b><i>120 تقييماً</i></div><span class="num">4.8</span></div>
+      <div class="branch"><div><b>المعاريف</b><i>153 تقييماً</i></div><span class="num">4.5</span></div>
+    </div>
+    <footer class="foot"><span>المصدر: <span class="lat">Google Maps</span>، 13 أكتوبر 2026</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 5 · الملاحظة 1 -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">الملاحظة 1</p>
+      <h2>من يبحث عنكم بالاسم يصل إلى المنصات</h2>
+    </header>
+    <div class="cols">
+      <div class="serp">
+        <div class="q">Al Hayba Sweets</div>
+        <ol>
+          <li><span class="num rk">1</span><b class="ltr">Glovo</b><span class="tag">منصة توصيل</span></li>
+          <li><span class="num rk">2</span><b class="ltr">Instagram</b><span class="tag ok">حسابكم</span></li>
+          <li><span class="num rk">3</span><b class="ltr">Yumlo</b><span class="tag">منصة توصيل</span></li>
+        </ol>
+      </div>
+      <div class="serp">
+        <div class="q">Al Hayba Sweets menu</div>
+        <ol>
+          <li><span class="num rk">1</span><b class="ltr">Glovo</b><span class="tag">منصة توصيل</span></li>
+          <li><span class="num rk">2</span><b class="ltr">Yumlo</b><span class="tag">منصة توصيل</span></li>
+          <li><span class="num rk">3</span><b class="ltr">Instagram</b><span class="tag ok">حسابكم</span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="statement">القائمة والأسعار والطلب: كلها اليوم عند طرف ثالث.</p>
+    <footer class="foot"><span>بحث <span class="lat">Google</span> بإعداد المغرب، 13 أكتوبر 2026. الترتيب قد يختلف قليلاً حسب الجهاز.</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 6 · الملاحظة 2 -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">الملاحظة 2</p>
+      <h2>عنوانكم على الإنترنت موجود</h2>
+    </header>
+    <div class="cols" style="gap:90px;align-items:flex-start">
+      <div style="flex:0 0 600px;display:flex;flex-direction:column;gap:16px">
+        <div class="bizcard">
+          <img src="deck-assets/logo-white.png" alt="">
+          <span>Al Hayba Sweets</span>
+          <span>05 22 98 06 37</span>
+          <span>Instagram · alhaybasweets</span>
+        </div>
+        <p class="caption">ما يفتحه زر «الموقع» في <span class="lat">Google Maps</span> اليوم: <span class="ltr">alhaybasweets.com</span></p>
+      </div>
+      <div>
+        <p class="colhead">ما يبحث عنه الزبون</p>
+        <div class="need"><span>القائمة والأسعار</span><span class="tag">غير موجودة</span></div>
+        <div class="need"><span>العلب والهدايا</span><span class="tag">غير موجودة</span></div>
+        <div class="need"><span>فروع <span class="lat">Casa Port</span> و <span class="lat">Casa Voyageurs</span> والرباط</span><span class="tag">غير مذكورة</span></div>
+        <div class="need"><span>زر للطلب</span><span class="tag">غير موجود</span></div>
+        <div class="need"><span>رقم المعاريف وحساب إنستغرام</span><span class="tag ok">موجودان</span></div>
+      </div>
+    </div>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 7 · الملاحظة 3 -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">الملاحظة 3</p>
+      <h2>أين تظهرون وأين تغيبون</h2>
+    </header>
+    <div class="cols" style="gap:80px">
+      <div class="kwcol">
+        <h3>حيث تظهرون</h3>
+        <div class="kw"><span class="chip">بقلاوة الدار البيضاء</span><p>فروعكم الثلاثة تحتل خريطة <span class="lat">Google</span></p></div>
+        <div class="kw"><span class="chip ltr">baklava Rabat Agdal</span><p>فرع أكدال الأول في الخريطة</p></div>
+        <div class="kw"><span class="chip ltr">coffret baklava Casablanca</span><p>تظهرون، لكن عبر <span class="lat">Yumlo</span> و <span class="lat">Glovo</span></p></div>
+      </div>
+      <div class="kwcol no">
+        <h3>حيث تغيبون</h3>
+        <div class="kw"><span class="chip ltr">chocolat dubai Casablanca</span><p>يظهر: <span class="lat">Pralinor, Rose Léon, ChocoDiamant</span></p></div>
+        <div class="kw"><span class="chip ltr">pâtisserie orientale Casablanca</span><p>يظهر: <span class="lat">Bennis, Maymana, Les Jumeaux</span></p></div>
+        <div class="kw"><span class="chip ltr">cadeau entreprise Ramadan</span><p>تظهر شركات هدايا لها مواقع</p></div>
+        <div class="kw"><span class="chip">حلويات شامية الدار البيضاء</span><p>يظهر: قصر الشام، روابي حلب</p></div>
+      </div>
+    </div>
+    <footer class="foot"><span>بحث <span class="lat">Google</span> بإعداد المغرب، 13 أكتوبر 2026</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 8 · الفرصة -->
+  <section class="slide dark pattern big-say">
+    <p class="eyebrow">الفرصة</p>
+    <h2>المكان على <span class="lat">Google</span><br>ما زال <em>فارغاً</em></h2>
+    <p class="soft">في بحثنا، لم نجد موقعاً فعّالاً لأي محل منافس في الحلويات الشامية بالدار البيضاء والرباط. من يدخل أولاً يأخذ المكان.</p>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 9 · الموقع جاهز -->
+  <section class="slide dark pattern site">
+    <div class="txt">
+      <p class="eyebrow">03 — الحل</p>
+      <h2>موقع الهيبة جاهز</h2>
+      <p class="soft">مصمَّم بهويتكم، للحاسوب والهاتف.</p>
+      <p class="pill">نفتحه الآن معاً</p>
+    </div>
+    <div class="shots">
+      <img class="desk" src="deck-assets/site-desktop.png" alt="الصفحة الرئيسية للموقع على الحاسوب">
+      <img class="phone" src="deck-assets/site-mobile.png" alt="الموقع على الهاتف">
+    </div>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 10 · ما الذي يتغيّر -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">03 — الحل</p>
+      <h2>ما الذي يتغيّر مع الموقع</h2>
+    </header>
+    <div class="grid2">
+      <div class="card"><h3>القائمة والأسعار</h3><p class="soft">اليوم عند <span class="lat">Glovo</span> و <span class="lat">Yumlo</span>. غداً على عنوانكم أنتم.</p></div>
+      <div class="card"><h3>طلب العلب</h3><p class="soft">زر واتساب مباشر: بلا عمولة منصة، ورقم الزبون يبقى عندكم.</p></div>
+      <div class="card"><h3>الفروع الأربعة</h3><p class="soft">لكل فرع صفحته: العنوان، الهاتف، التوقيت، والاتجاهات.</p></div>
+      <div class="card"><h3>الشركات والمناسبات</h3><p class="soft">صفحة لهدايا الشركات والأعراس، مع طلب عرض سعر.</p></div>
+    </div>
+    <footer class="foot"><span>بالعربية والفرنسية · سريع على الهاتف</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 11 · بطاقات Google -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">04 — الخطة</p>
+      <h2>أربع بطاقات على <span class="lat">Google</span>، علامة واحدة</h2>
+    </header>
+    <div class="cols" style="gap:90px">
+      <div>
+        <p class="colhead">كما تظهر اليوم</p>
+        <div class="gl"><span class="ltr name">Al Hayba Sweets</span><span class="where">المعاريف</span></div>
+        <div class="gl"><span class="ltr name">Al Hayba Sweets - Casa Port</span><span class="where"><span class="lat">Casa Port</span></span></div>
+        <div class="gl"><span class="ltr name">Al Hayba Sweets ( Casa voyageurs )</span><span class="where"><span class="lat">Casa Voyageurs</span></span></div>
+        <div class="gl"><span class="ltr name">Al Hayba Sweets</span><span class="where">الرباط · <b>بلا موقع</b></span></div>
+        <div class="gl"><span class="ltr name">Alhaybasweets</span><span class="where"><b>مكررة، بلا تقييمات</b></span></div>
+      </div>
+      <div>
+        <p class="colhead">ما نقوم به</p>
+        <div class="todo">
+          <p>توحيد الاسم والتصنيف في البطاقات الأربع</p>
+          <p>ربط كل بطاقة بصفحة فرعها في الموقع</p>
+          <p>إزالة البطاقة المكررة</p>
+          <p>الرد على التقييمات بانتظام</p>
+          <p>تقرير شهري: الاتصالات، الاتجاهات، نقرات واتساب</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>المصدر: <span class="lat">Google Maps</span>، 13 أكتوبر 2026</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 12 · الباقات -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">04 — الخطة</p>
+      <h2>ثلاث طرق للانطلاق</h2>
+    </header>
+    <div class="cols" style="gap:32px">
+      <div class="pack">
+        <h3>الانطلاقة</h3>
+        <p class="sub">الموقع</p>
+        <p>الموقع بالعربية والفرنسية</p>
+        <p>القائمة والأسعار</p>
+        <p>طلب العلب بواتساب</p>
+        <p>صفحة لكل فرع</p>
+        <p>ربط <span class="ltr">alhaybasweets.com</span></p>
+      </div>
+      <div class="pack best">
+        <h3>الموقع + <span class="lat">Google</span></h3>
+        <p class="sub">الموصى بها</p>
+        <p>كل ما في «الانطلاقة»</p>
+        <p>توحيد بطاقات <span class="lat">Google</span> الأربع</p>
+        <p>صفحة الشركات والمناسبات</p>
+        <p>تتبّع الاتصالات ونقرات واتساب</p>
+        <p>متابعة لثلاثة أشهر</p>
+      </div>
+      <div class="pack">
+        <h3>الشريك الرقمي</h3>
+        <p class="sub">متابعة شهرية</p>
+        <p>كل ما في الباقة الثانية</p>
+        <p>صفحات رمضان والعيد والأعراس</p>
+        <p>الرد على التقييمات</p>
+        <p>تقرير شهري بالأرقام</p>
+        <p>متابعة لستة أشهر</p>
+      </div>
+    </div>
+    <p class="anchor">للمقارنة: طلب شركة واحد من 50 علبة <span class="lat">H3</span> يساوي <b>12,500 درهم</b>.</p>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 13 · الجدول الزمني -->
+  <section class="slide green pattern">
+    <header class="head">
+      <p class="eyebrow">04 — الخطة</p>
+      <h2>على الإنترنت قبل رمضان</h2>
+    </header>
+    <div class="spacer"></div>
+    <div class="timeline">
+      <div class="tl"><h3>الأسبوع 1</h3><p class="soft">الاتفاق واستلام المحتوى</p></div>
+      <div class="tl"><h3>الأسبوعان 2 و3</h3><p class="soft">النصوص، الصور، وصفحات الفروع</p></div>
+      <div class="tl"><h3>الأسبوع 4</h3><p class="soft">الإطلاق وربط بطاقات <span class="lat">Google</span></p></div>
+      <div class="tl"><h3>دجنبر</h3><p class="soft">هدايا نهاية السنة للشركات</p></div>
+      <div class="tl goal"><h3>فبراير 2027</h3><p class="soft">رمضان، والموقع ظاهر</p></div>
+    </div>
+    <div class="spacer"></div>
+    <p class="note soft"><span class="lat">Google</span> يحتاج أسابيع ليُظهر موقعاً جديداً. كل أسبوع انتظار يُقتطع من موسم رمضان.</p>
+    <footer class="foot"><span>بداية رمضان 2027: حوالي 8 فبراير، تقدير فلكي</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 14 · ما نحتاجه -->
+  <section class="slide">
+    <header class="head">
+      <p class="eyebrow">للانطلاق</p>
+      <h2>ما نحتاجه منكم</h2>
+    </header>
+    <div>
+      <div class="ask"><span class="num">1</span><span>الدخول إلى الدومين <span class="ltr">alhaybasweets.com</span></span></div>
+      <div class="ask"><span class="num">2</span><span>البريد الذي يدير بطاقات <span class="lat">Google</span></span></div>
+      <div class="ask"><span class="num">3</span><span>رقم واتساب الخاص بالطلبات</span></div>
+      <div class="ask"><span class="num">4</span><span>الشعار، صور المنتوجات، ولائحة الأسعار</span></div>
+      <div class="ask"><span class="num">5</span><span>عنوان وتوقيت كل فرع</span></div>
+    </div>
+    <footer class="foot"><span>حلويات الهيبة · لقاء العمل</span><span class="num pg"></span></footer>
+  </section>
+
+  <!-- 15 · الخطوة التالية -->
+  <section class="slide dark pattern cover closing">
+    <div class="photo" style="background-image:url(deck-assets/gold-box.jpg)"></div>
+    <p class="eyebrow">الخطوة التالية</p>
+    <h1>نبدأ هذا الأسبوع،<br>ونكون على الإنترنت<br>قبل فاتح دجنبر</h1>
+    <p class="ar-line">حلويات الهيبة، في متناول كل من يبحث عنها</p>
+    <p class="prepared"><span class="lat">Mohamed Ermili</span><span class="ltr">06 94 10 38 69</span><span class="ltr">ermiliweb.com</span></p>
+  </section>
+
+</div>
+
+<div id="hud"><button id="prev" type="button">السابق</button><span id="count"></span><button id="next" type="button">التالي</button><button id="fs" type="button">ملء الشاشة</button></div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var preview = new URLSearchParams(location.search).has('preview');
+  var stage = document.getElementById('stage');
+  var hud = document.getElementById('hud');
+  var count = document.getElementById('count');
+  var cur = 0;
+  var bc = null;
+
+  if (preview) document.documentElement.classList.add('preview');
+  slides.forEach(function (s, i) {
+    var pg = s.querySelector('.pg');
+    if (pg) pg.textContent = i + 1;
+  });
+
+  function fit() {
+    stage.style.setProperty('--s', Math.min(window.innerWidth / 1920, window.innerHeight / 1080));
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  function show(n) {
+    n = Math.max(1, Math.min(total, parseInt(n, 10) || 1));
+    if (n === cur) return false;
+    slides.forEach(function (s, i) { s.classList.toggle('on', i === n - 1); });
+    cur = n;
+    count.textContent = n + ' / ' + total;
+    try { history.replaceState(null, '', '#' + n); } catch (e) { location.hash = n; }
+    return true;
+  }
+
+  // The presenter window drives this one; tell it when we move on our own.
+  function announce() {
+    if (preview) return;
+    var msg = { alhayba: 'at', n: cur, total: total };
+    try { if (window.opener && !window.opener.closed) window.opener.postMessage(msg, '*'); } catch (e) {}
+    if (bc) { try { bc.postMessage(msg); } catch (e) {} }
+  }
+  function go(n) { if (show(n)) announce(); }
+
+  function onMessage(d) {
+    if (!d || typeof d !== 'object') return;
+    if (d.alhayba === 'goto') show(d.n);
+    else if (d.alhayba === 'hello') announce();
+  }
+  window.addEventListener('message', function (e) { onMessage(e.data); });
+  if (!preview) {
+    try { bc = new BroadcastChannel('alhayba-deck'); bc.onmessage = function (e) { onMessage(e.data); }; } catch (e) {}
+  }
+
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
+  show(location.hash.slice(1) || 1);
+  announce();
+
+  if (preview) return;
+
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    switch (e.key) {
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Enter': go(cur + 1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace': go(cur - 1); break;
+      case 'Home': go(1); break;
+      case 'End': go(total); break;
+      case 'f': case 'F': toggleFullscreen(); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+  }
+  document.getElementById('prev').addEventListener('click', function () { this.blur(); go(cur - 1); });
+  document.getElementById('next').addEventListener('click', function () { this.blur(); go(cur + 1); });
+  document.getElementById('fs').addEventListener('click', function () { this.blur(); toggleFullscreen(); });
+
+  var hideTimer;
+  document.addEventListener('mousemove', function () {
+    hud.classList.add('show');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () { hud.classList.remove('show'); }, 2500);
+  });
+})();
+</script>
+</body>
+</html>

@@ -33,6 +33,7 @@ export type Copy = {
     titleEm: string;
     description: string;
     order: string;
+    orderShort: string;
     explore: string;
     fig: string;
     slides: { label: string; alt: string }[];
@@ -111,6 +112,8 @@ export type Copy = {
   };
   footer: {
     rights: string;
+    explore: string;
+    houses: string;
   };
   pages: {
     collectionEyebrow: string;
@@ -145,12 +148,13 @@ const en: Copy = {
     titleEm: "remembering.",
     description: "Levantine recipes, finished by Moroccan hands.",
     order: "Order on WhatsApp",
+    orderShort: "Order",
     explore: "See the menu",
     fig: "Fig. 01 — Pistachio baklava",
     slides: [
       { label: "The gold box", alt: "A gold Al Hayba gift box" },
       { label: "The round", alt: "Pistachio baklava cut into a round" },
-      { label: "Maamoul", alt: "Three pieces of maamoul on a plate" },
+      { label: "The slice", alt: "A slice of pistachio baklava being lifted" },
     ],
   },
   story: {
@@ -160,7 +164,7 @@ const en: Copy = {
     arabic: ["من التراث", "إلى المذاق", "الذي يدوم"],
     body: "Al Hayba carries the sweets of Damascus, Beirut, and Istanbul to Casablanca, and serves them the way Morocco receives a guest. With tea, with time, with more than was asked for. Each tray is still finished by hand. Filo pulled thin, pistachios chosen for colour, syrup poured only when the pastry is ready.",
     cta: "Our story",
-    fig: "Fig. 02 — The tray",
+    fig: "Fig. 02 — The house",
     more: [
       "The Mashreq and the Maghreb have always sat at the same table. One language, one faith, one habit of setting out something sweet before the guest has taken off their coat. Al Hayba was born where those two ends of the Arab world meet.",
       "The recipes came west the way recipes always travel, with merchants, pilgrims, and families. They arrived in a country that already knew orange blossom, almonds, and patience. Here they found a second home, and the tea they had been waiting for.",
@@ -208,6 +212,8 @@ const en: Copy = {
     alts: [
       "Sweets arranged on the counter",
       "Chocolate and pistachio baklava squares",
+      "A gold Al Hayba gift box",
+      "Inside the Al Hayba kiosk",
     ],
   },
   quotes: {
@@ -287,6 +293,8 @@ const en: Copy = {
   },
   footer: {
     rights: "© 2026 Al Hayba Sweets. Casablanca.",
+    explore: "Explore",
+    houses: "Houses",
   },
   pages: {
     collectionEyebrow: "The selection",
@@ -377,12 +385,13 @@ const ar: Copy = {
     titleEm: "remembering.",
     description: "وصفات شامية، بلمسة يد مغربية.",
     order: "اطلب عبر واتساب",
+    orderShort: "اطلب",
     explore: "شاهد القائمة",
     fig: "صورة ٠١ — بقلاوة بالفستق",
     slides: [
       { label: "العلبة الذهبية", alt: "صندوق هدايا الهيبة الذهبي" },
       { label: "القرص", alt: "بقلاوة بالفستق مقطّعة قرصًا" },
-      { label: "المعمول", alt: "ثلاث قطع معمول على طبق" },
+      { label: "القطعة", alt: "قطعة بقلاوة بالفستق تُرفع من الصينية" },
     ],
   },
   story: {
@@ -392,7 +401,7 @@ const ar: Copy = {
     arabic: ["من التراث", "إلى المذاق", "الذي يدوم"],
     body: "تحمل الهيبة حلويات دمشق وبيروت وإسطنبول إلى الدار البيضاء، وتقدّمها كما يستقبل المغرب ضيفه. بالشاي، وبالوقت، وبأكثر مما طُلب. وما زالت كل صينية تُنجز باليد. عجين رقيق، وفستق يُختار للونه، وقطر يُسكب حين تستوي الحلوى.",
     cta: "قصتنا",
-    fig: "صورة ٠٢ — الصينية",
+    fig: "صورة ٠٢ — الدار",
     more: [
       "جلس المشرق والمغرب دائمًا إلى المائدة نفسها. لغة واحدة، وإيمان واحد، وعادة واحدة في أن يُقدَّم الحلو قبل أن يستقرّ الضيف في مجلسه. وُلدت الهيبة حيث يلتقي طرفا العالم العربي.",
       "سافرت الوصفات غربًا كما تسافر الوصفات دائمًا، مع التجّار والحجّاج والعائلات. ووصلت إلى بلد يعرف ماء الزهر واللوز والصبر. فوجدت فيه بيتًا ثانيًا، والشاي الذي كانت تنتظره.",
@@ -440,6 +449,8 @@ const ar: Copy = {
     alts: [
       "حلويات مرتّبة على الرخام",
       "مربعات بقلاوة بالشوكولاتة والفستق",
+      "صندوق هدايا الهيبة الذهبي",
+      "داخل ركن الهيبة",
     ],
   },
   quotes: {
@@ -519,6 +530,8 @@ const ar: Copy = {
   },
   footer: {
     rights: "© 2026 حلويات الهيبة. الدار البيضاء.",
+    explore: "استكشف",
+    houses: "الدور",
   },
   pages: {
     collectionEyebrow: "المختارات",

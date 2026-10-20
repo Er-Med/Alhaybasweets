@@ -38,7 +38,7 @@ export function OrderBar() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-gold/40 bg-espresso/95 px-[var(--gutter)] py-3 backdrop-blur transition-transform duration-300 lg:hidden",
+        "fixed inset-x-0 bottom-0 z-40 border-t border-gold/40 bg-espresso/95 px-[var(--gutter)] pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 lg:hidden",
         show ? "translate-y-0" : "pointer-events-none translate-y-full",
       )}
     >

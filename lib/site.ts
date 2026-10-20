@@ -105,4 +105,6 @@ export const galleryMedia = [
 export const instagramMedia = [
   { src: "/images/counter.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
   { src: "/images/chocolate-square.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
+  { src: "/images/gold-box.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
+  { src: "/images/kiosk.jpg", maxWidth: 720, imageClass: "object-cover object-center" },
 ] as const;
